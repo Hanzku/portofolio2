@@ -9,7 +9,7 @@ const MAX_PORT_RETRIES = 10;
 
 const publicDir = path.join(__dirname, 'public');
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'zandygege@gmail.com';
-const SITE_URL = process.env.SITE_URL || 'https://portofolio-alfachridzy.vercel.app';
+const SITE_URL = process.env.SITE_URL || 'https://portofolioalfach.vercel.app/';
 const FORM_SERVICE_URL = process.env.FORM_SERVICE_URL || `https://formsubmit.co/ajax/${CONTACT_TO_EMAIL}`;
 
 app.use(express.json({ limit: '30kb' }));
@@ -39,12 +39,12 @@ function validateContactPayload(payload) {
     errors.kategori = 'Pilih kategori pesan.';
   }
 
-  if (pesan.length < 10) {
-    errors.pesan = 'Pesan minimal 10 karakter.';
+  if (pesan.length < 15) {
+    errors.pesan = 'Pesan minimal 15 karakter.';
   }
 
-  if (pesan.length > 1000) {
-    errors.pesan = 'Pesan maksimal 1000 karakter.';
+  if (pesan.length > 3500) {
+    errors.pesan = 'Pesan maksimal 3500 karakter.';
   }
 
   return {
