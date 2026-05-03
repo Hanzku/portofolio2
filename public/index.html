@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio full stack Alfachridzy, siswa TKJ yang belajar coding dan membangun project web sederhana.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Alfachridzy - Portofolio Full Stack TKJ</title>
+  <style>
+    :root {
+      --bg: #070b0d;
+      --bg-soft: #0d1416;
+      --surface: #111a1d;
+      --surface-light: #172327;
+      --line: rgba(232, 241, 238, 0.12);
+      --text: #edf7f3;
+      --muted: #9fb0ad;
+      --green: #3ef0a3;
+      --cyan: #56d5ff;
+      --amber: #f6c865;
+      --coral: #ff7d73;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+      --radius: 8px;
+      --header-height: 78px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-height) + 24px);
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        linear-gradient(135deg, rgba(62, 240, 163, 0.07), transparent 32%),
+        linear-gradient(225deg, rgba(86, 213, 255, 0.055), transparent 34%),
+        linear-gradient(180deg, #070b0d 0%, #0a1012 48%, #070b0d 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      min-height: var(--header-height);
+      border-bottom: 1px solid rgba(232, 241, 238, 0.08);
+      background: rgba(7, 11, 13, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-wrap {
+      width: min(1120px, calc(100% - 40px));
+      min-height: var(--header-height);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(62, 240, 163, 0.45);
+      border-radius: var(--radius);
+      color: #04100c;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      box-shadow: 0 12px 28px rgba(62, 240, 163, 0.18);
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 650;
+      transition: color 180ms ease, background 180ms ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text);
+      background: rgba(232, 241, 238, 0.07);
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      bottom: 6px;
+      left: 12px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    .menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--text);
+      background: rgba(232, 241, 238, 0.06);
+      cursor: pointer;
+    }
+
+    .menu-button span,
+    .menu-button::before,
+    .menu-button::after {
+      content: "";
+      width: 18px;
+      height: 2px;
+      display: block;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .menu-button {
+      gap: 4px;
+    }
+
+    .nav-open .menu-button::before {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav-open .menu-button span {
+      opacity: 0;
+    }
+
+    .nav-open .menu-button::after {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    main {
+      width: 100%;
+    }
+
+    .section {
+      padding: 108px 0;
+      position: relative;
+    }
+
+    .section.alt {
+      background: rgba(232, 241, 238, 0.025);
+      border-top: 1px solid rgba(232, 241, 238, 0.06);
+      border-bottom: 1px solid rgba(232, 241, 238, 0.06);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: calc(100vh - var(--header-height));
+      display: flex;
+      align-items: center;
+      padding: 88px 0 76px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.88fr);
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--green);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      display: inline-block;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      margin-bottom: 24px;
+      font-size: clamp(2.8rem, 7vw, 5.9rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .hero h1 span {
+      color: transparent;
+      background: linear-gradient(135deg, var(--green), var(--cyan), var(--amber));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-lead {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 32px 0 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      font-weight: 800;
+      transition: transform 180ms ease, border 180ms ease, background 180ms ease, color 180ms ease;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: #04110d;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      box-shadow: 0 14px 34px rgba(62, 240, 163, 0.18);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(232, 241, 238, 0.06);
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(62, 240, 163, 0.35);
+    }
+
+    .button-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-grid;
+      place-items: center;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .quick-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .quick-info li {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(232, 241, 238, 0.04);
+      font-size: 0.9rem;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 16px;
+      border: 1px solid rgba(232, 241, 238, 0.13);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(17, 26, 29, 0.96), rgba(11, 16, 18, 0.96));
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(62, 240, 163, 0.42), transparent 38%, rgba(86, 213, 255, 0.34));
+      opacity: 0.5;
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .window-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .window-dots span:nth-child(2) {
+      background: var(--amber);
+    }
+
+    .window-dots span:nth-child(3) {
+      background: var(--green);
+    }
+
+    .dashboard-visual {
+      display: grid;
+      gap: 14px;
+    }
+
+    .code-card,
+    .metric-card,
+    .status-card {
+      border: 1px solid rgba(232, 241, 238, 0.1);
+      border-radius: var(--radius);
+      background: rgba(232, 241, 238, 0.045);
+    }
+
+    .code-card {
+      padding: 18px;
+      color: #dff8ef;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.9rem;
+      overflow: hidden;
+    }
+
+    .code-line {
+      display: block;
+      min-height: 1.55rem;
+      white-space: nowrap;
+    }
+
+    .code-muted {
+      color: #6f8580;
+    }
+
+    .code-green {
+      color: var(--green);
+    }
+
+    .code-cyan {
+      color: var(--cyan);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      padding: 15px;
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .metric-card span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .status-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .status-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .status-light {
+      width: 12px;
+      height: 12px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 8px rgba(62, 240, 163, 0.12), 0 0 28px rgba(62, 240, 163, 0.7);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.68fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .story {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 26, 29, 0.72);
+    }
+
+    .story p {
+      color: var(--muted);
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    .profile-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .profile-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(232, 241, 238, 0.04);
+    }
+
+    .profile-list span {
+      color: var(--muted);
+    }
+
+    .profile-list strong {
+      text-align: right;
+    }
+
+    .strength-grid,
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .strength-card,
+    .project-card,
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 26, 29, 0.78);
+      transition: transform 180ms ease, border 180ms ease, background 180ms ease;
+    }
+
+    .strength-card:hover,
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(62, 240, 163, 0.35);
+      background: rgba(23, 35, 39, 0.9);
+    }
+
+    .strength-card {
+      padding: 24px;
+    }
+
+    .strength-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 18px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      color: #07100d;
+      background: var(--green);
+      font-weight: 900;
+    }
+
+    .strength-card:nth-child(2) .strength-icon {
+      background: var(--cyan);
+    }
+
+    .strength-card:nth-child(3) .strength-icon {
+      background: var(--amber);
+    }
+
+    .strength-card h3,
+    .project-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.12rem;
+    }
+
+    .strength-card p,
+    .project-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .skills-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .skill-note {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 26, 29, 0.76);
+    }
+
+    .skill-note h3 {
+      margin-bottom: 12px;
+      font-size: 1.45rem;
+    }
+
+    .skill-note p {
+      color: var(--muted);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .skill-tags span {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(232, 241, 238, 0.04);
+      font-size: 0.88rem;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .skill-item {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 26, 29, 0.76);
+    }
+
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 10px;
+      font-weight: 750;
+    }
+
+    .skill-row span:last-child {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .skill-bar {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(232, 241, 238, 0.08);
+    }
+
+    .skill-bar span {
+      width: var(--value);
+      height: 100%;
+      display: block;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+    }
+
+    .project-card {
+      overflow: hidden;
+    }
+
+    .project-preview {
+      min-height: 170px;
+      padding: 18px;
+      display: grid;
+      align-content: end;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(62, 240, 163, 0.18), transparent 34%),
+        linear-gradient(180deg, rgba(86, 213, 255, 0.12), rgba(246, 200, 101, 0.06)),
+        #0d1416;
+    }
+
+    .preview-window {
+      min-height: 118px;
+      padding: 12px;
+      border: 1px solid rgba(232, 241, 238, 0.14);
+      border-radius: var(--radius);
+      background: rgba(7, 11, 13, 0.72);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .preview-row {
+      height: 9px;
+      margin-bottom: 9px;
+      border-radius: 999px;
+      background: rgba(232, 241, 238, 0.14);
+    }
+
+    .preview-row.short {
+      width: 62%;
+      background: rgba(62, 240, 163, 0.48);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .preview-grid span {
+      min-height: 44px;
+      border-radius: var(--radius);
+      background: rgba(232, 241, 238, 0.09);
+    }
+
+    .project-body {
+      padding: 22px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .project-meta span {
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(232, 241, 238, 0.04);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .process-step {
+      position: relative;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 26, 29, 0.74);
+      counter-increment: step;
+    }
+
+    .process-step::before {
+      content: counter(step, decimal-leading-zero);
+      display: block;
+      margin-bottom: 18px;
+      color: var(--green);
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+
+    .process-step h3 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .process-step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(340px, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .contact-card {
+      padding: 28px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list a,
+    .contact-list > li > span {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(232, 241, 238, 0.04);
+    }
+
+    .contact-list strong {
+      color: var(--text);
+    }
+
+    .contact-form {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 26, 29, 0.88);
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 760;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(232, 241, 238, 0.14);
+      border-radius: var(--radius);
+      color: var(--text);
+      background: rgba(7, 11, 13, 0.62);
+      outline: none;
+      transition: border 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    input,
+    select {
+      min-height: 46px;
+      padding: 0 13px;
+    }
+
+    textarea {
+      min-height: 138px;
+      padding: 13px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(62, 240, 163, 0.58);
+      box-shadow: 0 0 0 4px rgba(62, 240, 163, 0.1);
+      background: rgba(7, 11, 13, 0.82);
+    }
+
+    .field.invalid input,
+    .field.invalid select,
+    .field.invalid textarea {
+      border-color: rgba(255, 125, 115, 0.78);
+    }
+
+    .error-text {
+      min-height: 1rem;
+      color: var(--coral);
+      font-size: 0.78rem;
+    }
+
+    .form-status {
+      min-height: 44px;
+      margin: 8px 0 16px;
+      padding: 11px 12px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(232, 241, 238, 0.04);
+    }
+
+    .form-status:empty {
+      display: none;
+    }
+
+    .form-status.success {
+      border-color: rgba(62, 240, 163, 0.35);
+      color: #c8ffe7;
+      background: rgba(62, 240, 163, 0.08);
+    }
+
+    .form-status.error {
+      border-color: rgba(255, 125, 115, 0.35);
+      color: #ffd0cc;
+      background: rgba(255, 125, 115, 0.08);
+    }
+
+    .submit-button {
+      width: 100%;
+    }
+
+    .submit-button:disabled {
+      opacity: 0.68;
+      cursor: wait;
+      transform: none;
+    }
+
+    .site-footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      background: rgba(7, 11, 13, 0.72);
+    }
+
+    .footer-wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-wrap strong,
+    .footer-wrap a {
+      color: var(--text);
+    }
+
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    [data-animate].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(0.92);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about-grid,
+      .skills-layout,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .strength-grid,
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --header-height: 70px;
+      }
+
+      .nav-wrap,
+      .container,
+      .footer-wrap {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .menu-button {
+        display: inline-grid;
+      }
+
+      .nav-menu {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 14px;
+        left: 14px;
+        display: grid;
+        gap: 4px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(7, 11, 13, 0.96);
+        box-shadow: var(--shadow);
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .nav-open .nav-menu {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-link {
+        padding: 12px;
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .hero {
+        padding: 68px 0 56px;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .metric-grid,
+      .strength-grid,
+      .project-grid,
+      .process-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-list li,
+      .contact-list a,
+      .contact-list span,
+      .footer-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .profile-list strong {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="nav-wrap">
+      <a class="brand" href="#beranda" aria-label="Kembali ke beranda">
+        <span class="brand-mark">A</span>
+        <span class="brand-text">Alfachridzy <span>TKJ Web Portfolio</span></span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navigasi utama">
+        <a class="nav-link active" href="#beranda">Beranda</a>
+        <a class="nav-link" href="#tentang">Tentang</a>
+        <a class="nav-link" href="#keunggulan">Keunggulan</a>
+        <a class="nav-link" href="#skill">Skill</a>
+        <a class="nav-link" href="#project">Project</a>
+        <a class="nav-link" href="#proses">Proses</a>
+        <a class="nav-link" href="#kontak">Kontak</a>
+      </nav>
+
+      <button class="menu-button" type="button" aria-label="Buka menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div data-animate>
+          <p class="eyebrow">Portofolio Full Stack Pemula</p>
+          <h1>Halo, saya <span>Alfachridzy</span>.</h1>
+          <p class="hero-lead">
+            Siswa TKJ yang sedang serius belajar coding, membangun website rapi, dan mulai memahami alur frontend sampai backend sederhana dengan Node.js.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#project">
+              <span class="button-icon">→</span>
+              Lihat Project
+            </a>
+            <a class="button button-secondary" href="/cv-alfachridzy.txt" download>
+              <span class="button-icon">↓</span>
+              Download CV
+            </a>
+          </div>
+
+          <ul class="quick-info" aria-label="Informasi singkat">
+            <li>Kelas TKJ</li>
+            <li>1 tahun belajar coding</li>
+            <li>HTML, CSS, JavaScript, Node.js</li>
+          </ul>
+        </div>
+
+        <div class="hero-panel" data-animate>
+          <div class="panel-top">
+            <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>portfolio-server.js</span>
+          </div>
+
+          <div class="dashboard-visual" aria-label="Ilustrasi dashboard portofolio">
+            <div class="code-card">
+              <span class="code-line"><span class="code-muted">const</span> siswa = <span class="code-green">'Alfachridzy'</span>;</span>
+              <span class="code-line"><span class="code-muted">const</span> fokus = <span class="code-cyan">'full stack dasar'</span>;</span>
+              <span class="code-line">app.post(<span class="code-green">'/api/contact'</span>, simpanPesan);</span>
+              <span class="code-line"><span class="code-muted">// belajar, bikin, perbaiki</span></span>
+            </div>
+
+            <div class="metric-grid">
+              <div class="metric-card"><strong>12+</strong><span>latihan kecil</span></div>
+              <div class="metric-card"><strong>4</strong><span>project utama</span></div>
+              <div class="metric-card"><strong>1 th</strong><span>proses belajar</span></div>
+            </div>
+
+            <div class="status-card">
+              <div>
+                <strong>Project siap diuji</strong>
+                <p>Tampilan rapi, alur jelas, dan kontak masuk ke email.</p>
+              </div>
+              <span class="status-light" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="tentang">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Tentang Saya</p>
+          <h2>Belajar dari dasar, lalu pelan-pelan membuat sesuatu yang bisa dipakai.</h2>
+          <p>
+            Saya masih dalam tahap berkembang, tetapi saya berusaha membangun kebiasaan menulis kode yang rapi, memahami masalah, dan menyelesaikan project sampai berjalan.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="story" data-animate>
+            <h3>Perjalanan singkat</h3>
+            <p>
+              Saya mulai belajar coding sekitar satu tahun terakhir. Awalnya saya mengenal HTML dan CSS dari latihan sederhana, lalu mulai mencoba JavaScript agar halaman terasa lebih hidup.
+            </p>
+            <p>
+              Karena saya berada di jurusan TKJ, saya juga tertarik memahami bagian server, jaringan, dan cara data dikirim dari form ke backend. Dari situ saya mulai belajar Node.js, Express, dan penyimpanan data sederhana memakai file JSON.
+            </p>
+            <p>
+              Target saya bukan terlihat paling hebat, tetapi terus naik level: lebih teliti saat membuat layout, lebih paham saat membaca error, dan lebih berani membangun project yang benar-benar selesai.
+            </p>
+          </article>
+
+          <ul class="profile-list" data-animate>
+            <li><span>Nama</span><strong>Alfachridzy</strong></li>
+            <li><span>Kelas</span><strong>TKJ</strong></li>
+            <li><span>Pengalaman</span><strong>Sekitar 1 tahun</strong></li>
+            <li><span>Fokus</span><strong>Web full stack dasar</strong></li>
+            <li><span>Email</span><strong><a href="mailto:zandygege@gmail.com">zandygege@gmail.com</a></strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="keunggulan">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Kelebihan</p>
+          <h2>Cara kerja yang sederhana, teliti, dan realistis.</h2>
+          <p>
+            Saya masih belajar, jadi kelebihan utama saya adalah mau mencoba, mau memperbaiki, dan tidak mudah berhenti saat menemui error.
+          </p>
+        </div>
+
+        <div class="strength-grid">
+          <article class="strength-card" data-animate>
+            <div class="strength-icon">01</div>
+            <h3>Rapi dalam menyusun halaman</h3>
+            <p>Saya berusaha membuat struktur section jelas, jarak antar elemen nyaman, dan tampilan tetap enak dilihat di layar kecil.</p>
+          </article>
+
+          <article class="strength-card" data-animate>
+            <div class="strength-icon">02</div>
+            <h3>Mau membaca error</h3>
+            <p>Saat kode bermasalah, saya belajar melihat pesan error, mengecek ulang logika, lalu memperbaikinya satu per satu.</p>
+          </article>
+
+          <article class="strength-card" data-animate>
+            <div class="strength-icon">03</div>
+            <h3>Punya dasar TKJ</h3>
+            <p>Materi jaringan dan komputer membantu saya memahami hubungan antara client, server, API, dan penyimpanan data.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="skill">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Skill</p>
+          <h2>Kemampuan yang sedang saya bangun.</h2>
+          <p>
+            Angka di bawah bukan klaim ahli, melainkan gambaran posisi belajar saya saat ini agar terlihat jujur dan mudah dipahami.
+          </p>
+        </div>
+
+        <div class="skills-layout">
+          <aside class="skill-note" data-animate>
+            <h3>Fokus belajar sekarang</h3>
+            <p>
+              Saya sedang memperkuat dasar frontend, memahami JavaScript lebih rapi, dan membiasakan backend Express untuk kebutuhan form, validasi, dan penyimpanan data sederhana.
+            </p>
+            <div class="skill-tags">
+              <span>Responsive Layout</span>
+              <span>API Sederhana</span>
+              <span>Validasi Form</span>
+              <span>File JSON</span>
+              <span>Debugging</span>
+            </div>
+          </aside>
+
+          <div class="skill-list" data-animate>
+            <div class="skill-item" style="--value: 78%">
+              <div class="skill-row"><span>HTML & CSS</span><span>78%</span></div>
+              <div class="skill-bar"><span></span></div>
+            </div>
+            <div class="skill-item" style="--value: 68%">
+              <div class="skill-row"><span>JavaScript</span><span>68%</span></div>
+              <div class="skill-bar"><span></span></div>
+            </div>
+            <div class="skill-item" style="--value: 60%">
+              <div class="skill-row"><span>Node.js & Express</span><span>60%</span></div>
+              <div class="skill-bar"><span></span></div>
+            </div>
+            <div class="skill-item" style="--value: 58%">
+              <div class="skill-row"><span>Database dasar & JSON</span><span>58%</span></div>
+              <div class="skill-bar"><span></span></div>
+            </div>
+            <div class="skill-item" style="--value: 72%">
+              <div class="skill-row"><span>Dasar jaringan TKJ</span><span>72%</span></div>
+              <div class="skill-bar"><span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="project">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Project</p>
+          <h2>Beberapa latihan yang saya jadikan project portofolio.</h2>
+          <p>
+            Project ini dibuat agar kemampuan dasar saya terlihat nyata: ada tampilan, interaksi, dan beberapa sudah mulai memakai backend sederhana.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card" data-animate>
+            <div class="project-preview">
+              <div class="preview-window">
+                <div class="preview-row short"></div>
+                <div class="preview-row"></div>
+                <div class="preview-row"></div>
+                <div class="preview-grid"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Sistem Absensi Kelas</h3>
+              <p>Latihan membuat input data siswa, status kehadiran, dan rekap sederhana memakai JavaScript.</p>
+              <div class="project-meta"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <div class="project-preview">
+              <div class="preview-window">
+                <div class="preview-row short"></div>
+                <div class="preview-row"></div>
+                <div class="preview-grid"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Inventaris Lab TKJ</h3>
+              <p>Dashboard kecil untuk mencatat perangkat lab seperti router, kabel, dan komputer praktik.</p>
+              <div class="project-meta"><span>Node.js</span><span>Express</span><span>JSON</span></div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <div class="project-preview">
+              <div class="preview-window">
+                <div class="preview-row short"></div>
+                <div class="preview-row"></div>
+                <div class="preview-row"></div>
+                <div class="preview-grid"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Landing Page Ekskul</h3>
+              <p>Halaman promosi kegiatan sekolah dengan layout responsif, tombol ajakan, dan section dokumentasi.</p>
+              <div class="project-meta"><span>Responsive</span><span>UI</span><span>CSS</span></div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <div class="project-preview">
+              <div class="preview-window">
+                <div class="preview-row short"></div>
+                <div class="preview-row"></div>
+                <div class="preview-row"></div>
+                <div class="preview-grid"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>API Form Kontak</h3>
+              <p>Backend untuk menerima pesan dari form, validasi data, lalu menyimpannya ke file JSON lokal.</p>
+              <div class="project-meta"><span>API</span><span>Validasi</span><span>Express</span></div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <div class="project-preview">
+              <div class="preview-window">
+                <div class="preview-row short"></div>
+                <div class="preview-row"></div>
+                <div class="preview-grid"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Catatan Belajar Coding</h3>
+              <p>Halaman berisi rangkuman materi, potongan kode, dan daftar hal yang perlu saya pelajari ulang.</p>
+              <div class="project-meta"><span>Dokumentasi</span><span>Belajar</span><span>Web</span></div>
+            </div>
+          </article>
+
+          <article class="project-card" data-animate>
+            <div class="project-preview">
+              <div class="preview-window">
+                <div class="preview-row short"></div>
+                <div class="preview-row"></div>
+                <div class="preview-row"></div>
+                <div class="preview-grid"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>Portofolio Pribadi</h3>
+              <p>Website ini dibuat sebagai latihan menyatukan desain modern, JavaScript, dan backend kontak.</p>
+              <div class="project-meta"><span>Full Stack</span><span>Portfolio</span><span>Node</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="proses">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Proses</p>
+          <h2>Alur sederhana saat membuat project.</h2>
+          <p>
+            Saya mencoba membiasakan alur yang teratur agar hasil tidak hanya terlihat jadi, tetapi juga lebih mudah dirawat.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-step" data-animate>
+            <h3>Pahami kebutuhan</h3>
+            <p>Menentukan tujuan halaman, isi utama, dan fitur yang benar-benar perlu dibuat.</p>
+          </article>
+          <article class="process-step" data-animate>
+            <h3>Buat struktur</h3>
+            <p>Menyusun HTML, folder, dan bagian backend agar mudah dibaca kembali.</p>
+          </article>
+          <article class="process-step" data-animate>
+            <h3>Rapikan tampilan</h3>
+            <p>Mengatur warna, jarak, responsif, dan hover agar terasa modern.</p>
+          </article>
+          <article class="process-step" data-animate>
+            <h3>Tes fitur</h3>
+            <p>Mencoba form, API, dan validasi supaya tidak berhenti di tampilan saja.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontak">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Kontak</p>
+          <h2>Mari terhubung untuk diskusi project atau belajar bareng.</h2>
+          <p>
+            Kirim pesan kalau ada masukan, ide project latihan, atau kesempatan belajar. Pesan akan masuk ke email kontak saya.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <aside class="contact-card" data-animate>
+            <h3>Informasi kontak</h3>
+            <p>
+              Saya terbuka untuk masukan, ide project latihan, atau kesempatan belajar yang bisa membantu saya berkembang sebagai siswa TKJ.
+            </p>
+            <ul class="contact-list">
+              <li>
+                <a href="mailto:zandygege@gmail.com">
+                  <span>Email</span>
+                  <strong>zandygege@gmail.com</strong>
+                </a>
+              </li>
+              <li>
+                <span>
+                  <span>Status</span>
+                  <strong>Aktif belajar</strong>
+                </span>
+              </li>
+              <li>
+                <span>
+                  <span>Bidang</span>
+                  <strong>TKJ dan Web Development</strong>
+                </span>
+              </li>
+            </ul>
+          </aside>
+
+          <form class="contact-form" id="contactForm" novalidate data-animate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" autocomplete="name" placeholder="Nama kamu">
+                <span class="error-text" aria-live="polite"></span>
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="email@contoh.com">
+                <span class="error-text" aria-live="polite"></span>
+              </div>
+
+              <div class="field full">
+                <label for="kategori">Kategori</label>
+                <select id="kategori" name="kategori">
+                  <option value="">Pilih kategori</option>
+                  <option value="Diskusi project">Diskusi project</option>
+                  <option value="Masukan portofolio">Masukan portofolio</option>
+                  <option value="Belajar bareng">Belajar bareng</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <span class="error-text" aria-live="polite"></span>
+              </div>
+
+              <div class="field full">
+                <label for="pesan">Pesan</label>
+                <textarea id="pesan" name="pesan" placeholder="Tulis pesan dengan jelas"></textarea>
+                <span class="error-text" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+            <button class="button button-primary submit-button" type="submit">
+              <span class="button-icon">→</span>
+              Kirim Pesan
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-wrap">
+      <p><strong>Alfachridzy</strong> - Portofolio siswa TKJ.</p>
+      <p>Kontak: <a href="mailto:zandygege@gmail.com">zandygege@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const header = document.querySelector('.site-header');
+      const menuButton = document.querySelector('.menu-button');
+      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+      const animatedElements = document.querySelectorAll('[data-animate]');
+      const sections = document.querySelectorAll('section[id]');
+      const form = document.querySelector('#contactForm');
+      const formStatus = document.querySelector('#formStatus');
+      const formSubmitUrl = 'https://formsubmit.co/ajax/zandygege@gmail.com';
+
+      function setMenu(open) {
+        header.classList.toggle('nav-open', open);
+        menuButton.setAttribute('aria-expanded', String(open));
+      }
+
+      menuButton.addEventListener('click', function () {
+        setMenu(!header.classList.contains('nav-open'));
+      });
+
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          const targetId = link.getAttribute('href');
+          const target = document.querySelector(targetId);
+
+          if (!target) {
+            return;
+          }
+
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setMenu(false);
+        });
+      });
+
+      function setActiveNav(sectionId) {
+        navLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        const activeObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActiveNav(entry.target.id);
+            }
+          });
+        }, {
+          rootMargin: '-42% 0px -48% 0px',
+          threshold: 0
+        });
+
+        sections.forEach(function (section) {
+          activeObserver.observe(section);
+        });
+
+        const revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.16
+        });
+
+        animatedElements.forEach(function (element) {
+          revealObserver.observe(element);
+        });
+      } else {
+        animatedElements.forEach(function (element) {
+          element.classList.add('is-visible');
+        });
+      }
+
+      function showStatus(message, type) {
+        formStatus.textContent = message;
+        formStatus.className = `form-status ${type}`;
+      }
+
+      function setError(input, message) {
+        const field = input.closest('.field');
+        const errorText = field.querySelector('.error-text');
+
+        field.classList.toggle('invalid', Boolean(message));
+        errorText.textContent = message || '';
+      }
+
+      function getFormData() {
+        return {
+          nama: form.nama.value.trim(),
+          email: form.email.value.trim(),
+          kategori: form.kategori.value.trim(),
+          pesan: form.pesan.value.trim()
+        };
+      }
+
+      function validateForm() {
+        const data = getFormData();
+        let isValid = true;
+
+        setError(form.nama, '');
+        setError(form.email, '');
+        setError(form.kategori, '');
+        setError(form.pesan, '');
+
+        if (data.nama.length < 3) {
+          setError(form.nama, 'Nama minimal 3 karakter.');
+          isValid = false;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+          setError(form.email, 'Email belum valid.');
+          isValid = false;
+        }
+
+        if (data.kategori.length < 3) {
+          setError(form.kategori, 'Pilih kategori pesan.');
+          isValid = false;
+        }
+
+        if (data.pesan.length < 10) {
+          setError(form.pesan, 'Pesan minimal 10 karakter.');
+          isValid = false;
+        }
+
+        if (data.pesan.length > 1000) {
+          setError(form.pesan, 'Pesan maksimal 1000 karakter.');
+          isValid = false;
+        }
+
+        return isValid ? data : null;
+      }
+
+      function createMessageEntry(data) {
+        const id = window.crypto && window.crypto.randomUUID
+          ? window.crypto.randomUUID()
+          : `msg-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
+        return {
+          id: id,
+          nama: data.nama,
+          email: data.email,
+          kategori: data.kategori,
+          pesan: data.pesan,
+          createdAt: new Date().toISOString(),
+          userAgent: navigator.userAgent || '-'
+        };
+      }
+
+      function createEmailPayload(data) {
+        const entry = createMessageEntry(data);
+
+        return {
+          _subject: `[Portofolio] Pesan dari ${entry.nama}`,
+          _template: 'table',
+          _captcha: 'false',
+          _replyto: entry.email,
+          messages_json: JSON.stringify(entry, null, 2),
+          id: entry.id,
+          nama: entry.nama,
+          email: entry.email,
+          kategori: entry.kategori,
+          pesan: entry.pesan,
+          createdAt: entry.createdAt,
+          userAgent: entry.userAgent
+        };
+      }
+
+      async function sendEmail(data) {
+        const response = await fetch(formSubmitUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify(createEmailPayload(data))
+        });
+        const result = await response.json().catch(function () {
+          return {};
+        });
+
+        if (!response.ok) {
+          throw new Error(result.message || 'Pesan belum berhasil dikirim.');
+        }
+
+        return result;
+      }
+
+      form.addEventListener('input', function (event) {
+        if (event.target.matches('input, select, textarea')) {
+          setError(event.target, '');
+        }
+      });
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const data = validateForm();
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        if (!data) {
+          showStatus('Periksa lagi data yang masih belum sesuai.', 'error');
+          return;
+        }
+
+        submitButton.disabled = true;
+        showStatus('Mengirim pesan...', '');
+
+        try {
+          const result = await sendEmail(data);
+
+          form.reset();
+          if (/activation/i.test(result.message || '')) {
+            showStatus('Form kontak sudah tersambung. Cek inbox email dan klik link aktivasi FormSubmit agar pesan berikutnya masuk normal.', 'success');
+            return;
+          }
+
+          showStatus('Pesan berhasil dikirim ke email. Terima kasih, saya akan mengeceknya secepat mungkin.', 'success');
+        } catch (error) {
+          showStatus(error.message || 'Terjadi kendala saat mengirim pesan.', 'error');
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

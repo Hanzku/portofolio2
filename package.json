@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-alfachridzy",
+  "version": "1.0.0",
+  "description": "Website portofolio full stack sederhana untuk Alfachridzy, siswa TKJ yang sedang belajar coding.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "express",
+    "tkj",
+    "nodejs"
+  ],
+  "author": "Alfachridzy",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^4.18.3"
+  }
+}

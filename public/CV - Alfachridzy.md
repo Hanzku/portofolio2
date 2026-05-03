@@ -1,0 +1,13 @@
+CV - Alfachridzy
+
+Nama: Alfachridzy
+Di panggil: Nengok
+Kelas: TKJ
+Pengalaman: Sekitar 1 tahun belajar coding
+Email: zandygege@gmail.com
+
+Ringkasan:
+Saya siswa TKJ yang sedang membangun kemampuan di bidang web development, jaringan komputer, dan backend sederhana dengan Node.js. dan juga nama saya alfachridzy kalau di panggil nengok
+
+Catatan:
+INI CUMAN TEST. JADI CV KU AKAN SIAP KALAU AKU DAH LULUS :v
