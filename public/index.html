@@ -2085,13 +2085,19 @@ window.addEventListener("load", () => {
       }
 
       async function sendEmail(data) {
+        const payload = createEmailPayload(data);
+        const formData = new FormData();
+
+        Object.entries(payload).forEach(function (entry) {
+          formData.append(entry[0], entry[1]);
+        });
+
         const response = await fetch(formSubmitUrl, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
             Accept: 'application/json'
           },
-          body: JSON.stringify(createEmailPayload(data))
+          body: formData
         });
         const result = await response.json().catch(function () {
           return {};
