@@ -1083,7 +1083,7 @@
         transition-duration: 0.01ms !important;
       }
     }
- <!-- TARUH CSS MUSIC PLAYER INI TEPAT SEBELUM </head> -->
+    /head> -->
 
 <style>
 .music-player{
@@ -1417,6 +1417,26 @@
     height:4px;
   }
 }
+
+    .captcha-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .captcha-wrap input {
+      width: 90px;
+    }
+
+    .captcha-question {
+      color: var(--green);
+      font-size: 0.95rem;
+      font-weight: 700;
+      white-space: nowrap;
+      font-family: monospace;
+      letter-spacing: 0.04em;
+    }
 
 </style>
 
@@ -1892,6 +1912,14 @@ window.addEventListener("load", () => {
               </div>
             </div>
 
+            <div class="field full">
+              <label for="captcha">Verifikasi: <span class="captcha-question" id="captchaQuestion"></span></label>
+              <div class="captcha-wrap">
+                <input type="number" id="captcha" placeholder="Jawaban" autocomplete="off">
+              </div>
+              <span class="error-text" aria-live="polite"></span>
+            </div>
+
             <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
 
             <button class="button button-primary submit-button" type="submit">
@@ -1922,7 +1950,9 @@ window.addEventListener("load", () => {
       const sections = document.querySelectorAll('section[id]');
       const form = document.querySelector('#contactForm');
       const formStatus = document.querySelector('#formStatus');
-      const formSubmitUrl = 'https://formsubmit.co/ajax/zandygege@gmail.com';
+      const WEB3FORMS_KEY = '25b3ac93-4e25-4419-b669-788a704070ba';
+      const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
+      let captchaAnswer = 0;
 
       function setMenu(open) {
         header.classList.toggle('nav-open', open);
@@ -2012,14 +2042,24 @@ window.addEventListener("load", () => {
         };
       }
 
+      function generateCaptcha() {
+        const a = Math.floor(Math.random() * 9) + 1;
+        const b = Math.floor(Math.random() * 9) + 1;
+        captchaAnswer = a + b;
+        document.getElementById('captchaQuestion').textContent = a + ' + ' + b + ' = ?';
+        document.getElementById('captcha').value = '';
+      }
+
       function validateForm() {
         const data = getFormData();
+        const captchaInput = document.getElementById('captcha');
         let isValid = true;
 
         setError(form.nama, '');
         setError(form.email, '');
         setError(form.kategori, '');
         setError(form.pesan, '');
+        setError(captchaInput, '');
 
         if (data.nama.length < 3) {
           setError(form.nama, 'Nama minimal 3 karakter.');
@@ -2046,65 +2086,43 @@ window.addEventListener("load", () => {
           isValid = false;
         }
 
+        const userAnswer = parseInt(captchaInput.value, 10);
+        if (isNaN(userAnswer) || userAnswer !== captchaAnswer) {
+          setError(captchaInput, 'Jawaban verifikasi salah. Coba lagi.');
+          generateCaptcha();
+          isValid = false;
+        }
+
         return isValid ? data : null;
       }
 
-      function createMessageEntry(data) {
-        const id = window.crypto && window.crypto.randomUUID
-          ? window.crypto.randomUUID()
-          : `msg-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-
-        return {
-          id: id,
-          nama: data.nama,
+      async function sendEmail(data) {
+        const payload = {
+          access_key: WEB3FORMS_KEY,
+          subject: '[Portofolio] Pesan dari ' + data.nama,
+          from_name: data.nama,
+          replyto: data.email,
           email: data.email,
           kategori: data.kategori,
           pesan: data.pesan,
-          createdAt: new Date().toISOString(),
-          userAgent: navigator.userAgent || '-'
+          botcheck: ''
         };
-      }
 
-      function createEmailPayload(data) {
-        const entry = createMessageEntry(data);
-
-        return {
-          _subject: `[Portofolio] Pesan dari ${entry.nama}`,
-          _template: 'table',
-          _captcha: 'false',
-          _replyto: entry.email,
-          messages_json: JSON.stringify(entry, null, 2),
-          id: entry.id,
-          nama: entry.nama,
-          email: entry.email,
-          kategori: entry.kategori,
-          pesan: entry.pesan,
-          createdAt: entry.createdAt,
-          userAgent: entry.userAgent
-        };
-      }
-
-      async function sendEmail(data) {
-        const payload = createEmailPayload(data);
-        const formData = new FormData();
-
-        Object.entries(payload).forEach(function (entry) {
-          formData.append(entry[0], entry[1]);
-        });
-
-        const response = await fetch(formSubmitUrl, {
+        const response = await fetch(WEB3FORMS_URL, {
           method: 'POST',
           headers: {
-            Accept: 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
-          body: formData
-        });
-        const result = await response.json().catch(function () {
-          return {};
+          body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-          throw new Error(result.message || 'Pesan belum berhasil dikirim.');
+        const result = await response.json().catch(function () {
+          return { success: false };
+        });
+
+        if (!result.success) {
+          throw new Error(result.message || 'Pesan gagal dikirim.');
         }
 
         return result;
@@ -2131,21 +2149,20 @@ window.addEventListener("load", () => {
         showStatus('Mengirim pesan...', '');
 
         try {
-          const result = await sendEmail(data);
+          await sendEmail(data);
 
           form.reset();
-          if (/activation/i.test(result.message || '')) {
-            showStatus('Form kontak sudah tersambung. Cek inbox email dan klik link aktivasi FormSubmit agar pesan berikutnya masuk normal.', 'success');
-            return;
-          }
-
-          showStatus('Pesan berhasil dikirim ke email. Terima kasih, saya akan cek kalau inget yah.', 'success');
+          generateCaptcha();
+          showStatus('Pesan berhasil dikirim. Terima kasih, saya akan cek kalau inget yah.', 'success');
         } catch (error) {
           showStatus(error.message || 'Terjadi kendala saat mengirim pesan.', 'error');
+          generateCaptcha();
         } finally {
           submitButton.disabled = false;
         }
       });
+
+      generateCaptcha();
     })();
   </script>
 </body>
