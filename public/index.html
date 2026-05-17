@@ -1301,6 +1301,17 @@
   box-shadow:
     0 10px 40px rgba(0,0,0,0.4),
     0 0 20px rgba(62,240,163,0.08);
+
+  opacity:1;
+  transition:opacity 600ms ease;
+}
+
+.music-player-fixed.is-playing{
+  opacity:0.3;
+}
+
+.music-player-fixed.is-playing:hover{
+  opacity:1;
 }
 
 .music-btn{
@@ -1442,6 +1453,7 @@ const audio = document.getElementById("musicAudio");
 const btn = document.getElementById("musicBtn");
 const disc = document.getElementById("musicDisc");
 const wave = document.getElementById("musicWave");
+const player = document.querySelector(".music-player-fixed");
 
 let playing = false;
 
@@ -1450,14 +1462,14 @@ function updateMusicState(){
   if(playing){
 
     disc.classList.add("music-spin");
-
     wave.style.display = "flex";
+    player.classList.add("is-playing");
 
   }else{
 
     disc.classList.remove("music-spin");
-
     wave.style.display = "none";
+    player.classList.remove("is-playing");
   }
 }
 
