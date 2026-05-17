@@ -1245,111 +1245,298 @@
 }
 </style>
 </head>
-  <!-- MUSIC PLAYER -->
+<!-- MUSIC PLAYER FIX -->
 
-<div class="music-player">
+<div id="floating-music-player">
 
-  <audio id="audio" loop>
-    <source src="/data/audio/happiness.mp3" type="audio/mp3">
+  <audio id="bgMusic" loop preload="auto">
+    <source src="happiness.mp3" type="audio/mp3">
   </audio>
 
-  <div class="disc-wrapper">
+  <div class="music-disc-wrapper" id="musicToggle">
 
-    <div class="disc" id="disc">
-      <div class="disc-center"></div>
+    <div class="music-disc" id="musicDisc">
+      <div class="music-disc-center"></div>
     </div>
 
-    <div class="overlay" id="overlayBtn">
+    <div class="music-overlay" id="musicOverlay">
       ▶
     </div>
 
-    <div class="waves" id="waves" style="display:none;">
-      <div class="wave"></div>
-      <div class="wave"></div>
-      <div class="wave"></div>
+    <div class="music-waves" id="musicWaves">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
 
   </div>
 
-  <div class="music-info">
-    <span class="music-title">Happiness</span>
-    <span class="music-artist">Rex Orange County</span>
+  <div class="music-meta">
+    <div class="music-name">Happiness</div>
+    <div class="music-artist">Rex Orange County</div>
   </div>
-
-  <button class="play-btn" id="playBtn">
-    ▶
-  </button>
 
 </div>
 
+<style>
+
+#floating-music-player{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:999999;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:10px 18px 10px 10px;
+
+  border-radius:999px;
+
+  background:rgba(15,20,25,0.75);
+
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.45),
+    0 0 20px rgba(62,240,163,0.08);
+}
+
+.music-disc-wrapper{
+  width:52px;
+  height:52px;
+
+  border-radius:50%;
+
+  position:relative;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  overflow:hidden;
+
+  background:rgba(255,255,255,0.04);
+}
+
+.music-disc{
+  width:36px;
+  height:36px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(
+    135deg,
+    #3ef0a3,
+    #56d5ff
+  );
+
+  box-shadow:
+    0 0 18px rgba(62,240,163,0.35);
+}
+
+.music-disc-center{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#07100d;
+}
+
+.music-spin{
+  animation:spinDisc 7s linear infinite;
+}
+
+.music-overlay{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(0,0,0,0.35);
+
+  color:white;
+
+  font-size:14px;
+
+  opacity:0;
+
+  transition:0.25s;
+}
+
+.music-disc-wrapper:hover .music-overlay{
+  opacity:1;
+}
+
+.music-meta{
+  display:flex;
+  flex-direction:column;
+}
+
+.music-name{
+  font-size:12px;
+  font-weight:700;
+  color:white;
+}
+
+.music-artist{
+  font-size:9px;
+  color:rgba(255,255,255,0.6);
+  text-transform:uppercase;
+}
+
+.music-waves{
+  position:absolute;
+  right:-3px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  display:none;
+  align-items:flex-end;
+  gap:2px;
+
+  height:12px;
+}
+
+.music-waves span{
+  width:2px;
+  height:4px;
+
+  border-radius:999px;
+
+  background:#3ef0a3;
+
+  animation:waveAnim 0.7s infinite;
+}
+
+.music-waves span:nth-child(2){
+  animation-delay:0.1s;
+}
+
+.music-waves span:nth-child(3){
+  animation-delay:0.2s;
+}
+
+@keyframes spinDisc{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes waveAnim{
+  0%{
+    height:4px;
+  }
+
+  50%{
+    height:12px;
+  }
+
+  100%{
+    height:4px;
+  }
+}
+
+@media(max-width:600px){
+
+  #floating-music-player{
+    right:14px;
+    bottom:14px;
+    transform:scale(0.92);
+  }
+
+}
+
+</style>
+
 <script>
-const musicAudio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const overlayBtn = document.getElementById("overlayBtn");
-const disc = document.getElementById("disc");
-const waves = document.getElementById("waves");
 
-let isPlaying = false;
+const bgMusic = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+const musicDisc = document.getElementById("musicDisc");
+const musicOverlay = document.getElementById("musicOverlay");
+const musicWaves = document.getElementById("musicWaves");
 
-function updateMusicUI(){
+let musicPlaying = false;
 
-  if(isPlaying){
+function updatePlayer(){
 
-    disc.classList.add("spin");
+  if(musicPlaying){
 
-    waves.style.display = "flex";
+    musicDisc.classList.add("music-spin");
 
-    playBtn.innerHTML = "❚❚";
+    musicOverlay.innerHTML = "❚❚";
 
-    overlayBtn.innerHTML = "❚❚";
+    musicWaves.style.display = "flex";
 
-  } else {
+  }else{
 
-    disc.classList.remove("spin");
+    musicDisc.classList.remove("music-spin");
 
-    waves.style.display = "none";
+    musicOverlay.innerHTML = "▶";
 
-    playBtn.innerHTML = "▶";
-
-    overlayBtn.innerHTML = "▶";
+    musicWaves.style.display = "none";
   }
 }
 
-function toggleMusic(){
+async function toggleMusic(){
 
-  if(isPlaying){
+  try{
 
-    musicAudio.pause();
+    if(musicPlaying){
 
-  } else {
+      bgMusic.pause();
 
-    musicAudio.play().catch(() => {});
-  }
+      musicPlaying = false;
 
-  isPlaying = !isPlaying;
+    }else{
 
-  updateMusicUI();
-}
+      await bgMusic.play();
 
-playBtn.addEventListener("click", toggleMusic);
-
-overlayBtn.addEventListener("click", toggleMusic);
-
-document.body.addEventListener(
-  "click",
-  () => {
-
-    if(!isPlaying){
-
-      musicAudio.play().catch(() => {});
-
-      isPlaying = true;
-
-      updateMusicUI();
+      musicPlaying = true;
     }
-  },
-  { once:true }
-);
+
+    updatePlayer();
+
+  }catch(err){
+
+    console.log(err);
+  }
+}
+
+musicToggle.addEventListener("click", toggleMusic);
+
+document.addEventListener("click", async () => {
+
+  if(!musicPlaying){
+
+    try{
+
+      await bgMusic.play();
+
+      musicPlaying = true;
+
+      updatePlayer();
+
+    }catch(err){}
+  }
+
+}, { once:true });
+
 </script>
 <body>
   <header class="site-header" id="top">
