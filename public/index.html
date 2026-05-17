@@ -1083,8 +1083,274 @@
         transition-duration: 0.01ms !important;
       }
     }
-  </style>
+ <!-- TARUH CSS MUSIC PLAYER INI TEPAT SEBELUM </head> -->
+
+<style>
+.music-player{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:8px 24px 8px 8px;
+  border-radius:999px;
+  background:linear-gradient(
+    135deg,
+    rgba(34,197,94,0.20),
+    rgba(16,185,129,0.10),
+    rgba(132,204,22,0.15)
+  );
+  border:1px solid rgba(74,222,128,0.25);
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 0 20px rgba(34,197,94,0.15),
+    0 0 60px rgba(34,197,94,0.10);
+  z-index:9999;
+}
+
+.disc-wrapper{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.05);
+  cursor:pointer;
+}
+
+.disc{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(
+    to top right,
+    #4ade80,
+    #10b981,
+    #84cc16
+  );
+  box-shadow:0 0 15px rgba(74,222,128,0.4);
+}
+
+.disc-center{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#08110c;
+}
+
+.spin{
+  animation:musicSpin 8s linear infinite;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.35);
+  opacity:0;
+  transition:0.3s;
+  font-size:14px;
+}
+
+.disc-wrapper:hover .overlay{
+  opacity:1;
+}
+
+.music-info{
+  display:flex;
+  flex-direction:column;
+}
+
+.music-title{
+  font-size:11px;
+  font-weight:bold;
+  color:#f0fdf4;
+}
+
+.music-artist{
+  font-size:9px;
+  color:rgba(220,252,231,0.7);
+  text-transform:uppercase;
+}
+
+.play-btn{
+  background:none;
+  border:none;
+  color:#dcfce7;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.play-btn:hover{
+  color:white;
+}
+
+.waves{
+  position:absolute;
+  top:50%;
+  right:-4px;
+  transform:translateY(-50%);
+  display:flex;
+  align-items:flex-end;
+  gap:2px;
+  height:12px;
+}
+
+.wave{
+  width:2px;
+  background:#dcfce7;
+  border-radius:999px;
+  animation:musicWave 0.6s infinite;
+}
+
+.wave:nth-child(2){
+  animation-delay:0.1s;
+}
+
+.wave:nth-child(3){
+  animation-delay:0.2s;
+}
+
+@keyframes musicSpin{
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes musicWave{
+  0%{
+    height:4px;
+  }
+
+  50%{
+    height:12px;
+  }
+
+  100%{
+    height:4px;
+  }
+}
+</style>
 </head>
+  <!-- MUSIC PLAYER -->
+
+<div class="music-player">
+
+  <audio id="audio" loop>
+    <source src="/data/audio/happiness.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="disc-wrapper">
+
+    <div class="disc" id="disc">
+      <div class="disc-center"></div>
+    </div>
+
+    <div class="overlay" id="overlayBtn">
+      ▶
+    </div>
+
+    <div class="waves" id="waves" style="display:none;">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+
+  </div>
+
+  <div class="music-info">
+    <span class="music-title">Happiness</span>
+    <span class="music-artist">Rex Orange County</span>
+  </div>
+
+  <button class="play-btn" id="playBtn">
+    ▶
+  </button>
+
+</div>
+
+<script>
+const musicAudio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const overlayBtn = document.getElementById("overlayBtn");
+const disc = document.getElementById("disc");
+const waves = document.getElementById("waves");
+
+let isPlaying = false;
+
+function updateMusicUI(){
+
+  if(isPlaying){
+
+    disc.classList.add("spin");
+
+    waves.style.display = "flex";
+
+    playBtn.innerHTML = "❚❚";
+
+    overlayBtn.innerHTML = "❚❚";
+
+  } else {
+
+    disc.classList.remove("spin");
+
+    waves.style.display = "none";
+
+    playBtn.innerHTML = "▶";
+
+    overlayBtn.innerHTML = "▶";
+  }
+}
+
+function toggleMusic(){
+
+  if(isPlaying){
+
+    musicAudio.pause();
+
+  } else {
+
+    musicAudio.play().catch(() => {});
+  }
+
+  isPlaying = !isPlaying;
+
+  updateMusicUI();
+}
+
+playBtn.addEventListener("click", toggleMusic);
+
+overlayBtn.addEventListener("click", toggleMusic);
+
+document.body.addEventListener(
+  "click",
+  () => {
+
+    if(!isPlaying){
+
+      musicAudio.play().catch(() => {});
+
+      isPlaying = true;
+
+      updateMusicUI();
+    }
+  },
+  { once:true }
+);
+</script>
 <body>
   <header class="site-header" id="top">
     <div class="nav-wrap">
