@@ -1946,7 +1946,7 @@ window.addEventListener("load", () => {
       const sections = document.querySelectorAll('section[id]');
       const form = document.querySelector('#contactForm');
       const formStatus = document.querySelector('#formStatus');
-      const WEB3FORMS_KEY = 'MASUKKAN_ACCESS_KEY_KAMU_DI_SINI';
+      const WEB3FORMS_KEY = '25b3ac93-4e25-4419-b669-788a704070ba';
       const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
       let captchaAnswer = 0;
 
@@ -2094,7 +2094,7 @@ window.addEventListener("load", () => {
 
       async function sendEmail(data) {
         const payload = {
-          access_key: 25b3ac93-4e25-4419-b669-788a704070ba,
+          access_key: WEB3FORMS_KEY,
           subject: '[Portofolio] Pesan dari ' + data.nama,
           from_name: data.nama,
           replyto: data.email,
