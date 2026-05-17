@@ -1455,6 +1455,18 @@ const disc = document.getElementById("musicDisc");
 const wave = document.getElementById("musicWave");
 const player = document.querySelector(".music-player-fixed");
 
+player.style.transition = "opacity 600ms ease";
+
+player.addEventListener("mouseenter", function(){
+  player.style.opacity = "1";
+});
+
+player.addEventListener("mouseleave", function(){
+  if(playing){
+    player.style.opacity = "0.25";
+  }
+});
+
 let playing = false;
 
 function updateMusicState(){
@@ -1463,13 +1475,13 @@ function updateMusicState(){
 
     disc.classList.add("music-spin");
     wave.style.display = "flex";
-    player.classList.add("is-playing");
+    player.style.opacity = "0.25";
 
   }else{
 
     disc.classList.remove("music-spin");
     wave.style.display = "none";
-    player.classList.remove("is-playing");
+    player.style.opacity = "1";
   }
 }
 
