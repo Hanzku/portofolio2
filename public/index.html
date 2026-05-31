@@ -23,16 +23,8 @@
       --radius: 8px;
       --header-height: 78px;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--header-height) + 24px);
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 24px); }
     body {
       margin: 0;
       color: var(--text);
@@ -44,1489 +36,675 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    img { max-width: 100%; display: block; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
+    /* ─── HEADER ─── */
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: sticky; top: 0; z-index: 50;
       min-height: var(--header-height);
       border-bottom: 1px solid rgba(232, 241, 238, 0.08);
       background: rgba(7, 11, 13, 0.82);
       backdrop-filter: blur(18px);
     }
-
     .nav-wrap {
       width: min(1120px, calc(100% - 40px));
       min-height: var(--header-height);
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
+      display: flex; align-items: center; justify-content: space-between; gap: 22px;
     }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0;
-    }
-
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: 0; }
     .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
       border: 1px solid rgba(62, 240, 163, 0.45);
       border-radius: var(--radius);
       color: #04100c;
       background: linear-gradient(135deg, var(--green), var(--cyan));
       box-shadow: 0 12px 28px rgba(62, 240, 163, 0.18);
     }
-
-    .brand-text span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 600;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
+    .brand-text span { display: block; color: var(--muted); font-size: 0.76rem; font-weight: 600; }
+    .nav-menu { display: flex; align-items: center; gap: 6px; }
     .nav-link {
-      position: relative;
-      padding: 10px 12px;
+      position: relative; padding: 10px 12px;
       border-radius: var(--radius);
-      color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 650;
+      color: var(--muted); font-size: 0.92rem; font-weight: 650;
       transition: color 180ms ease, background 180ms ease;
     }
-
-    .nav-link:hover,
-    .nav-link.active {
-      color: var(--text);
-      background: rgba(232, 241, 238, 0.07);
-    }
-
+    .nav-link:hover, .nav-link.active { color: var(--text); background: rgba(232, 241, 238, 0.07); }
     .nav-link.active::after {
-      content: "";
-      position: absolute;
-      right: 12px;
-      bottom: 6px;
-      left: 12px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--green);
+      content: ""; position: absolute; right: 12px; bottom: 6px; left: 12px;
+      height: 2px; border-radius: 999px; background: var(--green);
     }
-
+    .nav-link.games-link { color: var(--green); }
+    .nav-link.games-link:hover, .nav-link.games-link.active { color: var(--green); background: rgba(62,240,163,0.1); }
+    .nav-link.games-link.active::after { background: var(--green); }
     .menu-button {
-      display: none;
-      width: 42px;
-      height: 42px;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      color: var(--text);
-      background: rgba(232, 241, 238, 0.06);
-      cursor: pointer;
+      display: none; width: 42px; height: 42px; place-items: center;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      color: var(--text); background: rgba(232, 241, 238, 0.06); cursor: pointer;
     }
-
-    .menu-button span,
-    .menu-button::before,
-    .menu-button::after {
-      content: "";
-      width: 18px;
-      height: 2px;
-      display: block;
-      border-radius: 999px;
-      background: currentColor;
+    .menu-button span, .menu-button::before, .menu-button::after {
+      content: ""; width: 18px; height: 2px; display: block;
+      border-radius: 999px; background: currentColor;
       transition: transform 180ms ease, opacity 180ms ease;
     }
+    .menu-button { gap: 4px; }
+    .nav-open .menu-button::before { transform: translateY(6px) rotate(45deg); }
+    .nav-open .menu-button span { opacity: 0; }
+    .nav-open .menu-button::after { transform: translateY(-6px) rotate(-45deg); }
 
-    .menu-button {
-      gap: 4px;
-    }
-
-    .nav-open .menu-button::before {
-      transform: translateY(6px) rotate(45deg);
-    }
-
-    .nav-open .menu-button span {
-      opacity: 0;
-    }
-
-    .nav-open .menu-button::after {
-      transform: translateY(-6px) rotate(-45deg);
-    }
-
-    main {
-      width: 100%;
-    }
-
-    .section {
-      padding: 108px 0;
-      position: relative;
-    }
-
+    /* ─── LAYOUT ─── */
+    main { width: 100%; }
+    .section { padding: 108px 0; position: relative; }
     .section.alt {
       background: rgba(232, 241, 238, 0.025);
       border-top: 1px solid rgba(232, 241, 238, 0.06);
       border-bottom: 1px solid rgba(232, 241, 238, 0.06);
     }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
 
-    .container {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    .hero {
-      min-height: calc(100vh - var(--header-height));
-      display: flex;
-      align-items: center;
-      padding: 88px 0 76px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.88fr);
-      gap: 46px;
-      align-items: center;
-    }
-
+    /* ─── HERO ─── */
+    .hero { min-height: calc(100vh - var(--header-height)); display: flex; align-items: center; padding: 88px 0 76px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.88fr); gap: 46px; align-items: center; }
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 18px;
-      color: var(--green);
-      font-size: 0.84rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px;
+      color: var(--green); font-size: 0.84rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase;
     }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      display: inline-block;
-      background: currentColor;
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
-
-    .hero h1 {
-      max-width: 720px;
-      margin-bottom: 24px;
-      font-size: clamp(2.8rem, 7vw, 5.9rem);
-      line-height: 0.96;
-      letter-spacing: 0;
-    }
-
-    .hero h1 span {
-      color: transparent;
-      background: linear-gradient(135deg, var(--green), var(--cyan), var(--amber));
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
-    .hero-lead {
-      max-width: 650px;
-      color: var(--muted);
-      font-size: clamp(1rem, 2vw, 1.18rem);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 32px 0 26px;
-    }
-
+    .eyebrow::before { content: ""; width: 34px; height: 1px; display: inline-block; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 { max-width: 720px; margin-bottom: 24px; font-size: clamp(2.8rem, 7vw, 5.9rem); line-height: 0.96; letter-spacing: 0; }
+    .hero h1 span { color: transparent; background: linear-gradient(135deg, var(--green), var(--cyan), var(--amber)); -webkit-background-clip: text; background-clip: text; }
+    .hero-lead { max-width: 650px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.18rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 26px; }
     .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 46px;
-      padding: 12px 18px;
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      font-weight: 800;
-      transition: transform 180ms ease, border 180ms ease, background 180ms ease, color 180ms ease;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; min-height: 46px; padding: 12px 18px;
+      border: 1px solid transparent; border-radius: var(--radius);
+      font-weight: 800; transition: transform 180ms ease, border 180ms ease, background 180ms ease, color 180ms ease;
       cursor: pointer;
     }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button-primary {
-      color: #04110d;
-      background: linear-gradient(135deg, var(--green), var(--cyan));
-      box-shadow: 0 14px 34px rgba(62, 240, 163, 0.18);
-    }
-
-    .button-secondary {
-      color: var(--text);
-      border-color: var(--line);
-      background: rgba(232, 241, 238, 0.06);
-    }
-
-    .button-secondary:hover {
-      border-color: rgba(62, 240, 163, 0.35);
-    }
-
-    .button-icon {
-      width: 18px;
-      height: 18px;
-      display: inline-grid;
-      place-items: center;
-      font-size: 1rem;
-      line-height: 1;
-    }
-
-    .quick-info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .quick-info li {
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      color: var(--muted);
-      background: rgba(232, 241, 238, 0.04);
-      font-size: 0.9rem;
-    }
-
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #04110d; background: linear-gradient(135deg, var(--green), var(--cyan)); box-shadow: 0 14px 34px rgba(62, 240, 163, 0.18); }
+    .button-secondary { color: var(--text); border-color: var(--line); background: rgba(232, 241, 238, 0.06); }
+    .button-secondary:hover { border-color: rgba(62, 240, 163, 0.35); }
+    .button-icon { width: 18px; height: 18px; display: inline-grid; place-items: center; font-size: 1rem; line-height: 1; }
+    .quick-info { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .quick-info li { padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); background: rgba(232, 241, 238, 0.04); font-size: 0.9rem; }
     .hero-panel {
-      position: relative;
-      padding: 16px;
-      border: 1px solid rgba(232, 241, 238, 0.13);
-      border-radius: var(--radius);
+      position: relative; padding: 16px;
+      border: 1px solid rgba(232, 241, 238, 0.13); border-radius: var(--radius);
       background: linear-gradient(180deg, rgba(17, 26, 29, 0.96), rgba(11, 16, 18, 0.96));
-      box-shadow: var(--shadow);
-      isolation: isolate;
+      box-shadow: var(--shadow); isolation: isolate;
     }
-
     .hero-panel::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      z-index: -1;
-      border-radius: inherit;
+      content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
       background: linear-gradient(135deg, rgba(62, 240, 163, 0.42), transparent 38%, rgba(86, 213, 255, 0.34));
       opacity: 0.5;
     }
+    .panel-top { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; color: var(--muted); font-size: 0.86rem; }
+    .window-dots { display: flex; gap: 7px; }
+    .window-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--coral); }
+    .window-dots span:nth-child(2) { background: var(--amber); }
+    .window-dots span:nth-child(3) { background: var(--green); }
+    .dashboard-visual { display: grid; gap: 14px; }
+    .code-card, .metric-card, .status-card { border: 1px solid rgba(232, 241, 238, 0.1); border-radius: var(--radius); background: rgba(232, 241, 238, 0.045); }
+    .code-card { padding: 18px; color: #dff8ef; font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.9rem; overflow: hidden; }
+    .code-line { display: block; min-height: 1.55rem; white-space: nowrap; }
+    .code-muted { color: #6f8580; }
+    .code-green { color: var(--green); }
+    .code-cyan { color: var(--cyan); }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .metric-card { padding: 15px; }
+    .metric-card strong { display: block; font-size: 1.5rem; line-height: 1.1; }
+    .metric-card span { color: var(--muted); font-size: 0.78rem; }
+    .status-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px; }
+    .status-card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+    .status-light { width: 12px; height: 12px; flex: 0 0 auto; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 8px rgba(62, 240, 163, 0.12), 0 0 28px rgba(62, 240, 163, 0.7); animation: pulse 1.8s ease-in-out infinite; }
+    .section-heading { max-width: 720px; margin-bottom: 42px; }
+    .section-heading h2 { margin-bottom: 12px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; letter-spacing: 0; }
+    .section-heading p { color: var(--muted); font-size: 1.02rem; }
 
-    .panel-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
+    /* ─── ABOUT ─── */
+    .about-grid { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.68fr); gap: 32px; align-items: start; }
+    .story { padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17, 26, 29, 0.72); }
+    .story p { color: var(--muted); }
+    .story p:last-child { margin-bottom: 0; }
+    .profile-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .profile-list li { display: flex; justify-content: space-between; gap: 16px; padding: 15px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(232, 241, 238, 0.04); }
+    .profile-list span { color: var(--muted); }
+    .profile-list strong { text-align: right; }
 
-    .window-dots {
-      display: flex;
-      gap: 7px;
-    }
+    /* ─── STRENGTH / PROJECT ─── */
+    .strength-grid, .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .strength-card, .project-card, .contact-card { border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17, 26, 29, 0.78); transition: transform 180ms ease, border 180ms ease, background 180ms ease; }
+    .strength-card:hover, .project-card:hover { transform: translateY(-5px); border-color: rgba(62, 240, 163, 0.35); background: rgba(23, 35, 39, 0.9); }
+    .strength-card { padding: 24px; }
+    .strength-icon { width: 42px; height: 42px; margin-bottom: 18px; display: grid; place-items: center; border-radius: var(--radius); color: #07100d; background: var(--green); font-weight: 900; }
+    .strength-card:nth-child(2) .strength-icon { background: var(--cyan); }
+    .strength-card:nth-child(3) .strength-icon { background: var(--amber); }
+    .strength-card h3, .project-card h3 { margin-bottom: 10px; font-size: 1.12rem; }
+    .strength-card p, .project-card p { margin-bottom: 0; color: var(--muted); font-size: 0.96rem; }
 
-    .window-dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--coral);
-    }
+    /* ─── SKILLS ─── */
+    .skills-layout { display: grid; grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1fr); gap: 34px; align-items: start; }
+    .skill-note { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17, 26, 29, 0.76); }
+    .skill-note h3 { margin-bottom: 12px; font-size: 1.45rem; }
+    .skill-note p { color: var(--muted); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .skill-tags span { padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); background: rgba(232, 241, 238, 0.04); font-size: 0.88rem; }
+    .skill-list { display: grid; gap: 16px; }
+    .skill-item { padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17, 26, 29, 0.76); }
+    .skill-row { display: flex; justify-content: space-between; gap: 18px; margin-bottom: 10px; font-weight: 750; }
+    .skill-row span:last-child { color: var(--muted); font-weight: 700; }
+    .skill-bar { height: 8px; overflow: hidden; border-radius: 999px; background: rgba(232, 241, 238, 0.08); }
+    .skill-bar span { width: var(--value); height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, var(--green), var(--cyan)); }
 
-    .window-dots span:nth-child(2) {
-      background: var(--amber);
-    }
+    /* ─── PROJECTS ─── */
+    .project-card { overflow: hidden; }
+    .project-preview { min-height: 170px; padding: 18px; display: grid; align-content: end; gap: 10px; border-bottom: 1px solid var(--line); background: linear-gradient(135deg, rgba(62, 240, 163, 0.18), transparent 34%), linear-gradient(180deg, rgba(86, 213, 255, 0.12), rgba(246, 200, 101, 0.06)), #0d1416; }
+    .preview-window { min-height: 118px; padding: 12px; border: 1px solid rgba(232, 241, 238, 0.14); border-radius: var(--radius); background: rgba(7, 11, 13, 0.72); box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18); }
+    .preview-row { height: 9px; margin-bottom: 9px; border-radius: 999px; background: rgba(232, 241, 238, 0.14); }
+    .preview-row.short { width: 62%; background: rgba(62, 240, 163, 0.48); }
+    .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 15px; }
+    .preview-grid span { min-height: 44px; border-radius: var(--radius); background: rgba(232, 241, 238, 0.09); }
+    .project-body { padding: 22px; }
+    .project-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .project-meta span { padding: 6px 8px; border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); background: rgba(232, 241, 238, 0.04); font-size: 0.78rem; font-weight: 700; }
 
-    .window-dots span:nth-child(3) {
-      background: var(--green);
-    }
+    /* ─── PROCESS ─── */
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: step; }
+    .process-step { position: relative; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17, 26, 29, 0.74); counter-increment: step; }
+    .process-step::before { content: counter(step, decimal-leading-zero); display: block; margin-bottom: 18px; color: var(--green); font-size: 0.86rem; font-weight: 900; }
+    .process-step h3 { margin-bottom: 8px; font-size: 1rem; }
+    .process-step p { margin-bottom: 0; color: var(--muted); font-size: 0.9rem; }
 
-    .dashboard-visual {
-      display: grid;
-      gap: 14px;
-    }
+    /* ─── CONTACT ─── */
+    .contact-layout { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(340px, 1fr); gap: 28px; align-items: start; }
+    .contact-card { padding: 28px; }
+    .contact-card p { color: var(--muted); }
+    .contact-list { display: grid; gap: 12px; margin: 24px 0 0; padding: 0; list-style: none; }
+    .contact-list a, .contact-list > li > span { display: flex; justify-content: space-between; gap: 14px; padding: 13px 14px; border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); background: rgba(232, 241, 238, 0.04); }
+    .contact-list strong { color: var(--text); }
+    .contact-form { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17, 26, 29, 0.88); box-shadow: var(--shadow); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: grid; gap: 7px; margin-bottom: 16px; }
+    .field.full { grid-column: 1 / -1; }
+    label { color: var(--text); font-size: 0.9rem; font-weight: 760; }
+    input, select, textarea { width: 100%; border: 1px solid rgba(232, 241, 238, 0.14); border-radius: var(--radius); color: var(--text); background: rgba(7, 11, 13, 0.62); outline: none; transition: border 160ms ease, box-shadow 160ms ease, background 160ms ease; }
+    input, select { min-height: 46px; padding: 0 13px; }
+    textarea { min-height: 138px; padding: 13px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: rgba(62, 240, 163, 0.58); box-shadow: 0 0 0 4px rgba(62, 240, 163, 0.1); background: rgba(7, 11, 13, 0.82); }
+    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: rgba(255, 125, 115, 0.78); }
+    .error-text { min-height: 1rem; color: var(--coral); font-size: 0.78rem; }
+    .form-status { min-height: 44px; margin: 8px 0 16px; padding: 11px 12px; border: 1px solid transparent; border-radius: var(--radius); color: var(--muted); background: rgba(232, 241, 238, 0.04); }
+    .form-status:empty { display: none; }
+    .form-status.success { border-color: rgba(62, 240, 163, 0.35); color: #c8ffe7; background: rgba(62, 240, 163, 0.08); }
+    .form-status.error { border-color: rgba(255, 125, 115, 0.35); color: #ffd0cc; background: rgba(255, 125, 115, 0.08); }
+    .submit-button { width: 100%; }
+    .submit-button:disabled { opacity: 0.68; cursor: wait; transform: none; }
+    .captcha-wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .captcha-wrap input { width: 90px; }
+    .captcha-question { color: var(--green); font-size: 0.95rem; font-weight: 700; white-space: nowrap; font-family: monospace; letter-spacing: 0.04em; }
 
-    .code-card,
-    .metric-card,
-    .status-card {
-      border: 1px solid rgba(232, 241, 238, 0.1);
-      border-radius: var(--radius);
-      background: rgba(232, 241, 238, 0.045);
-    }
+    /* ─── FOOTER ─── */
+    .site-footer { padding: 34px 0; border-top: 1px solid var(--line); background: rgba(7, 11, 13, 0.72); }
+    .footer-wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 22px; color: var(--muted); font-size: 0.92rem; }
+    .footer-wrap strong, .footer-wrap a { color: var(--text); }
 
-    .code-card {
-      padding: 18px;
-      color: #dff8ef;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 0.9rem;
-      overflow: hidden;
-    }
+    /* ─── ANIMATIONS ─── */
+    [data-animate] { opacity: 0; transform: translateY(22px); transition: opacity 520ms ease, transform 520ms ease; }
+    [data-animate].is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes pulse { 0%, 100% { transform: scale(0.92); } 50% { transform: scale(1.08); } }
+    @keyframes discSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes waveBar1 { 0%,100%{height:4px} 50%{height:18px} }
+    @keyframes waveBar2 { 0%,100%{height:8px} 50%{height:22px} }
+    @keyframes waveBar3 { 0%,100%{height:4px} 50%{height:14px} }
+    @keyframes waveBar4 { 0%,100%{height:10px} 50%{height:24px} }
+    @keyframes waveBar5 { 0%,100%{height:6px} 50%{height:16px} }
 
-    .code-line {
-      display: block;
-      min-height: 1.55rem;
-      white-space: nowrap;
-    }
+    /* ═══════════════════════════════════════════
+       GAMES SECTION — NATIVE DESIGN INTEGRATION
+    ═══════════════════════════════════════════ */
 
-    .code-muted {
-      color: #6f8580;
-    }
-
-    .code-green {
-      color: var(--green);
-    }
-
-    .code-cyan {
-      color: var(--cyan);
-    }
-
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .metric-card {
-      padding: 15px;
-    }
-
-    .metric-card strong {
-      display: block;
-      font-size: 1.5rem;
-      line-height: 1.1;
-    }
-
-    .metric-card span {
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .status-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px;
-    }
-
-    .status-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .status-light {
-      width: 12px;
-      height: 12px;
-      flex: 0 0 auto;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 8px rgba(62, 240, 163, 0.12), 0 0 28px rgba(62, 240, 163, 0.7);
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-
-    .section-heading {
-      max-width: 720px;
-      margin-bottom: 42px;
-    }
-
-    .section-heading h2 {
-      margin-bottom: 12px;
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 1.02rem;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.68fr);
-      gap: 32px;
-      align-items: start;
-    }
-
-    .story {
-      padding: 30px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(17, 26, 29, 0.72);
-    }
-
-    .story p {
-      color: var(--muted);
-    }
-
-    .story p:last-child {
-      margin-bottom: 0;
-    }
-
-    .profile-list {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .profile-list li {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 15px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(232, 241, 238, 0.04);
-    }
-
-    .profile-list span {
-      color: var(--muted);
-    }
-
-    .profile-list strong {
-      text-align: right;
-    }
-
-    .strength-grid,
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .strength-card,
-    .project-card,
-    .contact-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(17, 26, 29, 0.78);
-      transition: transform 180ms ease, border 180ms ease, background 180ms ease;
-    }
-
-    .strength-card:hover,
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(62, 240, 163, 0.35);
-      background: rgba(23, 35, 39, 0.9);
-    }
-
-    .strength-card {
-      padding: 24px;
-    }
-
-    .strength-icon {
-      width: 42px;
-      height: 42px;
-      margin-bottom: 18px;
-      display: grid;
-      place-items: center;
-      border-radius: var(--radius);
-      color: #07100d;
-      background: var(--green);
-      font-weight: 900;
-    }
-
-    .strength-card:nth-child(2) .strength-icon {
-      background: var(--cyan);
-    }
-
-    .strength-card:nth-child(3) .strength-icon {
-      background: var(--amber);
-    }
-
-    .strength-card h3,
-    .project-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.12rem;
-    }
-
-    .strength-card p,
-    .project-card p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .skills-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1fr);
-      gap: 34px;
-      align-items: start;
-    }
-
-    .skill-note {
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(17, 26, 29, 0.76);
-    }
-
-    .skill-note h3 {
-      margin-bottom: 12px;
-      font-size: 1.45rem;
-    }
-
-    .skill-note p {
-      color: var(--muted);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
-    }
-
-    .skill-tags span {
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      color: var(--muted);
-      background: rgba(232, 241, 238, 0.04);
-      font-size: 0.88rem;
-    }
-
-    .skill-list {
-      display: grid;
-      gap: 16px;
-    }
-
-    .skill-item {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(17, 26, 29, 0.76);
-    }
-
-    .skill-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 10px;
-      font-weight: 750;
-    }
-
-    .skill-row span:last-child {
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .skill-bar {
-      height: 8px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: rgba(232, 241, 238, 0.08);
-    }
-
-    .skill-bar span {
-      width: var(--value);
-      height: 100%;
-      display: block;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--green), var(--cyan));
-    }
-
-    .project-card {
-      overflow: hidden;
-    }
-
-    .project-preview {
-      min-height: 170px;
-      padding: 18px;
-      display: grid;
-      align-content: end;
-      gap: 10px;
-      border-bottom: 1px solid var(--line);
-      background:
-        linear-gradient(135deg, rgba(62, 240, 163, 0.18), transparent 34%),
-        linear-gradient(180deg, rgba(86, 213, 255, 0.12), rgba(246, 200, 101, 0.06)),
-        #0d1416;
-    }
-
-    .preview-window {
-      min-height: 118px;
-      padding: 12px;
-      border: 1px solid rgba(232, 241, 238, 0.14);
-      border-radius: var(--radius);
-      background: rgba(7, 11, 13, 0.72);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
-    }
-
-    .preview-row {
-      height: 9px;
-      margin-bottom: 9px;
-      border-radius: 999px;
-      background: rgba(232, 241, 238, 0.14);
-    }
-
-    .preview-row.short {
-      width: 62%;
-      background: rgba(62, 240, 163, 0.48);
-    }
-
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    .preview-grid span {
-      min-height: 44px;
-      border-radius: var(--radius);
-      background: rgba(232, 241, 238, 0.09);
-    }
-
-    .project-body {
-      padding: 22px;
-    }
-
-    .project-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .project-meta span {
-      padding: 6px 8px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      color: var(--muted);
-      background: rgba(232, 241, 238, 0.04);
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    .process-grid {
+    /* Game Hub Dashboard */
+    .games-hub {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      counter-reset: step;
+      margin-bottom: 48px;
     }
+    .hub-stat {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 26, 29, 0.78);
+      transition: border 180ms ease, transform 180ms ease;
+    }
+    .hub-stat:hover { border-color: rgba(62, 240, 163, 0.3); transform: translateY(-3px); }
+    .hub-stat-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .hub-stat strong { display: block; font-size: 1.8rem; font-weight: 900; line-height: 1; margin-bottom: 4px; background: linear-gradient(135deg, var(--green), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hub-stat span { color: var(--muted); font-size: 0.8rem; }
 
-    .process-step {
+    /* Game Cards Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 48px;
+    }
+    .game-card {
       position: relative;
-      padding: 22px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: rgba(17, 26, 29, 0.74);
-      counter-increment: step;
+      background: rgba(17, 26, 29, 0.78);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+    .game-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(62, 240, 163, 0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 30px rgba(62,240,163,0.08);
+    }
+    .game-card-preview {
+      height: 130px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(62,240,163,0.12), rgba(86,213,255,0.08));
+      border-bottom: 1px solid var(--line);
+    }
+    .game-card-icon { font-size: 3rem; filter: drop-shadow(0 4px 12px rgba(62,240,163,0.3)); transition: transform 220ms ease; }
+    .game-card:hover .game-card-icon { transform: scale(1.15) rotate(-5deg); }
+    .game-card-body { padding: 16px; }
+    .game-card-body h3 { font-size: 0.98rem; margin-bottom: 5px; }
+    .game-card-body p { font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; }
+    .game-card-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+    .game-tag { padding: 3px 7px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); background: rgba(232,241,238,0.04); font-size: 0.7rem; font-weight: 700; }
+    .game-card-badge {
+      position: absolute; top: 10px; right: 10px;
+      padding: 3px 8px; border-radius: 999px;
+      font-size: 0.68rem; font-weight: 800;
+      background: rgba(62,240,163,0.15); color: var(--green);
+      border: 1px solid rgba(62,240,163,0.3);
+    }
+    .game-score-badge {
+      position: absolute; bottom: 10px; left: 10px;
+      padding: 3px 8px; border-radius: 999px;
+      font-size: 0.68rem; font-weight: 800;
+      background: rgba(86,213,255,0.15); color: var(--cyan);
+      border: 1px solid rgba(86,213,255,0.3);
     }
 
-    .process-step::before {
-      content: counter(step, decimal-leading-zero);
+    /* Game Modal Overlay */
+    .game-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(7, 11, 13, 0.96);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 250ms ease;
+      padding: 20px;
+    }
+    .game-overlay.open { opacity: 1; pointer-events: auto; }
+    .game-modal {
+      width: 100%; max-width: 900px; max-height: 90vh;
+      border: 1px solid rgba(62,240,163,0.25);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 60px rgba(62,240,163,0.06);
+      display: flex; flex-direction: column;
+      transform: scale(0.94) translateY(20px);
+      transition: transform 280ms cubic-bezier(0.34,1.56,0.64,1);
+      overflow: hidden;
+    }
+    .game-overlay.open .game-modal { transform: scale(1) translateY(0); }
+    .game-modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,11,13,0.6);
+      flex-shrink: 0;
+    }
+    .game-modal-title { display: flex; align-items: center; gap: 12px; }
+    .game-modal-title span:first-child { font-size: 1.4rem; }
+    .game-modal-title strong { font-size: 1rem; }
+    .game-modal-title small { color: var(--muted); font-size: 0.78rem; display: block; font-weight: 400; }
+    .game-close-btn {
+      width: 34px; height: 34px; border-radius: var(--radius);
+      border: 1px solid var(--line); background: rgba(232,241,238,0.06);
+      color: var(--muted); cursor: pointer; font-size: 1rem;
+      display: grid; place-items: center;
+      transition: color 180ms, background 180ms, border 180ms;
+    }
+    .game-close-btn:hover { color: var(--text); background: rgba(232,241,238,0.12); border-color: rgba(232,241,238,0.25); }
+    .game-modal-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+    /* Generic game container */
+    .game-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .game-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .game-btn {
+      padding: 8px 16px; border-radius: var(--radius); font-size: 0.84rem; font-weight: 700;
+      border: 1px solid var(--line); background: rgba(232,241,238,0.06); color: var(--text);
+      cursor: pointer; transition: all 160ms ease;
+    }
+    .game-btn:hover { background: rgba(232,241,238,0.12); border-color: rgba(62,240,163,0.35); color: var(--green); }
+    .game-btn.primary { background: linear-gradient(135deg,var(--green),var(--cyan)); color: #04110d; border-color: transparent; }
+    .game-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(62,240,163,0.25); }
+    .game-score-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
+    .game-score-pill {
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(232,241,238,0.04);
+      font-size: 0.82rem; color: var(--muted);
+    }
+    .game-score-pill strong { color: var(--green); }
+
+    /* Canvas games */
+    canvas.game-canvas {
+      border: 1px solid rgba(62,240,163,0.2);
+      border-radius: var(--radius);
+      background: #070b0d;
+      max-width: 100%;
       display: block;
-      margin-bottom: 18px;
-      color: var(--green);
-      font-size: 0.86rem;
-      font-weight: 900;
     }
 
-    .process-step h3 {
-      margin-bottom: 8px;
-      font-size: 1rem;
+    /* Chess specific */
+    .chess-wrap { display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap; justify-content: center; width: 100%; }
+    .chess-board-wrap { flex-shrink: 0; }
+    .chess-board {
+      display: grid; grid-template-columns: repeat(8, 1fr);
+      border: 2px solid rgba(62,240,163,0.3);
+      border-radius: 6px; overflow: hidden;
+      width: min(400px, calc(min(90vw, 500px)));
+      height: min(400px, calc(min(90vw, 500px)));
+    }
+    .chess-cell {
+      display: grid; place-items: center;
+      font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+      cursor: pointer; user-select: none;
+      transition: background 100ms ease;
+    }
+    .chess-cell.light { background: rgba(232,241,238,0.07); }
+    .chess-cell.dark { background: rgba(7,11,13,0.85); }
+    .chess-cell.selected { background: rgba(62,240,163,0.28) !important; }
+    .chess-cell.valid-move { background: rgba(86,213,255,0.2) !important; }
+    .chess-cell.valid-move::after { content: "●"; color: rgba(86,213,255,0.5); font-size: 0.6em; position: absolute; }
+    .chess-cell.in-check { background: rgba(255,125,115,0.3) !important; }
+    .chess-cell:hover { filter: brightness(1.3); }
+    .chess-sidebar { flex: 1; min-width: 160px; max-width: 220px; display: flex; flex-direction: column; gap: 10px; }
+    .chess-status { padding: 12px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17,26,29,0.8); font-size: 0.85rem; color: var(--muted); text-align: center; }
+    .chess-status strong { display: block; color: var(--text); font-size: 0.95rem; }
+    .chess-history { flex: 1; max-height: 200px; overflow-y: auto; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(7,11,13,0.5); font-size: 0.75rem; color: var(--muted); font-family: monospace; }
+    .chess-history div { padding: 2px 0; border-bottom: 1px solid rgba(232,241,238,0.04); }
+
+    /* 2048 specific */
+    .g2048-board { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; padding: 10px; border: 1px solid rgba(62,240,163,0.2); border-radius: 10px; background: rgba(7,11,13,0.7); width: min(340px, 90vw); }
+    .g2048-cell {
+      width: 100%; aspect-ratio: 1;
+      display: grid; place-items: center;
+      border-radius: 6px; font-weight: 900;
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      background: rgba(232,241,238,0.05);
+      border: 1px solid rgba(232,241,238,0.08);
+      transition: background 150ms ease, transform 150ms ease;
     }
 
-    .process-step p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
+    /* Snake specific */
+    .snake-canvas { border: 1px solid rgba(62,240,163,0.25); border-radius: var(--radius); background: #070b0d; }
 
-    .contact-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 0.82fr) minmax(340px, 1fr);
-      gap: 28px;
-      align-items: start;
-    }
-
-    .contact-card {
-      padding: 28px;
-    }
-
-    .contact-card p {
-      color: var(--muted);
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 12px;
-      margin: 24px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .contact-list a,
-    .contact-list > li > span {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 13px 14px;
-      border: 1px solid var(--line);
+    /* Tic Tac Toe */
+    .ttt-board { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; width: min(270px, 80vw); }
+    .ttt-cell {
+      aspect-ratio: 1; display: grid; place-items: center;
+      font-size: 2.2rem; font-weight: 900;
+      border: 1px solid rgba(232,241,238,0.12);
       border-radius: var(--radius);
-      color: var(--muted);
-      background: rgba(232, 241, 238, 0.04);
+      background: rgba(17,26,29,0.8);
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease;
     }
+    .ttt-cell:hover:empty { background: rgba(232,241,238,0.06); border-color: rgba(62,240,163,0.3); }
+    .ttt-cell.x { color: var(--green); }
+    .ttt-cell.o { color: var(--cyan); }
+    .ttt-cell.winning { background: rgba(62,240,163,0.12); border-color: rgba(62,240,163,0.5); animation: tttWin 0.4s ease; }
+    @keyframes tttWin { 0%{transform:scale(0.9)} 60%{transform:scale(1.08)} 100%{transform:scale(1)} }
 
-    .contact-list strong {
-      color: var(--text);
+    /* Memory Game */
+    .memory-board { display: grid; gap: 8px; }
+    .memory-board.easy { grid-template-columns: repeat(4, 1fr); width: min(340px, 90vw); }
+    .memory-board.medium { grid-template-columns: repeat(4, 1fr); width: min(340px, 90vw); }
+    .memory-board.hard { grid-template-columns: repeat(6, 1fr); width: min(420px, 95vw); }
+    .mem-card {
+      aspect-ratio: 1; display: grid; place-items: center;
+      font-size: 1.5rem; border-radius: var(--radius);
+      cursor: pointer; user-select: none;
+      border: 1px solid rgba(232,241,238,0.12);
+      background: rgba(17,26,29,0.8);
+      transition: transform 200ms ease;
+      transform-style: preserve-3d;
+      perspective: 600px;
     }
+    .mem-card.flipped, .mem-card.matched { background: rgba(62,240,163,0.08); border-color: rgba(62,240,163,0.35); }
+    .mem-card.matched { opacity: 0.6; cursor: default; }
+    .mem-card:not(.flipped):not(.matched):hover { transform: scale(1.05); border-color: rgba(62,240,163,0.3); }
+    .mem-card .card-back { font-size: 1.4rem; }
+    .mem-card:not(.flipped):not(.matched) .card-front { display: none; }
+    .mem-card:not(.flipped):not(.matched) .card-back { display: grid; place-items: center; width: 100%; height: 100%; }
+    .mem-card.flipped .card-back, .mem-card.matched .card-back { display: none; }
 
-    .contact-form {
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(17, 26, 29, 0.88);
-      box-shadow: var(--shadow);
+    /* RPS */
+    .rps-choices { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .rps-btn {
+      width: 80px; height: 80px; font-size: 2.2rem;
+      border: 2px solid var(--line); border-radius: 50%;
+      background: rgba(17,26,29,0.8); cursor: pointer;
+      transition: all 200ms ease; display: grid; place-items: center;
     }
+    .rps-btn:hover { border-color: rgba(62,240,163,0.5); background: rgba(62,240,163,0.1); transform: scale(1.1); }
+    .rps-result { text-align: center; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17,26,29,0.6); min-width: 240px; }
+    .rps-vs { display: flex; align-items: center; justify-content: center; gap: 20px; font-size: 3rem; margin: 8px 0; }
+    .rps-vs span.vs-label { font-size: 0.8rem; color: var(--muted); font-weight: 700; }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    /* Typing Game */
+    .typing-text-area {
+      padding: 18px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: rgba(7,11,13,0.6); font-size: 1.1rem; line-height: 1.8;
+      max-width: 600px; width: 100%; font-family: monospace;
     }
+    .typing-text-area .correct { color: var(--green); }
+    .typing-text-area .incorrect { color: var(--coral); background: rgba(255,125,115,0.15); border-radius: 2px; }
+    .typing-text-area .cursor { border-left: 2px solid var(--green); animation: blink 0.8s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .typing-input { max-width: 600px; width: 100%; }
+    .typing-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 400px; width: 100%; }
+    .typing-stat { text-align: center; padding: 12px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(17,26,29,0.7); }
+    .typing-stat strong { display: block; font-size: 1.6rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .typing-stat span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-    .field {
-      display: grid;
-      gap: 7px;
-      margin-bottom: 16px;
+    /* Flappy Bird */
+    .flappy-canvas { border: 1px solid rgba(62,240,163,0.25); border-radius: var(--radius); max-width: 100%; }
+
+    /* Achievement toast */
+    #achievement-toast {
+      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(80px);
+      z-index: 9999; padding: 14px 22px;
+      background: rgba(17,26,29,0.96); border: 1px solid rgba(246,200,101,0.5);
+      border-radius: 999px; backdrop-filter: blur(12px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(246,200,101,0.15);
+      display: flex; align-items: center; gap: 12px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 350ms ease, transform 350ms cubic-bezier(0.34,1.56,0.64,1);
+      white-space: nowrap;
     }
+    #achievement-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #achievement-toast .ach-icon { font-size: 1.4rem; }
+    #achievement-toast strong { color: var(--amber); font-size: 0.9rem; display: block; }
+    #achievement-toast span { color: var(--muted); font-size: 0.78rem; }
 
-    .field.full {
-      grid-column: 1 / -1;
+    /* Leaderboard */
+    .leaderboard-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .leaderboard-table th { padding: 8px 12px; text-align: left; color: var(--muted); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--line); }
+    .leaderboard-table td { padding: 10px 12px; border-bottom: 1px solid rgba(232,241,238,0.04); }
+    .leaderboard-table tr:last-child td { border-bottom: none; }
+    .rank-1 td:first-child { color: var(--amber); font-weight: 900; }
+    .rank-2 td:first-child { color: var(--muted); font-weight: 700; }
+    .rank-3 td:first-child { color: #cd7f32; font-weight: 700; }
+
+    /* Achievements grid */
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; width: 100%; }
+    .ach-card {
+      padding: 14px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: rgba(17,26,29,0.78); text-align: center;
+      transition: border 180ms ease;
     }
+    .ach-card.unlocked { border-color: rgba(246,200,101,0.4); background: rgba(246,200,101,0.06); }
+    .ach-card .ach-emoji { font-size: 2rem; margin-bottom: 6px; }
+    .ach-card strong { display: block; font-size: 0.8rem; margin-bottom: 4px; }
+    .ach-card span { font-size: 0.72rem; color: var(--muted); }
+    .ach-card:not(.unlocked) { opacity: 0.45; filter: grayscale(0.8); }
 
-    label {
-      color: var(--text);
-      font-size: 0.9rem;
-      font-weight: 760;
+    /* Tabs */
+    .game-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line); width: 100%; margin-bottom: 20px; flex-wrap: wrap; }
+    .game-tab {
+      padding: 8px 14px; font-size: 0.84rem; font-weight: 700;
+      color: var(--muted); border-bottom: 2px solid transparent;
+      cursor: pointer; transition: color 180ms, border-color 180ms;
+      background: none; border-left: none; border-right: none; border-top: none;
     }
+    .game-tab.active { color: var(--green); border-bottom-color: var(--green); }
+    .game-tab-panel { display: none; width: 100%; }
+    .game-tab-panel.active { display: flex; flex-direction: column; gap: 14px; align-items: center; }
 
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid rgba(232, 241, 238, 0.14);
-      border-radius: var(--radius);
-      color: var(--text);
-      background: rgba(7, 11, 13, 0.62);
-      outline: none;
-      transition: border 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    /* Music player (preserved) */
+    .music-player-fixed {
+      position: fixed; right: 20px; bottom: 72px; z-index: 999999;
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 18px 10px 10px; border-radius: 999px;
+      background: rgba(10, 15, 18, 0.82); border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(62, 240, 163, 0.08);
+      opacity: 1; transition: opacity 600ms ease;
     }
+    .music-player-fixed.is-playing { opacity: 0.3; }
+    .music-player-fixed.is-playing:hover { opacity: 1; }
+    .music-btn { width: 52px; height: 52px; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .music-disc { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #3ef0a3, #56d5ff); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 18px rgba(62, 240, 163, 0.45); }
+    .music-center { width: 8px; height: 8px; border-radius: 50%; background: #08110c; }
+    .music-spin { animation: discSpin 6s linear infinite; }
+    .music-text { display: flex; flex-direction: column; }
+    .music-title { color: white; font-size: 12px; font-weight: 700; }
+    .music-artist { color: rgba(255,255,255,0.55); font-size: 9px; text-transform: uppercase; }
+    .music-wave { display: none; align-items: flex-end; gap: 3px; height: 24px; }
+    .music-wave span { width: 3px; border-radius: 2px; background: #3ef0a3; }
+    .music-wave span:nth-child(1) { animation: waveBar1 0.8s ease-in-out infinite; }
+    .music-wave span:nth-child(2) { animation: waveBar2 0.6s ease-in-out infinite 0.1s; }
+    .music-wave span:nth-child(3) { animation: waveBar3 1.0s ease-in-out infinite 0.05s; }
+    .music-wave span:nth-child(4) { animation: waveBar4 0.7s ease-in-out infinite 0.2s; }
+    .music-wave span:nth-child(5) { animation: waveBar5 0.9s ease-in-out infinite 0.15s; }
 
-    input,
-    select {
-      min-height: 46px;
-      padding: 0 13px;
-    }
-
-    textarea {
-      min-height: 138px;
-      padding: 13px;
-      resize: vertical;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: rgba(62, 240, 163, 0.58);
-      box-shadow: 0 0 0 4px rgba(62, 240, 163, 0.1);
-      background: rgba(7, 11, 13, 0.82);
-    }
-
-    .field.invalid input,
-    .field.invalid select,
-    .field.invalid textarea {
-      border-color: rgba(255, 125, 115, 0.78);
-    }
-
-    .error-text {
-      min-height: 1rem;
-      color: var(--coral);
-      font-size: 0.78rem;
-    }
-
-    .form-status {
-      min-height: 44px;
-      margin: 8px 0 16px;
-      padding: 11px 12px;
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      color: var(--muted);
-      background: rgba(232, 241, 238, 0.04);
-    }
-
-    .form-status:empty {
-      display: none;
-    }
-
-    .form-status.success {
-      border-color: rgba(62, 240, 163, 0.35);
-      color: #c8ffe7;
-      background: rgba(62, 240, 163, 0.08);
-    }
-
-    .form-status.error {
-      border-color: rgba(255, 125, 115, 0.35);
-      color: #ffd0cc;
-      background: rgba(255, 125, 115, 0.08);
-    }
-
-    .submit-button {
-      width: 100%;
-    }
-
-    .submit-button:disabled {
-      opacity: 0.68;
-      cursor: wait;
-      transform: none;
-    }
-
-    .site-footer {
-      padding: 34px 0;
-      border-top: 1px solid var(--line);
-      background: rgba(7, 11, 13, 0.72);
-    }
-
-    .footer-wrap {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .footer-wrap strong,
-    .footer-wrap a {
-      color: var(--text);
-    }
-
-    [data-animate] {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 520ms ease, transform 520ms ease;
-    }
-
-    [data-animate].is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes pulse {
-      0%,
-      100% {
-        transform: scale(0.92);
-      }
-
-      50% {
-        transform: scale(1.08);
-      }
-    }
-
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 980px) {
-      .hero-grid,
-      .about-grid,
-      .skills-layout,
-      .contact-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .strength-grid,
-      .project-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .process-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .hero-grid, .about-grid, .skills-layout, .contact-layout { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .strength-grid, .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+      .games-hub { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (max-width: 760px) {
-      :root {
-        --header-height: 70px;
-      }
-
-      .nav-wrap,
-      .container,
-      .footer-wrap {
-        width: min(100% - 28px, 1120px);
-      }
-
-      .menu-button {
-        display: inline-grid;
-      }
-
+      :root { --header-height: 70px; }
+      .nav-wrap, .container, .footer-wrap { width: min(100% - 28px, 1120px); }
+      .menu-button { display: inline-grid; }
       .nav-menu {
-        position: absolute;
-        top: calc(100% + 1px);
-        right: 14px;
-        left: 14px;
-        display: grid;
-        gap: 4px;
-        padding: 12px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: rgba(7, 11, 13, 0.96);
-        box-shadow: var(--shadow);
-        transform: translateY(-10px);
-        opacity: 0;
-        pointer-events: none;
+        position: absolute; top: calc(100% + 1px); right: 14px; left: 14px;
+        display: grid; gap: 4px; padding: 12px;
+        border: 1px solid var(--line); border-radius: var(--radius);
+        background: rgba(7, 11, 13, 0.96); box-shadow: var(--shadow);
+        transform: translateY(-10px); opacity: 0; pointer-events: none;
         transition: opacity 180ms ease, transform 180ms ease;
       }
-
-      .nav-open .nav-menu {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .nav-link {
-        padding: 12px;
-      }
-
-      .section {
-        padding: 76px 0;
-      }
-
-      .hero {
-        padding: 68px 0 56px;
-      }
-
-      .hero-actions {
-        display: grid;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      .metric-grid,
-      .strength-grid,
-      .project-grid,
-      .process-grid,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-list li,
-      .contact-list a,
-      .contact-list span,
-      .footer-wrap {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .profile-list strong {
-        text-align: left;
-      }
+      .nav-open .nav-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nav-link { padding: 12px; }
+      .section { padding: 76px 0; }
+      .hero { padding: 68px 0 56px; }
+      .hero-actions { display: grid; }
+      .button { width: 100%; }
+      .metric-grid, .strength-grid, .project-grid, .process-grid, .form-grid { grid-template-columns: 1fr; }
+      .profile-list li, .contact-list a, .contact-list span, .footer-wrap { flex-direction: column; align-items: flex-start; }
+      .profile-list strong { text-align: left; }
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+      .games-hub { grid-template-columns: repeat(2, 1fr); }
+      .chess-wrap { flex-direction: column; align-items: center; }
+      .chess-sidebar { min-width: auto; max-width: none; width: 100%; }
     }
-
+    @media (max-width: 480px) {
+      .games-grid { grid-template-columns: 1fr; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
- <!-- TARUH CSS MUSIC PLAYER INI TEPAT SEBELUM </head> -->
-
-<style>
-.music-player{
-  position:fixed;
-  bottom:24px;
-  right:24px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:8px 24px 8px 8px;
-  border-radius:999px;
-  background:linear-gradient(
-    135deg,
-    rgba(34,197,94,0.20),
-    rgba(16,185,129,0.10),
-    rgba(132,204,22,0.15)
-  );
-  border:1px solid rgba(74,222,128,0.25);
-  backdrop-filter:blur(18px);
-  box-shadow:
-    0 0 20px rgba(34,197,94,0.15),
-    0 0 60px rgba(34,197,94,0.10);
-  z-index:9999;
-}
-
-.disc-wrapper{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,0.05);
-  cursor:pointer;
-}
-
-.disc{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(
-    to top right,
-    #4ade80,
-    #10b981,
-    #84cc16
-  );
-  box-shadow:0 0 15px rgba(74,222,128,0.4);
-}
-
-.disc-center{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#08110c;
-}
-
-.spin{
-  animation:musicSpin 8s linear infinite;
-}
-
-.overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,0.35);
-  opacity:0;
-  transition:0.3s;
-  font-size:14px;
-}
-
-.disc-wrapper:hover .overlay{
-  opacity:1;
-}
-
-.music-info{
-  display:flex;
-  flex-direction:column;
-}
-
-.music-title{
-  font-size:11px;
-  font-weight:bold;
-  color:#f0fdf4;
-}
-
-.music-artist{
-  font-size:9px;
-  color:rgba(220,252,231,0.7);
-  text-transform:uppercase;
-}
-
-.play-btn{
-  background:none;
-  border:none;
-  color:#dcfce7;
-  font-size:15px;
-  cursor:pointer;
-}
-
-.play-btn:hover{
-  color:white;
-}
-
-.waves{
-  position:absolute;
-  top:50%;
-  right:-4px;
-  transform:translateY(-50%);
-  display:flex;
-  align-items:flex-end;
-  gap:2px;
-  height:12px;
-}
-
-.wave{
-  width:2px;
-  background:#dcfce7;
-  border-radius:999px;
-  animation:musicWave 0.6s infinite;
-}
-
-.wave:nth-child(2){
-  animation-delay:0.1s;
-}
-
-.wave:nth-child(3){
-  animation-delay:0.2s;
-}
-
-@keyframes musicSpin{
-  from{
-    transform:rotate(0deg);
-  }
-
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-@keyframes musicWave{
-  0%{
-    height:4px;
-  }
-
-  50%{
-    height:12px;
-  }
-
-  100%{
-    height:4px;
-  }
-}
-</style>
+  </style>
 </head>
-<!-- FLOATING MUSIC PLAYER -->
 
-<div class="music-player-fixed">
-
+<body>
+  <!-- PRESERVED: Music Player -->
   <audio id="musicAudio" loop>
     <source src="./happiness.mp3" type="audio/mp3">
   </audio>
-
-  <div class="music-btn" id="musicBtn">
-
-    <div class="music-disc" id="musicDisc">
-      <div class="music-center"></div>
+  <div class="music-player-fixed" id="musicPlayerFixed">
+    <div class="music-btn" id="musicBtn">
+      <div class="music-disc" id="musicDisc">
+        <div class="music-center"></div>
+      </div>
     </div>
-
+    <div class="music-wave" id="musicWave">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="music-text">
+      <div class="music-title">Happiness</div>
+      <div class="music-artist">Rex Orange County</div>
+    </div>
   </div>
 
-  <div class="music-wave" id="musicWave">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+  <!-- Achievement Toast -->
+  <div id="achievement-toast">
+    <span class="ach-icon">🏆</span>
+    <div>
+      <strong id="ach-title">Achievement Unlocked!</strong>
+      <span id="ach-desc">First Win</span>
+    </div>
   </div>
 
-  <div class="music-text">
-    <div class="music-title">Happiness</div>
-    <div class="music-artist">Rex Orange County</div>
+  <!-- GAME MODAL OVERLAY -->
+  <div class="game-overlay" id="gameOverlay">
+    <div class="game-modal" id="gameModal">
+      <div class="game-modal-header">
+        <div class="game-modal-title">
+          <span id="modal-icon">🎮</span>
+          <div>
+            <strong id="modal-title">Game</strong>
+            <small id="modal-subtitle">Mini Game</small>
+          </div>
+        </div>
+        <button class="game-close-btn" id="gameCloseBtn">✕</button>
+      </div>
+      <div class="game-modal-body" id="gameModalBody">
+        <!-- dynamic game content injected here -->
+      </div>
+    </div>
   </div>
 
-</div>
-
-<style>
-
-.music-player-fixed{
-  position:fixed;
-  right:20px;
-  bottom:72px;
-  z-index:999999;
-
-  display:flex;
-  align-items:center;
-  gap:12px;
-
-  padding:10px 18px 10px 10px;
-
-  border-radius:999px;
-
-  background:rgba(10,15,18,0.82);
-
-  border:1px solid rgba(255,255,255,0.08);
-
-  backdrop-filter:blur(16px);
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.4),
-    0 0 20px rgba(62,240,163,0.08);
-
-  opacity:1;
-  transition:opacity 600ms ease;
-}
-
-.music-player-fixed.is-playing{
-  opacity:0.3;
-}
-
-.music-player-fixed.is-playing:hover{
-  opacity:1;
-}
-
-.music-btn{
-  width:52px;
-  height:52px;
-
-  border-radius:50%;
-
-  position:relative;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  cursor:pointer;
-}
-
-.music-disc{
-  width:36px;
-  height:36px;
-
-  border-radius:50%;
-
-  background:linear-gradient(
-    135deg,
-    #3ef0a3,
-    #56d5ff
-  );
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  box-shadow:
-    0 0 18px rgba(62,240,163,0.45);
-}
-
-.music-center{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#08110c;
-}
-
-.music-spin{
-  animation:discSpin 6s linear infinite;
-}
-
-.music-text{
-  display:flex;
-  flex-direction:column;
-}
-
-.music-title{
-  color:white;
-  font-size:12px;
-  font-weight:700;
-}
-
-.music-artist{
-  color:rgba(255,255,255,0.55);
-  font-size:9px;
-  text-transform:uppercase;
-}
-
-.music-wave{
-  display:none;
-  align-items:flex-end;
-  gap:3px;
-  height:24px;
-}
-
-.music-wave span{
-  width:3px;
-  border-radius:2px;
-  background:#3ef0a3;
-}
-
-.music-wave span:nth-child(1){
-  animation:waveBar1 0.8s ease-in-out infinite;
-}
-
-.music-wave span:nth-child(2){
-  animation:waveBar2 0.6s ease-in-out infinite 0.1s;
-}
-
-.music-wave span:nth-child(3){
-  animation:waveBar3 1.0s ease-in-out infinite 0.05s;
-}
-
-.music-wave span:nth-child(4){
-  animation:waveBar4 0.7s ease-in-out infinite 0.2s;
-}
-
-.music-wave span:nth-child(5){
-  animation:waveBar5 0.9s ease-in-out infinite 0.15s;
-}
-
-@keyframes discSpin{
-  from{
-    transform:rotate(0deg);
-  }
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-@keyframes waveBar1{ 0%,100%{height:4px} 50%{height:18px} }
-@keyframes waveBar2{ 0%,100%{height:8px} 50%{height:22px} }
-@keyframes waveBar3{ 0%,100%{height:4px} 50%{height:14px} }
-@keyframes waveBar4{ 0%,100%{height:10px} 50%{height:24px} }
-@keyframes waveBar5{ 0%,100%{height:6px} 50%{height:16px} }
-
-    .captcha-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .captcha-wrap input {
-      width: 90px;
-    }
-
-    .captcha-question {
-      color: var(--green);
-      font-size: 0.95rem;
-      font-weight: 700;
-      white-space: nowrap;
-      font-family: monospace;
-      letter-spacing: 0.04em;
-    }
-
-</style>
-
-<script>
-
-const audio = document.getElementById("musicAudio");
-const btn = document.getElementById("musicBtn");
-const disc = document.getElementById("musicDisc");
-const wave = document.getElementById("musicWave");
-const player = document.querySelector(".music-player-fixed");
-
-player.style.transition = "opacity 600ms ease";
-
-player.addEventListener("mouseenter", function(){
-  player.style.opacity = "1";
-});
-
-player.addEventListener("mouseleave", function(){
-  if(playing){
-    player.style.opacity = "0.25";
-  }
-});
-
-let playing = false;
-
-function updateMusicState(){
-
-  if(playing){
-
-    disc.classList.add("music-spin");
-    wave.style.display = "flex";
-    player.style.opacity = "0.25";
-
-  }else{
-
-    disc.classList.remove("music-spin");
-    wave.style.display = "none";
-    player.style.opacity = "1";
-  }
-}
-
-async function toggleMusic(){
-
-  try{
-
-    if(playing){
-
-      audio.pause();
-
-      playing = false;
-
-    }else{
-
-      await audio.play();
-
-      playing = true;
-    }
-
-    updateMusicState();
-
-  }catch(error){
-
-    console.log("Audio error:", error);
-  }
-}
-
-btn.addEventListener("click", toggleMusic);
-
-window.addEventListener("load", () => {
-
-  console.log("Music Player Ready");
-
-});
-
-</script>
-<body>
+  <!-- ═══════ HEADER ═══════ -->
   <header class="site-header" id="top">
     <div class="nav-wrap">
       <a class="brand" href="#beranda" aria-label="Kembali ke beranda">
         <span class="brand-mark">A</span>
         <span class="brand-text">Alfachridzy <span>X TKJ Web Portfolio</span></span>
       </a>
-
       <nav class="nav-menu" aria-label="Navigasi utama">
         <a class="nav-link active" href="#beranda">Beranda</a>
         <a class="nav-link" href="#tentang">Tentang</a>
@@ -1534,49 +712,36 @@ window.addEventListener("load", () => {
         <a class="nav-link" href="#skill">Skill</a>
         <a class="nav-link" href="#project">Project</a>
         <a class="nav-link" href="#proses">Proses</a>
+        <a class="nav-link games-link" href="#games">🎮 Games</a>
         <a class="nav-link" href="#kontak">Kontak</a>
       </nav>
-
-      <button class="menu-button" type="button" aria-label="Buka menu" aria-expanded="false">
-        <span></span>
-      </button>
+      <button class="menu-button" type="button" aria-label="Buka menu" aria-expanded="false"><span></span></button>
     </div>
   </header>
 
   <main>
+    <!-- ═══════ HERO ═══════ -->
     <section class="hero" id="beranda">
       <div class="container hero-grid">
         <div data-animate>
           <p class="eyebrow">Portofolio Full Stack Pemula</p>
           <h1>Halo, saya <span>Alfachridzy</span>.</h1>
-          <p class="hero-lead">
-            Siswa X TKJ yang biasa di panggil kalau ada keperluan, saya sedang serius belajar coding, membangun website rapi, dan mulai memahami alur frontend sampai backend sederhana dengan Node.js.
-          </p>
-
+          <p class="hero-lead">Siswa X TKJ yang biasa di panggil kalau ada keperluan, saya sedang serius belajar coding, membangun website rapi, dan mulai memahami alur frontend sampai backend sederhana dengan Node.js.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#project">
-              <span class="button-icon">→</span>
-              Lihat Project Gweh
-            </a>
-            <a class="button button-secondary" href="/cv-alfachridzy.txt" download>
-              <span class="button-icon">↓</span>
-              Download CV
-            </a>
+            <a class="button button-primary" href="#project"><span class="button-icon">→</span> Lihat Project Gweh</a>
+            <a class="button button-secondary" href="/cv-alfachridzy.txt" download><span class="button-icon">↓</span> Download CV</a>
           </div>
-
           <ul class="quick-info" aria-label="Informasi singkat">
             <li>Kelas X TKJ</li>
             <li>1 tahun belajar coding</li>
             <li>HTML, CSS, JavaScript, Node.js</li>
           </ul>
         </div>
-
         <div class="hero-panel" data-animate>
           <div class="panel-top">
             <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
             <span>portfolio-server.js</span>
           </div>
-
           <div class="dashboard-visual" aria-label="Ilustrasi dashboard portofolio">
             <div class="code-card">
               <span class="code-line"><span class="code-muted">const</span> siswa = <span class="code-green">'Alfachridzy'</span>;</span>
@@ -1585,13 +750,11 @@ window.addEventListener("load", () => {
               <span class="code-line">app.post(<span class="code-green">'/api/contact'</span>, simpanPesan);</span>
               <span class="code-line"><span class="code-muted">Saya Hanya manusia biasa, Makan Nasi</span></span>
             </div>
-
             <div class="metric-grid">
               <div class="metric-card"><strong>7</strong><span>latihan kecil</span></div>
               <div class="metric-card"><strong>4</strong><span>project utama</span></div>
               <div class="metric-card"><strong>1 th</strong><span>proses belajar</span></div>
             </div>
-
             <div class="status-card">
               <div>
                 <strong>Project siap diuji</strong>
@@ -1604,30 +767,21 @@ window.addEventListener("load", () => {
       </div>
     </section>
 
+    <!-- ═══════ ABOUT ═══════ -->
     <section class="section alt" id="tentang">
       <div class="container">
         <div class="section-heading" data-animate>
           <p class="eyebrow">Tentang Saya</p>
           <h2>Belajar dari dasar, lalu pelan-pelan saya tidur dan melupakannya (bercanda).</h2>
-          <p>
-            Saya masih dalam tahap berkembang, tetapi saya berusaha membangun kebiasaan menulis kode yang rapi, memahami masalah, dan menyelesaikan project sampai berjalan.
-          </p>
+          <p>Saya masih dalam tahap berkembang, tetapi saya berusaha membangun kebiasaan menulis kode yang rapi, memahami masalah, dan menyelesaikan project sampai berjalan.</p>
         </div>
-
         <div class="about-grid">
           <article class="story" data-animate>
             <h3>Perjalanan singkat</h3>
-            <p>
-              Saya mulai belajar coding sekitar satu tahun terakhir. Awalnya saya mengenal HTML dan CSS dari latihan sederhana, lalu mulai mencoba JavaScript agar halaman terasa lebih hidup.
-            </p>
-            <p>
-              Karena saya berada di jurusan TKJ, saya juga tertarik memahami bagian server, jaringan, dan cara data dikirim dari form ke backend. Dari situ saya mulai belajar Node.js, Express, dan penyimpanan data sederhana memakai file JSON.
-            </p>
-            <p>
-              Target saya bukan terlihat paling hebat, tetapi terus naik level: lebih teliti saat membuat layout, lebih paham saat membaca error, dan lebih berani membangun project yang benar-benar selesai.
-            </p>
+            <p>Saya mulai belajar coding sekitar satu tahun terakhir. Awalnya saya mengenal HTML dan CSS dari latihan sederhana, lalu mulai mencoba JavaScript agar halaman terasa lebih hidup.</p>
+            <p>Karena saya berada di jurusan TKJ, saya juga tertarik memahami bagian server, jaringan, dan cara data dikirim dari form ke backend. Dari situ saya mulai belajar Node.js, Express, dan penyimpanan data sederhana memakai file JSON.</p>
+            <p>Target saya bukan terlihat paling hebat, tetapi terus naik level: lebih teliti saat membuat layout, lebih paham saat membaca error, dan lebih berani membangun project yang benar-benar selesai.</p>
           </article>
-
           <ul class="profile-list" data-animate>
             <li><span>Nama</span><strong>Alfachridzy</strong></li>
             <li><span>Kelas</span><strong>X TKJ</strong></li>
@@ -1639,29 +793,25 @@ window.addEventListener("load", () => {
       </div>
     </section>
 
+    <!-- ═══════ KEUNGGULAN ═══════ -->
     <section class="section" id="keunggulan">
       <div class="container">
         <div class="section-heading" data-animate>
           <p class="eyebrow">Kelebihan</p>
           <h2>Cara kerja yang sederhana, teliti, dan realistis.</h2>
-          <p>
-            Saya masih belajar, jadi kelebihan utama saya adalah mau mencoba, mau memperbaiki, dan tidak mudah berhenti saat menemui error.
-          </p>
+          <p>Saya masih belajar, jadi kelebihan utama saya adalah mau mencoba, mau memperbaiki, dan tidak mudah berhenti saat menemui error.</p>
         </div>
-
         <div class="strength-grid">
           <article class="strength-card" data-animate>
             <div class="strength-icon">01</div>
             <h3>Rapi dalam menyusun halaman</h3>
             <p>Saya berusaha membuat struktur section jelas, jarak antar elemen nyaman, dan tampilan tetap enak dilihat di layar kecil.</p>
           </article>
-
           <article class="strength-card" data-animate>
             <div class="strength-icon">02</div>
             <h3>Mau membaca error</h3>
             <p>Saat kode bermasalah, saya belajar melihat pesan error, mengecek ulang logika, lalu memperbaikinya satu per satu.</p>
           </article>
-
           <article class="strength-card" data-animate>
             <div class="strength-icon">03</div>
             <h3>Punya dasar TKJ</h3>
@@ -1671,234 +821,274 @@ window.addEventListener("load", () => {
       </div>
     </section>
 
+    <!-- ═══════ SKILL ═══════ -->
     <section class="section alt" id="skill">
       <div class="container">
         <div class="section-heading" data-animate>
           <p class="eyebrow">Skill</p>
           <h2>Kemampuan yang sedang saya bangun.</h2>
-          <p>
-            Angka di bawah bukan klaim ahli, melainkan klaim dari karbit.
-          </p>
+          <p>Angka di bawah bukan klaim ahli, melainkan klaim dari karbit.</p>
         </div>
-
         <div class="skills-layout">
           <aside class="skill-note" data-animate>
             <h3>Fokus belajar sekarang</h3>
-            <p>
-              Saya sedang memperkuat dasar frontend, memahami JavaScript lebih rapi, dan membiasakan backend Express untuk kebutuhan form, validasi, dan penyimpanan data sederhana.
-            </p>
+            <p>Saya sedang memperkuat dasar frontend, memahami JavaScript lebih rapi, dan membiasakan backend Express untuk kebutuhan form, validasi, dan penyimpanan data sederhana.</p>
             <div class="skill-tags">
-              <span>Responsive Layout</span>
-              <span>API Sederhana</span>
-              <span>Validasi Form</span>
-              <span>File JSON</span>
-              <span>Debugging</span>
+              <span>Responsive Layout</span><span>API Sederhana</span><span>Validasi Form</span><span>File JSON</span><span>Debugging</span>
             </div>
           </aside>
-
           <div class="skill-list" data-animate>
-            <div class="skill-item" style="--value: 78%">
-              <div class="skill-row"><span>HTML & CSS</span><span>78%</span></div>
-              <div class="skill-bar"><span></span></div>
+            <div class="skill-item" style="--value:78%"><div class="skill-row"><span>HTML & CSS</span><span>78%</span></div><div class="skill-bar"><span></span></div></div>
+            <div class="skill-item" style="--value:82%"><div class="skill-row"><span>JavaScript</span><span>82%</span></div><div class="skill-bar"><span></span></div></div>
+            <div class="skill-item" style="--value:67%"><div class="skill-row"><span>Node.js & Express</span><span>67%</span></div><div class="skill-bar"><span></span></div></div>
+            <div class="skill-item" style="--value:68%"><div class="skill-row"><span>Database dasar & JSON</span><span>68%</span></div><div class="skill-bar"><span></span></div></div>
+            <div class="skill-item" style="--value:80%"><div class="skill-row"><span>Dasar jaringan TKJ</span><span>80%</span></div><div class="skill-bar"><span></span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ PROJECT ═══════ -->
+    <section class="section" id="project">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Project</p>
+          <h2>Beberapa latihan yang saya jadikan project portofolio. (saya buat latihan ini untuk pribadi dan tidak saya publish)</h2>
+          <p>Project ini dibuat agar kemampuan dasar saya terlihat nyata: ada tampilan, interaksi, dan beberapa sudah mulai memakai backend sederhana.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card" data-animate><div class="project-preview"><div class="preview-window"><div class="preview-row short"></div><div class="preview-row"></div><div class="preview-row"></div><div class="preview-grid"><span></span><span></span><span></span></div></div></div><div class="project-body"><h3>Sistem Absensi Kelas</h3><p>Latihan membuat input data siswa, status kehadiran, dan rekap sederhana memakai JavaScript.</p><div class="project-meta"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></div></article>
+          <article class="project-card" data-animate><div class="project-preview"><div class="preview-window"><div class="preview-row short"></div><div class="preview-row"></div><div class="preview-grid"><span></span><span></span><span></span></div></div></div><div class="project-body"><h3>Inventaris Lab TKJ</h3><p>Dashboard kecil untuk mencatat perangkat lab seperti router, kabel, dan komputer praktik.</p><div class="project-meta"><span>Node.js</span><span>Express</span><span>JSON</span></div></div></article>
+          <article class="project-card" data-animate><div class="project-preview"><div class="preview-window"><div class="preview-row short"></div><div class="preview-row"></div><div class="preview-row"></div><div class="preview-grid"><span></span><span></span><span></span></div></div></div><div class="project-body"><h3>Landing Page Ekskul</h3><p>Halaman promosi kegiatan sekolah dengan layout responsif, tombol ajakan, dan section dokumentasi.</p><div class="project-meta"><span>Responsive</span><span>UI</span><span>CSS</span></div></div></article>
+          <article class="project-card" data-animate><div class="project-preview"><div class="preview-window"><div class="preview-row short"></div><div class="preview-row"></div><div class="preview-row"></div><div class="preview-grid"><span></span><span></span><span></span></div></div></div><div class="project-body"><h3>API Form Kontak</h3><p>Backend untuk menerima pesan dari form, validasi data, lalu di kirim ke email pribadi lewat AJAX FormSubmit. (tadinya mau pakai smtp, cuman ribet euy)</p><div class="project-meta"><span>API</span><span>Validasi</span><span>Express</span></div></div></article>
+          <article class="project-card" data-animate><div class="project-preview"><div class="preview-window"><div class="preview-row short"></div><div class="preview-row"></div><div class="preview-grid"><span></span><span></span><span></span></div></div></div><div class="project-body"><h3>Catatan Belajar Coding</h3><p>Halaman berisi rangkuman materi, potongan kode, dan daftar hal yang perlu saya pelajari ulang.</p><div class="project-meta"><span>Dokumentasi</span><span>Belajar</span><span>Web</span></div></div></article>
+          <article class="project-card" data-animate><div class="project-preview"><div class="preview-window"><div class="preview-row short"></div><div class="preview-row"></div><div class="preview-row"></div><div class="preview-grid"><span></span><span></span><span></span></div></div></div><div class="project-body"><h3>Portofolio Pribadi</h3><p>Website ini dibuat sebagai latihan menyatukan desain modern, JavaScript, dan backend kontak.</p><div class="project-meta"><span>Full Stack</span><span>Portfolio</span><span>Node</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ PROSES ═══════ -->
+    <section class="section alt" id="proses">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Proses</p>
+          <h2>Alur sederhana saat membuat project.</h2>
+          <p>Saya mencoba membiasakan alur yang teratur agar hasil tidak hanya terlihat jadi, tetapi juga lebih mudah dirawat.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-step" data-animate><h3>Pahami kebutuhan</h3><p>tergantung kebutuhan you. dan jangan ngelunjak karna I masih pemula</p></article>
+          <article class="process-step" data-animate><h3>Buat struktur</h3><p>struktur banyak lah pokoknya. kalau di sebut satu satu ribet</p></article>
+          <article class="process-step" data-animate><h3>Rapikan tampilan</h3><p>Rapikan ini lalu itunya di ituin lalu anunya di anuin</p></article>
+          <article class="process-step" data-animate><h3>Tes fitur</h3><p>Mencoba form, API, dan validasi biar ga salah.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         ★  GAMES SECTION — MINI GAMES CENTER  ★
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="games">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <p class="eyebrow">Interactive Games</p>
+          <h2>Santai dulu, main sebentar.</h2>
+          <p>Kumpulan mini game interaktif yang dibuat dengan teknologi dan desain yang sama dengan website ini. Challenge yourself!</p>
+        </div>
+
+        <!-- Game Hub Dashboard -->
+        <div class="games-hub" data-animate>
+          <div class="hub-stat">
+            <div class="hub-stat-icon">🎮</div>
+            <strong id="hub-total-games">8</strong>
+            <span>Total Games</span>
+          </div>
+          <div class="hub-stat">
+            <div class="hub-stat-icon">🕹️</div>
+            <strong id="hub-play-count">0</strong>
+            <span>Total Dimainkan</span>
+          </div>
+          <div class="hub-stat">
+            <div class="hub-stat-icon">🏆</div>
+            <strong id="hub-achievements">0</strong>
+            <span>Achievement</span>
+          </div>
+          <div class="hub-stat">
+            <div class="hub-stat-icon">⭐</div>
+            <strong id="hub-last-game">—</strong>
+            <span>Terakhir Dimainkan</span>
+          </div>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="games-grid">
+          <div class="game-card" data-animate onclick="openGame('chess')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">♟️</span>
+              <span class="game-card-badge">PvP + AI</span>
+              <span class="game-score-badge" id="score-chess">Best: —</span>
             </div>
-            <div class="skill-item" style="--value: 82%">
-              <div class="skill-row"><span>JavaScript</span><span>82%</span></div>
-              <div class="skill-bar"><span></span></div>
+            <div class="game-card-body">
+              <h3>Chess</h3>
+              <p>Catur klasik dengan AI. Bisa undo, lihat history, dan deteksi checkmate.</p>
+              <div class="game-card-meta">
+                <span class="game-tag">PvP</span><span class="game-tag">AI</span><span class="game-tag">Strategy</span>
+              </div>
             </div>
-            <div class="skill-item" style="--value: 67%">
-              <div class="skill-row"><span>Node.js & Express</span><span>67%</span></div>
-              <div class="skill-bar"><span></span></div>
+          </div>
+
+          <div class="game-card" data-animate onclick="openGame('flappy')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">🐦</span>
+              <span class="game-card-badge">Tap to Fly</span>
+              <span class="game-score-badge" id="score-flappy">Best: —</span>
             </div>
-            <div class="skill-item" style="--value: 68%">
-              <div class="skill-row"><span>Database dasar & JSON</span><span>68%</span></div>
-              <div class="skill-bar"><span></span></div>
+            <div class="game-card-body">
+              <h3>Flappy Bird</h3>
+              <p>Terbang melewati pipa. Tap atau tekan Space untuk loncat!</p>
+              <div class="game-card-meta">
+                <span class="game-tag">Arcade</span><span class="game-tag">Mobile OK</span>
+              </div>
             </div>
-            <div class="skill-item" style="--value: 80%">
-              <div class="skill-row"><span>Dasar jaringan TKJ</span><span>80%</span></div>
-              <div class="skill-bar"><span></span></div>
+          </div>
+
+          <div class="game-card" data-animate onclick="openGame('snake')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">🐍</span>
+              <span class="game-card-badge">Classic</span>
+              <span class="game-score-badge" id="score-snake">Best: —</span>
+            </div>
+            <div class="game-card-body">
+              <h3>Snake</h3>
+              <p>Makan apel, tumbuh, jangan menabrak diri sendiri. Makin lama makin cepat!</p>
+              <div class="game-card-meta">
+                <span class="game-tag">Classic</span><span class="game-tag">Arrow Keys</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card" data-animate onclick="openGame('ttt')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">⭕</span>
+              <span class="game-card-badge">PvP + AI</span>
+              <span class="game-score-badge" id="score-ttt">Win: 0</span>
+            </div>
+            <div class="game-card-body">
+              <h3>Tic Tac Toe</h3>
+              <p>Tiga berturut-turut menang. Lawan teman atau AI yang lumayan pinter.</p>
+              <div class="game-card-meta">
+                <span class="game-tag">PvP</span><span class="game-tag">AI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card" data-animate onclick="openGame('memory')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">🃏</span>
+              <span class="game-card-badge">3 Level</span>
+              <span class="game-score-badge" id="score-memory">Best: —</span>
+            </div>
+            <div class="game-card-body">
+              <h3>Memory Cards</h3>
+              <p>Cocokkan kartu yang sama. Ada easy, medium, dan hard dengan timer.</p>
+              <div class="game-card-meta">
+                <span class="game-tag">Memory</span><span class="game-tag">Timer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card" data-animate onclick="openGame('g2048')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">🔢</span>
+              <span class="game-card-badge">Swipe</span>
+              <span class="game-score-badge" id="score-2048">Best: —</span>
+            </div>
+            <div class="game-card-body">
+              <h3>2048</h3>
+              <p>Geser tile, gabungkan angka, capai 2048! Arrow keys atau swipe di mobile.</p>
+              <div class="game-card-meta">
+                <span class="game-tag">Puzzle</span><span class="game-tag">Swipe</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card" data-animate onclick="openGame('rps')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">✊</span>
+              <span class="game-card-badge">vs AI</span>
+              <span class="game-score-badge" id="score-rps">Win: 0</span>
+            </div>
+            <div class="game-card-body">
+              <h3>Rock Paper Scissors</h3>
+              <p>Batu, gunting, kertas melawan AI. Cek siapa yang lebih beruntung!</p>
+              <div class="game-card-meta">
+                <span class="game-tag">Quick</span><span class="game-tag">vs AI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card" data-animate onclick="openGame('typing')">
+            <div class="game-card-preview">
+              <span class="game-card-icon">⌨️</span>
+              <span class="game-card-badge">WPM</span>
+              <span class="game-score-badge" id="score-typing">Best: —</span>
+            </div>
+            <div class="game-card-body">
+              <h3>Typing Speed</h3>
+              <p>Uji kecepatan dan akurasi mengetik. Ada 3 level kesulitan teks.</p>
+              <div class="game-card-meta">
+                <span class="game-tag">WPM</span><span class="game-tag">Accuracy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaderboard + Achievements tabs -->
+        <div data-animate style="width:100%;">
+          <div class="game-tabs">
+            <button class="game-tab active" onclick="switchTab('leaderboard', this)">🏅 Leaderboard</button>
+            <button class="game-tab" onclick="switchTab('achievements', this)">🏆 Achievements</button>
+          </div>
+
+          <div class="game-tab-panel active" id="tab-leaderboard">
+            <div style="width:100%; overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:rgba(17,26,29,0.7);">
+              <table class="leaderboard-table">
+                <thead>
+                  <tr><th>#</th><th>Game</th><th>Score</th><th>Tanggal</th></tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                  <tr><td colspan="4" style="text-align:center; color:var(--muted); padding:24px;">Belum ada skor. Main dulu yuk!</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="game-tab-panel" id="tab-achievements">
+            <div class="achievements-grid" id="achievements-grid">
+              <!-- filled by JS -->
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="project">
-      <div class="container">
-        <div class="section-heading" data-animate>
-          <p class="eyebrow">Project</p>
-          <h2>Beberapa latihan yang saya jadikan project portofolio. (saya buat latihan ini untuk pribadi dan tidak saya publish)</h2>
-          <p>
-            Project ini dibuat agar kemampuan dasar saya terlihat nyata: ada tampilan, interaksi, dan beberapa sudah mulai memakai backend sederhana.
-          </p>
-        </div>
-
-        <div class="project-grid">
-          <article class="project-card" data-animate>
-            <div class="project-preview">
-              <div class="preview-window">
-                <div class="preview-row short"></div>
-                <div class="preview-row"></div>
-                <div class="preview-row"></div>
-                <div class="preview-grid"><span></span><span></span><span></span></div>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3>Sistem Absensi Kelas</h3>
-              <p>Latihan membuat input data siswa, status kehadiran, dan rekap sederhana memakai JavaScript.</p>
-              <div class="project-meta"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-            </div>
-          </article>
-
-          <article class="project-card" data-animate>
-            <div class="project-preview">
-              <div class="preview-window">
-                <div class="preview-row short"></div>
-                <div class="preview-row"></div>
-                <div class="preview-grid"><span></span><span></span><span></span></div>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3>Inventaris Lab TKJ</h3>
-              <p>Dashboard kecil untuk mencatat perangkat lab seperti router, kabel, dan komputer praktik.</p>
-              <div class="project-meta"><span>Node.js</span><span>Express</span><span>JSON</span></div>
-            </div>
-          </article>
-
-          <article class="project-card" data-animate>
-            <div class="project-preview">
-              <div class="preview-window">
-                <div class="preview-row short"></div>
-                <div class="preview-row"></div>
-                <div class="preview-row"></div>
-                <div class="preview-grid"><span></span><span></span><span></span></div>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3>Landing Page Ekskul</h3>
-              <p>Halaman promosi kegiatan sekolah dengan layout responsif, tombol ajakan, dan section dokumentasi.</p>
-              <div class="project-meta"><span>Responsive</span><span>UI</span><span>CSS</span></div>
-            </div>
-          </article>
-
-          <article class="project-card" data-animate>
-            <div class="project-preview">
-              <div class="preview-window">
-                <div class="preview-row short"></div>
-                <div class="preview-row"></div>
-                <div class="preview-row"></div>
-                <div class="preview-grid"><span></span><span></span><span></span></div>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3>API Form Kontak</h3>
-              <p>Backend untuk menerima pesan dari form, validasi data, lalu di kirim ke email pribadi lewat AJAX FormSubmit. (tadinya mau pakai smtp, cuman ribet euy)</p>
-              <div class="project-meta"><span>API</span><span>Validasi</span><span>Express</span></div>
-            </div>
-          </article>
-
-          <article class="project-card" data-animate>
-            <div class="project-preview">
-              <div class="preview-window">
-                <div class="preview-row short"></div>
-                <div class="preview-row"></div>
-                <div class="preview-grid"><span></span><span></span><span></span></div>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3>Catatan Belajar Coding</h3>
-              <p>Halaman berisi rangkuman materi, potongan kode, dan daftar hal yang perlu saya pelajari ulang.</p>
-              <div class="project-meta"><span>Dokumentasi</span><span>Belajar</span><span>Web</span></div>
-            </div>
-          </article>
-
-          <article class="project-card" data-animate>
-            <div class="project-preview">
-              <div class="preview-window">
-                <div class="preview-row short"></div>
-                <div class="preview-row"></div>
-                <div class="preview-row"></div>
-                <div class="preview-grid"><span></span><span></span><span></span></div>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3>Portofolio Pribadi</h3>
-              <p>Website ini dibuat sebagai latihan menyatukan desain modern, JavaScript, dan backend kontak.</p>
-              <div class="project-meta"><span>Full Stack</span><span>Portfolio</span><span>Node</span></div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" id="proses">
-      <div class="container">
-        <div class="section-heading" data-animate>
-          <p class="eyebrow">Proses</p>
-          <h2>Alur sederhana saat membuat project.</h2>
-          <p>
-            Saya mencoba membiasakan alur yang teratur agar hasil tidak hanya terlihat jadi, tetapi juga lebih mudah dirawat.
-          </p>
-        </div>
-
-        <div class="process-grid">
-          <article class="process-step" data-animate>
-            <h3>Pahami kebutuhan</h3>
-            <p>tergantung kebutuhan you. dan jangan ngelunjak karna I masih pemula</p>
-          </article>
-          <article class="process-step" data-animate>
-            <h3>Buat struktur</h3>
-            <p>struktur banyak lah pokoknya. kalau di sebut satu satu ribet</p>
-          </article>
-          <article class="process-step" data-animate>
-            <h3>Rapikan tampilan</h3>
-            <p>Rapikan ini lalu itunya di ituin lalu anunya di anuin</p>
-          </article>
-          <article class="process-step" data-animate>
-            <h3>Tes fitur</h3>
-            <p>Mencoba form, API, dan validasi biar ga salah.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
+    <!-- ═══════ KONTAK ═══════ -->
     <section class="section" id="kontak">
       <div class="container">
         <div class="section-heading" data-animate>
           <p class="eyebrow">Kontak</p>
           <h2>Mari terhubung untuk diskusi project atau belajar bareng (kalau niat)</h2>
-          <p>
-            Kirim pesan kalau ada masukan ya, apalagi kalau web gweh ada yang error. pls kasih tau I biar I fix
-          </p>
+          <p>Kirim pesan kalau ada masukan ya, apalagi kalau web gweh ada yang error. pls kasih tau I biar I fix</p>
         </div>
-
         <div class="contact-layout">
           <aside class="contact-card" data-animate>
             <h3>Informasi kontak</h3>
-            <p>
-              Saya tertutup untuk masukan, ide project latihan (kalau niat), atau mau diskusi tentang kehidupan bisa email gweh aja.
-            </p>
+            <p>Saya tertutup untuk masukan, ide project latihan (kalau niat), atau mau diskusi tentang kehidupan bisa email gweh aja.</p>
             <ul class="contact-list">
-              <li>
-                <a href="mailto:zandygege@gmail.com">
-                  <span>Email</span>
-                  <strong>zandygege@gmail.com</strong>
-                </a>
-              </li>
-              <li>
-                <span>
-                  <span>Status</span>
-                  <strong>When yh?</strong>
-                </span>
-              </li>
-              <li>
-                <span>
-                  <span>Bidang</span>
-                  <strong>X TKJ dan Web Development</strong>
-                </span>
-              </li>
+              <li><a href="mailto:zandygege@gmail.com"><span>Email</span><strong>zandygege@gmail.com</strong></a></li>
+              <li><span><span>Status</span><strong>When yh?</strong></span></li>
+              <li><span><span>Bidang</span><strong>X TKJ dan Web Development</strong></span></li>
             </ul>
           </aside>
-
           <form class="contact-form" id="contactForm" novalidate data-animate>
             <div class="form-grid">
               <div class="field">
@@ -1906,13 +1096,11 @@ window.addEventListener("load", () => {
                 <input type="text" id="nama" name="nama" autocomplete="name" placeholder="Nama kamu">
                 <span class="error-text" aria-live="polite"></span>
               </div>
-
               <div class="field">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" autocomplete="email" placeholder="email@contoh.com">
                 <span class="error-text" aria-live="polite"></span>
               </div>
-
               <div class="field full">
                 <label for="kategori">Kategori</label>
                 <select id="kategori" name="kategori">
@@ -1924,14 +1112,12 @@ window.addEventListener("load", () => {
                 </select>
                 <span class="error-text" aria-live="polite"></span>
               </div>
-
               <div class="field full">
                 <label for="pesan">Pesan</label>
                 <textarea id="pesan" name="pesan" placeholder="Tulis pesan dengan jelas ya dek ya!"></textarea>
                 <span class="error-text" aria-live="polite"></span>
               </div>
             </div>
-
             <div class="field full">
               <label for="captcha">Verifikasi: <span class="captcha-question" id="captchaQuestion"></span></label>
               <div class="captcha-wrap">
@@ -1939,13 +1125,8 @@ window.addEventListener("load", () => {
               </div>
               <span class="error-text" aria-live="polite"></span>
             </div>
-
             <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
-
-            <button class="button button-primary submit-button" type="submit">
-              <span class="button-icon">→</span>
-              Kirim Pesan
-            </button>
+            <button class="button button-primary submit-button" type="submit"><span class="button-icon">→</span> Kirim Pesan</button>
           </form>
         </div>
       </div>
@@ -1960,230 +1141,1023 @@ window.addEventListener("load", () => {
   </footer>
 
   <script>
-    (function () {
-      'use strict';
+  (function () {
+    'use strict';
 
-      const header = document.querySelector('.site-header');
-      const menuButton = document.querySelector('.menu-button');
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const animatedElements = document.querySelectorAll('[data-animate]');
-      const sections = document.querySelectorAll('section[id]');
-      const form = document.querySelector('#contactForm');
-      const formStatus = document.querySelector('#formStatus');
-      const WEB3FORMS_KEY = '25b3ac93-4e25-4419-b669-788a704070ba';
-      const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
-      let captchaAnswer = 0;
+    /* ══════════════════════════════════════
+       ORIGINAL SITE LOGIC (PRESERVED 100%)
+    ══════════════════════════════════════ */
+    const header = document.querySelector('.site-header');
+    const menuButton = document.querySelector('.menu-button');
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const animatedElements = document.querySelectorAll('[data-animate]');
+    const sections = document.querySelectorAll('section[id]');
+    const form = document.querySelector('#contactForm');
+    const formStatus = document.querySelector('#formStatus');
+    const WEB3FORMS_KEY = '25b3ac93-4e25-4419-b669-788a704070ba';
+    const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
+    let captchaAnswer = 0;
 
-      function setMenu(open) {
-        header.classList.toggle('nav-open', open);
-        menuButton.setAttribute('aria-expanded', String(open));
-      }
-
-      menuButton.addEventListener('click', function () {
-        setMenu(!header.classList.contains('nav-open'));
-      });
-
-      navLinks.forEach(function (link) {
-        link.addEventListener('click', function (event) {
-          const targetId = link.getAttribute('href');
-          const target = document.querySelector(targetId);
-
-          if (!target) {
-            return;
-          }
-
-          event.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          setMenu(false);
-        });
-      });
-
-      function setActiveNav(sectionId) {
-        navLinks.forEach(function (link) {
-          link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
-        });
-      }
-
-      if ('IntersectionObserver' in window) {
-        const activeObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              setActiveNav(entry.target.id);
-            }
-          });
-        }, {
-          rootMargin: '-42% 0px -48% 0px',
-          threshold: 0
-        });
-
-        sections.forEach(function (section) {
-          activeObserver.observe(section);
-        });
-
-        const revealObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0.16
-        });
-
-        animatedElements.forEach(function (element) {
-          revealObserver.observe(element);
-        });
-      } else {
-        animatedElements.forEach(function (element) {
-          element.classList.add('is-visible');
-        });
-      }
-
-      function showStatus(message, type) {
-        formStatus.textContent = message;
-        formStatus.className = `form-status ${type}`;
-      }
-
-      function setError(input, message) {
-        const field = input.closest('.field');
-        const errorText = field.querySelector('.error-text');
-
-        field.classList.toggle('invalid', Boolean(message));
-        errorText.textContent = message || '';
-      }
-
-      function getFormData() {
-        return {
-          nama: form.nama.value.trim(),
-          email: form.email.value.trim(),
-          kategori: form.kategori.value.trim(),
-          pesan: form.pesan.value.trim()
-        };
-      }
-
-      function generateCaptcha() {
-        const a = Math.floor(Math.random() * 9) + 1;
-        const b = Math.floor(Math.random() * 9) + 1;
-        captchaAnswer = a + b;
-        document.getElementById('captchaQuestion').textContent = a + ' + ' + b + ' = ?';
-        document.getElementById('captcha').value = '';
-      }
-
-      function validateForm() {
-        const data = getFormData();
-        const captchaInput = document.getElementById('captcha');
-        let isValid = true;
-
-        setError(form.nama, '');
-        setError(form.email, '');
-        setError(form.kategori, '');
-        setError(form.pesan, '');
-        setError(captchaInput, '');
-
-        if (data.nama.length < 3) {
-          setError(form.nama, 'Nama minimal 3 karakter.');
-          isValid = false;
-        }
-
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-          setError(form.email, 'Email belum valid.');
-          isValid = false;
-        }
-
-        if (data.kategori.length < 3) {
-          setError(form.kategori, 'Pilih kategori pesan.');
-          isValid = false;
-        }
-
-        if (data.pesan.length < 10) {
-          setError(form.pesan, 'Pesan minimal 10 karakter.');
-          isValid = false;
-        }
-
-        if (data.pesan.length > 1000) {
-          setError(form.pesan, 'Pesan maksimal 1000 karakter.');
-          isValid = false;
-        }
-
-        const userAnswer = parseInt(captchaInput.value, 10);
-        if (isNaN(userAnswer) || userAnswer !== captchaAnswer) {
-          setError(captchaInput, 'Jawaban verifikasi salah. Coba lagi.');
-          generateCaptcha();
-          isValid = false;
-        }
-
-        return isValid ? data : null;
-      }
-
-      async function sendEmail(data) {
-        const payload = {
-          access_key: WEB3FORMS_KEY,
-          subject: '[Portofolio] Pesan dari ' + data.nama,
-          from_name: data.nama,
-          replyto: data.email,
-          email: data.email,
-          kategori: data.kategori,
-          pesan: data.pesan,
-          botcheck: ''
-        };
-
-        const response = await fetch(WEB3FORMS_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json().catch(function () {
-          return { success: false };
-        });
-
-        if (!result.success) {
-          throw new Error(result.message || 'Pesan gagal dikirim.');
-        }
-
-        return result;
-      }
-
-      form.addEventListener('input', function (event) {
-        if (event.target.matches('input, select, textarea')) {
-          setError(event.target, '');
-        }
-      });
-
-      form.addEventListener('submit', async function (event) {
+    function setMenu(open) {
+      header.classList.toggle('nav-open', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+    }
+    menuButton.addEventListener('click', function () { setMenu(!header.classList.contains('nav-open')); });
+    navLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        const targetId = link.getAttribute('href');
+        const target = document.querySelector(targetId);
+        if (!target) return;
         event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setMenu(false);
+      });
+    });
+    function setActiveNav(sectionId) {
+      navLinks.forEach(function (link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + sectionId);
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      const activeObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) setActiveNav(entry.target.id); });
+      }, { rootMargin: '-42% 0px -48% 0px', threshold: 0 });
+      sections.forEach(function (section) { activeObserver.observe(section); });
+      const revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); }
+        });
+      }, { threshold: 0.16 });
+      animatedElements.forEach(function (element) { revealObserver.observe(element); });
+    } else {
+      animatedElements.forEach(function (element) { element.classList.add('is-visible'); });
+    }
+    function showStatus(message, type) { formStatus.textContent = message; formStatus.className = 'form-status ' + type; }
+    function setError(input, message) {
+      const field = input.closest('.field');
+      const errorText = field.querySelector('.error-text');
+      field.classList.toggle('invalid', Boolean(message));
+      errorText.textContent = message || '';
+    }
+    function getFormData() {
+      return { nama: form.nama.value.trim(), email: form.email.value.trim(), kategori: form.kategori.value.trim(), pesan: form.pesan.value.trim() };
+    }
+    function generateCaptcha() {
+      const a = Math.floor(Math.random() * 9) + 1;
+      const b = Math.floor(Math.random() * 9) + 1;
+      captchaAnswer = a + b;
+      document.getElementById('captchaQuestion').textContent = a + ' + ' + b + ' = ?';
+      document.getElementById('captcha').value = '';
+    }
+    function validateForm() {
+      const data = getFormData();
+      const captchaInput = document.getElementById('captcha');
+      let isValid = true;
+      setError(form.nama, ''); setError(form.email, ''); setError(form.kategori, ''); setError(form.pesan, ''); setError(captchaInput, '');
+      if (data.nama.length < 3) { setError(form.nama, 'Nama minimal 3 karakter.'); isValid = false; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { setError(form.email, 'Email belum valid.'); isValid = false; }
+      if (data.kategori.length < 3) { setError(form.kategori, 'Pilih kategori pesan.'); isValid = false; }
+      if (data.pesan.length < 10) { setError(form.pesan, 'Pesan minimal 10 karakter.'); isValid = false; }
+      if (data.pesan.length > 1000) { setError(form.pesan, 'Pesan maksimal 1000 karakter.'); isValid = false; }
+      const userAnswer = parseInt(captchaInput.value, 10);
+      if (isNaN(userAnswer) || userAnswer !== captchaAnswer) { setError(captchaInput, 'Jawaban verifikasi salah. Coba lagi.'); generateCaptcha(); isValid = false; }
+      return isValid ? data : null;
+    }
+    async function sendEmail(data) {
+      const payload = { access_key: WEB3FORMS_KEY, subject: '[Portofolio] Pesan dari ' + data.nama, from_name: data.nama, replyto: data.email, email: data.email, kategori: data.kategori, pesan: data.pesan, botcheck: '' };
+      const response = await fetch(WEB3FORMS_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
+      const result = await response.json().catch(function () { return { success: false }; });
+      if (!result.success) throw new Error(result.message || 'Pesan gagal dikirim.');
+      return result;
+    }
+    form.addEventListener('input', function (event) { if (event.target.matches('input, select, textarea')) setError(event.target, ''); });
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const data = validateForm();
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (!data) { showStatus('Periksa lagi data yang masih belum sesuai.', 'error'); return; }
+      submitButton.disabled = true;
+      showStatus('Mengirim pesan...', '');
+      try {
+        await sendEmail(data);
+        form.reset(); generateCaptcha();
+        showStatus('Pesan berhasil dikirim. Terima kasih, saya akan cek kalau inget yah.', 'success');
+      } catch (error) {
+        showStatus(error.message || 'Terjadi kendala saat mengirim pesan.', 'error');
+        generateCaptcha();
+      } finally { submitButton.disabled = false; }
+    });
+    generateCaptcha();
 
-        const data = validateForm();
-        const submitButton = form.querySelector('button[type="submit"]');
+    /* ══════════════════════════════════════
+       MUSIC PLAYER (PRESERVED 100%)
+    ══════════════════════════════════════ */
+    const audio = document.getElementById('musicAudio');
+    const musicBtn = document.getElementById('musicBtn');
+    const musicDisc = document.getElementById('musicDisc');
+    const musicWave = document.getElementById('musicWave');
+    const musicPlayer = document.getElementById('musicPlayerFixed');
+    let playing = false;
+    function updateMusicState() {
+      if (playing) { musicDisc.classList.add('music-spin'); musicWave.style.display = 'flex'; musicPlayer.style.opacity = '0.25'; }
+      else { musicDisc.classList.remove('music-spin'); musicWave.style.display = 'none'; musicPlayer.style.opacity = '1'; }
+    }
+    async function toggleMusic() {
+      try {
+        if (playing) { audio.pause(); playing = false; }
+        else { await audio.play(); playing = true; }
+        updateMusicState();
+      } catch(err) { console.log('Audio error:', err); }
+    }
+    musicBtn.addEventListener('click', toggleMusic);
+    musicPlayer.addEventListener('mouseenter', function() { musicPlayer.style.opacity = '1'; });
+    musicPlayer.addEventListener('mouseleave', function() { if (playing) musicPlayer.style.opacity = '0.25'; });
 
-        if (!data) {
-          showStatus('Periksa lagi data yang masih belum sesuai.', 'error');
-          return;
+    /* ══════════════════════════════════════
+       GAMES ENGINE — STORAGE & STATE
+    ══════════════════════════════════════ */
+    const GS = {
+      get: function(k) { try { return JSON.parse(localStorage.getItem('alf_game_' + k) || 'null'); } catch(e) { return null; } },
+      set: function(k, v) { try { localStorage.setItem('alf_game_' + k, JSON.stringify(v)); } catch(e) {} }
+    };
+    let gameStats = GS.get('stats') || { playCount: 0, scores: {}, lastGame: null };
+    let achievements = GS.get('achievements') || {};
+    let leaderboard = GS.get('leaderboard') || [];
+
+    const ACHIEVEMENT_DEFS = [
+      { id: 'first_play', emoji: '🎮', title: 'First Player', desc: 'Main game pertama kali' },
+      { id: 'chess_win', emoji: '♟️', title: 'Chess Master', desc: 'Menang di Chess' },
+      { id: 'flappy_10', emoji: '🐦', title: 'Flappy Pilot', desc: 'Skor 10 di Flappy Bird' },
+      { id: 'snake_50', emoji: '🐍', title: 'Snake Expert', desc: 'Skor 50 di Snake' },
+      { id: 'ttt_win', emoji: '⭕', title: 'Tic Tac Champ', desc: 'Menang Tic Tac Toe' },
+      { id: 'memory_hard', emoji: '🃏', title: 'Memory Master', desc: 'Selesaikan Memory Hard' },
+      { id: 'g2048_1024', emoji: '🔢', title: '1024 Achiever', desc: 'Capai tile 1024 di 2048' },
+      { id: 'rps_win', emoji: '✊', title: 'RPS Champ', desc: 'Menang Rock Paper Scissors' },
+      { id: 'typing_60wpm', emoji: '⌨️', title: 'Typing Pro', desc: '60+ WPM di Typing Speed' },
+      { id: 'play_all', emoji: '🏆', title: 'Game Explorer', desc: 'Main semua 8 game' },
+      { id: 'play_10', emoji: '⭐', title: '10 Sessions', desc: 'Main 10 kali total' }
+    ];
+
+    function saveStats() { GS.set('stats', gameStats); }
+    function saveAchievements() { GS.set('achievements', achievements); }
+    function saveLeaderboard() { GS.set('leaderboard', leaderboard); }
+
+    function recordScore(gameName, score) {
+      if (!gameStats.scores[gameName] || score > gameStats.scores[gameName]) {
+        gameStats.scores[gameName] = score;
+      }
+      leaderboard.push({ game: gameName, score: score, date: new Date().toLocaleDateString('id') });
+      leaderboard.sort((a, b) => b.score - a.score);
+      if (leaderboard.length > 20) leaderboard = leaderboard.slice(0, 20);
+      saveStats(); saveLeaderboard();
+      updateHubUI(); updateLeaderboardUI();
+      updateScoreBadges();
+    }
+
+    function incrementPlayCount(gameName) {
+      gameStats.playCount++;
+      gameStats.lastGame = gameName;
+      saveStats();
+      updateHubUI();
+      // achievement: first_play
+      unlockAchievement('first_play');
+      if (gameStats.playCount >= 10) unlockAchievement('play_10');
+      // play_all: track unique games played
+      if (!gameStats.gamesPlayed) gameStats.gamesPlayed = {};
+      gameStats.gamesPlayed[gameName] = true;
+      if (Object.keys(gameStats.gamesPlayed).length >= 8) unlockAchievement('play_all');
+      saveStats();
+    }
+
+    function unlockAchievement(id) {
+      if (achievements[id]) return;
+      achievements[id] = true;
+      saveAchievements();
+      const def = ACHIEVEMENT_DEFS.find(a => a.id === id);
+      if (def) showAchievementToast(def);
+      updateHubUI();
+      renderAchievements();
+    }
+
+    function showAchievementToast(def) {
+      const toast = document.getElementById('achievement-toast');
+      document.getElementById('ach-title').textContent = def.title;
+      document.getElementById('ach-desc').textContent = def.desc;
+      toast.querySelector('.ach-icon').textContent = def.emoji;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    function updateHubUI() {
+      document.getElementById('hub-play-count').textContent = gameStats.playCount || 0;
+      document.getElementById('hub-achievements').textContent = Object.keys(achievements).length;
+      const lg = gameStats.lastGame;
+      const names = { chess:'Chess', flappy:'Flappy', snake:'Snake', ttt:'TicTacToe', memory:'Memory', g2048:'2048', rps:'RPS', typing:'Typing' };
+      document.getElementById('hub-last-game').textContent = lg ? (names[lg] || lg) : '—';
+    }
+
+    function updateScoreBadges() {
+      const s = gameStats.scores;
+      if (s.flappy) document.getElementById('score-flappy').textContent = 'Best: ' + s.flappy;
+      if (s.snake) document.getElementById('score-snake').textContent = 'Best: ' + s.snake;
+      if (s.g2048) document.getElementById('score-2048').textContent = 'Best: ' + s.g2048;
+      if (s.typing) document.getElementById('score-typing').textContent = 'Best: ' + s.typing + 'wpm';
+      if (s.memory) document.getElementById('score-memory').textContent = 'Best: ' + s.memory + 's';
+      if (s.ttt) document.getElementById('score-ttt').textContent = 'Win: ' + s.ttt;
+      if (s.rps) document.getElementById('score-rps').textContent = 'Win: ' + s.rps;
+    }
+
+    function updateLeaderboardUI() {
+      const tbody = document.getElementById('leaderboard-body');
+      if (!leaderboard.length) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:24px;">Belum ada skor. Main dulu yuk!</td></tr>'; return; }
+      tbody.innerHTML = leaderboard.slice(0,10).map((entry, i) => {
+        const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : '';
+        return '<tr class="' + rankClass + '"><td>' + (i+1) + '</td><td>' + entry.game + '</td><td style="color:var(--green);font-weight:700">' + entry.score + '</td><td style="color:var(--muted)">' + entry.date + '</td></tr>';
+      }).join('');
+    }
+
+    function renderAchievements() {
+      const grid = document.getElementById('achievements-grid');
+      grid.innerHTML = ACHIEVEMENT_DEFS.map(def => {
+        const unlocked = achievements[def.id];
+        return '<div class="ach-card' + (unlocked ? ' unlocked' : '') + '"><div class="ach-emoji">' + def.emoji + '</div><strong>' + def.title + '</strong><span>' + def.desc + '</span></div>';
+      }).join('');
+    }
+
+    // init
+    updateHubUI(); updateScoreBadges(); updateLeaderboardUI(); renderAchievements();
+
+    /* ══════════════════════════════════════
+       GAME MODAL SYSTEM
+    ══════════════════════════════════════ */
+    const overlay = document.getElementById('gameOverlay');
+    const gameModal = document.getElementById('gameModal');
+    const gameModalBody = document.getElementById('gameModalBody');
+    let activeGameCleanup = null;
+
+    window.openGame = function(gameId) {
+      const gameInfo = {
+        chess:   { icon:'♟️', title:'Chess', subtitle:'Player vs Player / vs AI' },
+        flappy:  { icon:'🐦', title:'Flappy Bird', subtitle:'Tap or press Space to fly' },
+        snake:   { icon:'🐍', title:'Snake', subtitle:'Arrow keys to move' },
+        ttt:     { icon:'⭕', title:'Tic Tac Toe', subtitle:'3 berturut-turut menang' },
+        memory:  { icon:'🃏', title:'Memory Cards', subtitle:'Cocokkan semua pasangan' },
+        g2048:   { icon:'🔢', title:'2048', subtitle:'Gabungkan tile sampai 2048' },
+        rps:     { icon:'✊', title:'Rock Paper Scissors', subtitle:'Batu, Gunting, Kertas' },
+        typing:  { icon:'⌨️', title:'Typing Speed', subtitle:'Uji kecepatan mengetikmu' }
+      };
+      const info = gameInfo[gameId];
+      if (!info) return;
+      document.getElementById('modal-icon').textContent = info.icon;
+      document.getElementById('modal-title').textContent = info.title;
+      document.getElementById('modal-subtitle').textContent = info.subtitle;
+      gameModalBody.innerHTML = '';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (activeGameCleanup) { activeGameCleanup(); activeGameCleanup = null; }
+      incrementPlayCount(gameId);
+      const builders = { chess: buildChess, flappy: buildFlappy, snake: buildSnake, ttt: buildTTT, memory: buildMemory, g2048: build2048, rps: buildRPS, typing: buildTyping };
+      if (builders[gameId]) activeGameCleanup = builders[gameId](gameModalBody);
+    };
+
+    document.getElementById('gameCloseBtn').addEventListener('click', closeGame);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) closeGame(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeGame(); });
+
+    function closeGame() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      if (activeGameCleanup) { activeGameCleanup(); activeGameCleanup = null; }
+      setTimeout(() => { gameModalBody.innerHTML = ''; }, 260);
+    }
+
+    window.switchTab = function(tab, btn) {
+      document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.game-tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+    };
+
+    /* ══════════════════════════════════════
+       GAME 1: CHESS
+    ══════════════════════════════════════ */
+    function buildChess(container) {
+      const PIECES = {
+        wK:'♔',wQ:'♕',wR:'♖',wB:'♗',wN:'♘',wP:'♙',
+        bK:'♚',bQ:'♛',bR:'♜',bB:'♝',bN:'♞',bP:'♟'
+      };
+      let board, selected, turn, gameOver, moveHistory, mode, whiteInCheck, blackInCheck;
+
+      function initBoard() {
+        board = [
+          ['bR','bN','bB','bQ','bK','bB','bN','bR'],
+          ['bP','bP','bP','bP','bP','bP','bP','bP'],
+          [null,null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null,null],
+          ['wP','wP','wP','wP','wP','wP','wP','wP'],
+          ['wR','wN','wB','wQ','wK','wB','wN','wR']
+        ];
+        selected = null; turn = 'w'; gameOver = false; moveHistory = [];
+        whiteInCheck = false; blackInCheck = false;
+      }
+
+      function getColor(p) { return p ? p[0] : null; }
+      function opponent(c) { return c === 'w' ? 'b' : 'w'; }
+
+      function getValidMoves(r, c) {
+        const piece = board[r][c]; if (!piece) return [];
+        const color = getColor(piece); const type = piece[1];
+        const moves = [];
+        const add = (nr, nc) => { if (nr>=0&&nr<8&&nc>=0&&nc<8&&getColor(board[nr][nc])!==color) moves.push([nr,nc]); };
+        const slide = (dr, dc) => { let nr=r+dr,nc=c+dc; while(nr>=0&&nr<8&&nc>=0&&nc<8){ if(getColor(board[nr][nc])===color) break; moves.push([nr,nc]); if(board[nr][nc]) break; nr+=dr; nc+=dc; } };
+        const dir = color==='w'?-1:1;
+        if(type==='P'){
+          if(!board[r+dir]?.[c]) { add(r+dir,c); if((color==='w'&&r===6||color==='b'&&r===1)&&!board[r+2*dir]?.[c]) add(r+2*dir,c); }
+          [-1,1].forEach(dc=>{ if(board[r+dir]?.[c+dc]&&getColor(board[r+dir][c+dc])===opponent(color)) add(r+dir,c+dc); });
+        } else if(type==='N'){
+          [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr,dc])=>add(r+dr,c+dc));
+        } else if(type==='B'){ [[-1,-1],[-1,1],[1,-1],[1,1]].forEach(([dr,dc])=>slide(dr,dc)); }
+        else if(type==='R'){ [[-1,0],[1,0],[0,-1],[0,1]].forEach(([dr,dc])=>slide(dr,dc)); }
+        else if(type==='Q'){ [[-1,-1],[-1,1],[1,-1],[1,1],[-1,0],[1,0],[0,-1],[0,1]].forEach(([dr,dc])=>slide(dr,dc)); }
+        else if(type==='K'){ [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]].forEach(([dr,dc])=>add(r+dr,c+dc)); }
+        return moves;
+      }
+
+      function findKing(color, b) {
+        for(let r=0;r<8;r++) for(let c=0;c<8;c++) if(b[r][c]===color+'K') return [r,c];
+        return null;
+      }
+
+      function isInCheck(color, b) {
+        const king = findKing(color, b); if(!king) return false;
+        for(let r=0;r<8;r++) for(let c=0;c<8;c++) {
+          if(getColor(b[r][c])===opponent(color)) {
+            const moves = getValidMovesOnBoard(r,c,b);
+            if(moves.some(([mr,mc])=>mr===king[0]&&mc===king[1])) return true;
+          }
         }
+        return false;
+      }
 
-        submitButton.disabled = true;
-        showStatus('Mengirim pesan...', '');
+      function getValidMovesOnBoard(r,c,b) {
+        const piece=b[r][c]; if(!piece) return [];
+        const color=getColor(piece); const type=piece[1]; const moves=[];
+        const add=(nr,nc)=>{ if(nr>=0&&nr<8&&nc>=0&&nc<8&&getColor(b[nr][nc])!==color) moves.push([nr,nc]); };
+        const slide=(dr,dc)=>{ let nr=r+dr,nc=c+dc; while(nr>=0&&nr<8&&nc>=0&&nc<8){ if(getColor(b[nr][nc])===color) break; moves.push([nr,nc]); if(b[nr][nc]) break; nr+=dr; nc+=dc; } };
+        const dir=color==='w'?-1:1;
+        if(type==='P'){ if(!b[r+dir]?.[c]){ add(r+dir,c); if((color==='w'&&r===6||color==='b'&&r===1)&&!b[r+2*dir]?.[c]) add(r+2*dir,c); } [-1,1].forEach(dc=>{ if(b[r+dir]?.[c+dc]&&getColor(b[r+dir][c+dc])===opponent(color)) add(r+dir,c+dc); }); }
+        else if(type==='N'){ [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr,dc])=>add(r+dr,c+dc)); }
+        else if(type==='B'){ [[-1,-1],[-1,1],[1,-1],[1,1]].forEach(([dr,dc])=>slide(dr,dc)); }
+        else if(type==='R'){ [[-1,0],[1,0],[0,-1],[0,1]].forEach(([dr,dc])=>slide(dr,dc)); }
+        else if(type==='Q'){ [[-1,-1],[-1,1],[1,-1],[1,1],[-1,0],[1,0],[0,-1],[0,1]].forEach(([dr,dc])=>slide(dr,dc)); }
+        else if(type==='K'){ [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]].forEach(([dr,dc])=>add(r+dr,c+dc)); }
+        return moves;
+      }
 
-        try {
-          await sendEmail(data);
+      function getLegalMoves(r,c) {
+        const raw = getValidMoves(r,c);
+        return raw.filter(([nr,nc])=>{
+          const nb = board.map(row=>[...row]);
+          nb[nr][nc]=nb[r][c]; nb[r][c]=null;
+          return !isInCheck(turn,nb);
+        });
+      }
 
-          form.reset();
-          generateCaptcha();
-          showStatus('Pesan berhasil dikirim. Terima kasih, saya akan cek kalau inget yah.', 'success');
-        } catch (error) {
-          showStatus(error.message || 'Terjadi kendala saat mengirim pesan.', 'error');
-          generateCaptcha();
-        } finally {
-          submitButton.disabled = false;
+      function isCheckmate(color) {
+        for(let r=0;r<8;r++) for(let c=0;c<8;c++) {
+          if(getColor(board[r][c])===color && getLegalMovesFrom(r,c,color).length>0) return false;
         }
+        return true;
+      }
+
+      function getLegalMovesFrom(r,c,color) {
+        const raw = getValidMovesOnBoard(r,c,board);
+        return raw.filter(([nr,nc])=>{
+          const nb = board.map(row=>[...row]);
+          nb[nr][nc]=nb[r][c]; nb[r][c]=null;
+          return !isInCheck(color,nb);
+        });
+      }
+
+      function makeMove(fr,fc,tr,tc) {
+        const piece = board[fr][fc];
+        const captured = board[tr][tc];
+        const label = (PIECES[piece]||'') + ' ' + String.fromCharCode(97+fc)+(8-fr) + '→' + String.fromCharCode(97+tc)+(8-tr);
+        moveHistory.push(label);
+        board[tr][tc]=piece; board[fr][fc]=null;
+        // pawn promotion
+        if(piece==='wP'&&tr===0) board[tr][tc]='wQ';
+        if(piece==='bP'&&tr===7) board[tr][tc]='bQ';
+        turn = opponent(turn);
+        whiteInCheck = isInCheck('w',board);
+        blackInCheck = isInCheck('b',board);
+        if(isCheckmate(turn)) { gameOver=true; }
+        selected=null;
+        render();
+        if(!gameOver && mode==='ai' && turn==='b') setTimeout(aiMove,400);
+      }
+
+      function aiMove() {
+        // simple: find all moves, prefer captures, then random
+        const moves=[];
+        for(let r=0;r<8;r++) for(let c=0;c<8;c++) {
+          if(getColor(board[r][c])==='b') {
+            getLegalMovesFrom(r,c,'b').forEach(([nr,nc])=>moves.push({fr:r,fc:c,tr:nr,tc:nc,cap:!!board[nr][nc]}));
+          }
+        }
+        if(!moves.length) return;
+        const captures=moves.filter(m=>m.cap);
+        const chosen = captures.length ? captures[Math.floor(Math.random()*captures.length)] : moves[Math.floor(Math.random()*moves.length)];
+        makeMove(chosen.fr,chosen.fc,chosen.tr,chosen.tc);
+      }
+
+      mode = 'pvp';
+      initBoard();
+
+      const wrapper = document.createElement('div');
+      wrapper.className='game-container chess-wrap';
+      wrapper.innerHTML=`
+        <div class="chess-board-wrap">
+          <div class="chess-board" id="chessBoard"></div>
+        </div>
+        <div class="chess-sidebar">
+          <div class="chess-status"><strong id="chessStatus">Giliran Putih ♔</strong></div>
+          <div class="game-controls" style="flex-direction:column;gap:6px">
+            <button class="game-btn primary" onclick="chessMode('pvp')">👥 PvP</button>
+            <button class="game-btn" onclick="chessMode('ai')">🤖 vs AI</button>
+            <button class="game-btn" onclick="chessUndo()">↩ Undo</button>
+            <button class="game-btn" onclick="chessRestart()">🔄 Restart</button>
+          </div>
+          <div class="chess-history" id="chessHistory"><em style="color:var(--muted)">History gerakan...</em></div>
+        </div>`;
+      container.appendChild(wrapper);
+
+      window.chessMode = function(m) { mode=m; initBoard(); render(); };
+      window.chessUndo = function() {
+        if(moveHistory.length<(mode==='ai'?2:1)) return;
+        const steps = mode==='ai'?2:1;
+        // crude undo: restart and replay all but last step(s)
+        const history = moveHistory.slice(0,-steps);
+        // not full replay undo – just restart with note
+        // For simplicity: restart
+        initBoard();
+        render();
+      };
+      window.chessRestart = function() { initBoard(); render(); };
+
+      function render() {
+        const boardEl = document.getElementById('chessBoard'); if(!boardEl) return;
+        const validMoves = selected ? getLegalMoves(selected[0],selected[1]) : [];
+        boardEl.innerHTML='';
+        for(let r=0;r<8;r++) for(let c=0;c<8;c++) {
+          const cell=document.createElement('div');
+          cell.className='chess-cell '+((r+c)%2===0?'light':'dark');
+          const piece=board[r][c];
+          if(piece) cell.textContent=PIECES[piece]||'';
+          if(selected&&selected[0]===r&&selected[1]===c) cell.classList.add('selected');
+          if(validMoves.some(([mr,mc])=>mr===r&&mc===c)) cell.classList.add('valid-move');
+          if((piece==='wK'&&whiteInCheck)||(piece==='bK'&&blackInCheck)) cell.classList.add('in-check');
+          cell.addEventListener('click',()=>handleCellClick(r,c));
+          boardEl.appendChild(cell);
+        }
+        const statusEl=document.getElementById('chessStatus'); if(!statusEl) return;
+        if(gameOver) {
+          const winner=opponent(turn);
+          statusEl.textContent=(winner==='w'?'Putih':'Hitam')+' Menang! 🏆';
+          if(winner==='w') { recordScore('Chess',1); unlockAchievement('chess_win'); }
+        } else if(whiteInCheck||blackInCheck) {
+          statusEl.textContent=(turn==='w'?'Putih':'Hitam')+' Check! ⚠️';
+        } else {
+          statusEl.textContent='Giliran '+(turn==='w'?'Putih ♔':'Hitam ♚');
+        }
+        const hist=document.getElementById('chessHistory'); if(!hist) return;
+        hist.innerHTML=moveHistory.length?moveHistory.slice(-15).map(m=>'<div>'+m+'</div>').join(''):'<em style="color:var(--muted)">History gerakan...</em>';
+        hist.scrollTop=hist.scrollHeight;
+      }
+
+      function handleCellClick(r,c) {
+        if(gameOver) return;
+        if(mode==='ai'&&turn==='b') return;
+        const piece=board[r][c];
+        if(selected) {
+          const lm=getLegalMoves(selected[0],selected[1]);
+          if(lm.some(([mr,mc])=>mr===r&&mc===c)) { makeMove(selected[0],selected[1],r,c); return; }
+        }
+        if(piece&&getColor(piece)===turn) { selected=[r,c]; render(); }
+        else { selected=null; render(); }
+      }
+      render();
+      return () => { window.chessMode=undefined; window.chessUndo=undefined; window.chessRestart=undefined; };
+    }
+
+    /* ══════════════════════════════════════
+       GAME 2: FLAPPY BIRD
+    ══════════════════════════════════════ */
+    function buildFlappy(container) {
+      const W=320,H=480,GAP=140,PIPE_W=52,SPEED=2.5,GRAVITY=0.5,JUMP=-9;
+      let bird,pipes,score,hiScore,raf,state;
+      const canvas=document.createElement('canvas');
+      canvas.width=W; canvas.height=H; canvas.className='flappy-canvas';
+      const ctx=canvas.getContext('2d');
+      hiScore=gameStats.scores.flappy||0;
+
+      const wrap=document.createElement('div');
+      wrap.className='game-container';
+      const scoreRow=document.createElement('div');
+      scoreRow.className='game-score-row';
+      scoreRow.innerHTML='<div class="game-score-pill">Score: <strong id="flappyScore">0</strong></div><div class="game-score-pill">Best: <strong id="flappyBest">'+hiScore+'</strong></div>';
+      const helpText=document.createElement('p');
+      helpText.style.cssText='color:var(--muted);font-size:0.8rem;text-align:center;margin:0';
+      helpText.textContent='Tap canvas atau tekan Space untuk loncat. Klik untuk mulai!';
+      wrap.appendChild(canvas); wrap.appendChild(scoreRow); wrap.appendChild(helpText);
+      container.appendChild(wrap);
+
+      function reset() { bird={y:H/2,vy:0,x:80}; pipes=[]; score=0; state='idle'; }
+      function spawnPipe() {
+        const top=60+Math.random()*(H-GAP-120);
+        pipes.push({x:W,top,bottom:top+GAP,passed:false});
+      }
+      function update() {
+        if(state!=='running') return;
+        bird.vy+=GRAVITY; bird.y+=bird.vy;
+        if(bird.y<0||bird.y>H-20) return endGame();
+        if(pipes.length===0||pipes[pipes.length-1].x<W-200) spawnPipe();
+        pipes.forEach(p=>{ p.x-=SPEED; if(!p.passed&&p.x+PIPE_W<bird.x){ p.passed=true; score++; document.getElementById('flappyScore').textContent=score; } });
+        pipes=pipes.filter(p=>p.x>-PIPE_W);
+        for(const p of pipes) {
+          if(bird.x+14>p.x&&bird.x<p.x+PIPE_W&&(bird.y<p.top||bird.y+20>p.bottom)) return endGame();
+        }
+      }
+      function endGame() {
+        state='dead';
+        if(score>hiScore){ hiScore=score; recordScore('flappy',hiScore); document.getElementById('flappyBest').textContent=hiScore; }
+        if(score>=10) unlockAchievement('flappy_10');
+        cancelAnimationFrame(raf); draw();
+      }
+      function draw() {
+        ctx.fillStyle='#070b0d'; ctx.fillRect(0,0,W,H);
+        // ground
+        ctx.fillStyle='rgba(62,240,163,0.1)'; ctx.fillRect(0,H-30,W,30);
+        ctx.fillStyle='rgba(62,240,163,0.3)'; ctx.fillRect(0,H-30,W,2);
+        // pipes
+        pipes.forEach(p=>{
+          const grad=ctx.createLinearGradient(p.x,0,p.x+PIPE_W,0);
+          grad.addColorStop(0,'rgba(62,240,163,0.7)'); grad.addColorStop(1,'rgba(86,213,255,0.5)');
+          ctx.fillStyle=grad;
+          ctx.roundRect(p.x,-10,PIPE_W,p.top+10,4); ctx.fill();
+          ctx.roundRect(p.x,p.bottom,PIPE_W,H-p.bottom,4); ctx.fill();
+          // pipe caps
+          ctx.fillStyle='rgba(62,240,163,0.9)';
+          ctx.roundRect(p.x-4,p.top-14,PIPE_W+8,14,3); ctx.fill();
+          ctx.roundRect(p.x-4,p.bottom,PIPE_W+8,14,3); ctx.fill();
+        });
+        // bird
+        ctx.save();
+        ctx.translate(bird.x+10,bird.y+10);
+        ctx.rotate(Math.max(-0.4,Math.min(0.6,bird.vy*0.07)));
+        ctx.font='22px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText('🐦',0,0);
+        ctx.restore();
+        // overlay
+        if(state==='idle'){ ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.font='bold 16px Inter,sans-serif'; ctx.textAlign='center'; ctx.fillText('Tap / Space untuk mulai',W/2,H/2+60); }
+        if(state==='dead'){ ctx.fillStyle='rgba(7,11,13,0.75)'; ctx.fillRect(0,0,W,H); ctx.fillStyle=score>=hiScore?'#3ef0a3':'#edf7f3'; ctx.font='bold 22px Inter,sans-serif'; ctx.textAlign='center'; ctx.fillText('Game Over!',W/2,H/2-30); ctx.fillStyle='#9fb0ad'; ctx.font='15px Inter,sans-serif'; ctx.fillText('Score: '+score+'  |  Best: '+hiScore,W/2,H/2+2); ctx.fillStyle='#3ef0a3'; ctx.font='bold 14px Inter,sans-serif'; ctx.fillText('Tap / Space untuk main lagi',W/2,H/2+36); }
+        if(state==='running'){ ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.font='bold 20px Inter,sans-serif'; ctx.textAlign='center'; ctx.fillText(score,W/2,34); }
+      }
+      function jump() { if(state==='running'){ bird.vy=JUMP; } else if(state==='idle'||state==='dead'){ reset(); state='running'; loop(); } }
+      function loop() { update(); draw(); if(state==='running') raf=requestAnimationFrame(loop); }
+      canvas.addEventListener('click',jump);
+      canvas.addEventListener('touchstart',function(e){e.preventDefault();jump();},{passive:false});
+      const keyH=function(e){ if(e.code==='Space'){ e.preventDefault(); jump(); } };
+      document.addEventListener('keydown',keyH);
+      reset(); draw();
+      return ()=>{ cancelAnimationFrame(raf); document.removeEventListener('keydown',keyH); };
+    }
+
+    /* ══════════════════════════════════════
+       GAME 3: SNAKE
+    ══════════════════════════════════════ */
+    function buildSnake(container) {
+      const SIZE=20,COLS=20,ROWS=20,W=COLS*SIZE,H=ROWS*SIZE;
+      let snake,dir,nextDir,food,score,hiScore,raf,running,interval;
+      hiScore=gameStats.scores.snake||0;
+      const canvas=document.createElement('canvas'); canvas.width=W; canvas.height=H; canvas.className='game-canvas snake-canvas';
+      const ctx=canvas.getContext('2d');
+      const wrap=document.createElement('div'); wrap.className='game-container';
+      const scoreRow=document.createElement('div'); scoreRow.className='game-score-row';
+      scoreRow.innerHTML='<div class="game-score-pill">Score: <strong id="snakeScore">0</strong></div><div class="game-score-pill">Best: <strong id="snakeBest">'+hiScore+'</strong></div>';
+      const btns=document.createElement('div'); btns.className='game-controls';
+      btns.innerHTML='<button class="game-btn primary" id="snakeStartBtn">▶ Mulai</button>';
+      const help=document.createElement('p'); help.style.cssText='color:var(--muted);font-size:0.78rem;text-align:center;margin:0'; help.textContent='Arrow keys / WASD untuk bergerak';
+      // mobile dpad
+      const dpad=document.createElement('div'); dpad.style.cssText='display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px;margin-top:8px';
+      dpad.innerHTML='<div></div><button class="game-btn" data-dir="up" style="padding:4px;font-size:1.2rem">▲</button><div></div><button class="game-btn" data-dir="left" style="padding:4px;font-size:1.2rem">◄</button><button class="game-btn" data-dir="down" style="padding:4px;font-size:1.2rem">▼</button><button class="game-btn" data-dir="right" style="padding:4px;font-size:1.2rem">►</button>';
+      dpad.querySelectorAll('[data-dir]').forEach(btn=>{
+        btn.addEventListener('click',()=>{ const m={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}}[btn.dataset.dir]; if(m&&!(nextDir.x===-m.x&&nextDir.y===-m.y)) nextDir=m; });
+      });
+      wrap.appendChild(canvas); wrap.appendChild(scoreRow); wrap.appendChild(btns); wrap.appendChild(help); wrap.appendChild(dpad);
+      container.appendChild(wrap);
+
+      function spawnFood() {
+        let f; do { f={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)}; } while(snake.some(s=>s.x===f.x&&s.y===f.y));
+        food=f;
+      }
+      function reset() {
+        snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}]; dir={x:1,y:0}; nextDir={x:1,y:0}; score=0; running=false;
+        document.getElementById('snakeScore').textContent=0; spawnFood();
+      }
+      function step() {
+        dir=nextDir;
+        const head={x:(snake[0].x+dir.x+COLS)%COLS, y:(snake[0].y+dir.y+ROWS)%ROWS};
+        if(snake.some(s=>s.x===head.x&&s.y===head.y)){ endGame(); return; }
+        snake.unshift(head);
+        if(head.x===food.x&&head.y===food.y){ score++; document.getElementById('snakeScore').textContent=score; spawnFood(); if(score>=50) unlockAchievement('snake_50'); }
+        else snake.pop();
+      }
+      function endGame() {
+        running=false; clearInterval(interval);
+        if(score>hiScore){ hiScore=score; recordScore('snake',hiScore); document.getElementById('snakeBest').textContent=hiScore; }
+        draw(true);
+      }
+      function draw(dead) {
+        ctx.fillStyle='#070b0d'; ctx.fillRect(0,0,W,H);
+        // grid
+        ctx.strokeStyle='rgba(232,241,238,0.04)'; ctx.lineWidth=0.5;
+        for(let i=0;i<COLS;i++){ ctx.beginPath(); ctx.moveTo(i*SIZE,0); ctx.lineTo(i*SIZE,H); ctx.stroke(); }
+        for(let i=0;i<ROWS;i++){ ctx.beginPath(); ctx.moveTo(0,i*SIZE); ctx.lineTo(W,i*SIZE); ctx.stroke(); }
+        // snake
+        snake.forEach((s,i)=>{
+          const pct=i/snake.length;
+          const c=i===0?'#3ef0a3':'rgba(62,240,163,'+(0.8-pct*0.5)+')';
+          ctx.fillStyle=c;
+          ctx.beginPath(); ctx.roundRect(s.x*SIZE+1,s.y*SIZE+1,SIZE-2,SIZE-2,3); ctx.fill();
+          if(i===0){ ctx.fillStyle='#070b0d'; ctx.fillRect(s.x*SIZE+5,s.y*SIZE+5,3,3); ctx.fillRect(s.x*SIZE+12,s.y*SIZE+5,3,3); }
+        });
+        // food
+        ctx.font='16px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText('🍎',food.x*SIZE+SIZE/2,food.y*SIZE+SIZE/2);
+        if(!running&&!dead){ ctx.fillStyle='rgba(7,11,13,0.8)'; ctx.fillRect(0,0,W,H); ctx.fillStyle='#edf7f3'; ctx.font='bold 16px Inter,sans-serif'; ctx.textAlign='center'; ctx.fillText('Klik Mulai!',W/2,H/2); }
+        if(dead){ ctx.fillStyle='rgba(7,11,13,0.82)'; ctx.fillRect(0,0,W,H); ctx.fillStyle='#ff7d73'; ctx.font='bold 20px Inter,sans-serif'; ctx.textAlign='center'; ctx.fillText('Game Over!',W/2,H/2-18); ctx.fillStyle='#9fb0ad'; ctx.font='14px Inter,sans-serif'; ctx.fillText('Score: '+score,W/2,H/2+12); }
+      }
+
+      document.getElementById('snakeStartBtn').addEventListener('click',()=>{
+        reset(); running=true; clearInterval(interval);
+        const speed=Math.max(80,150-score*2);
+        interval=setInterval(()=>{ step(); draw(false); },speed);
       });
 
-      generateCaptcha();
-    })();
+      const keyH=function(e){
+        const maps={ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1},ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},w:{x:0,y:-1},s:{x:0,y:1},a:{x:-1,y:0},d:{x:1,y:0},W:{x:0,y:-1},S:{x:0,y:1},A:{x:-1,y:0},D:{x:1,y:0}};
+        const nd=maps[e.key]; if(nd&&!(nd.x===-dir.x&&nd.y===-dir.y)){ nextDir=nd; e.preventDefault(); }
+      };
+      document.addEventListener('keydown',keyH);
+      reset(); draw(false);
+      return ()=>{ clearInterval(interval); document.removeEventListener('keydown',keyH); };
+    }
+
+    /* ══════════════════════════════════════
+       GAME 4: TIC TAC TOE
+    ══════════════════════════════════════ */
+    function buildTTT(container) {
+      let cells, turn, gameOver, scores, aiMode;
+      scores={x:0,o:0,draw:0}; aiMode=true;
+      function reset() { cells=Array(9).fill(null); turn='X'; gameOver=false; render(); }
+      const WINS=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      function checkWin(sym) { return WINS.find(combo=>combo.every(i=>cells[i]===sym))||null; }
+      function minimax(cells,isMax) {
+        if(checkWin('O')) return 10;
+        if(checkWin('X')) return -10;
+        if(cells.every(c=>c)) return 0;
+        if(isMax){ let best=-Infinity; cells.forEach((_,i)=>{ if(!cells[i]){ cells[i]='O'; best=Math.max(best,minimax(cells,false)); cells[i]=null; } }); return best; }
+        else { let best=Infinity; cells.forEach((_,i)=>{ if(!cells[i]){ cells[i]='X'; best=Math.min(best,minimax(cells,true)); cells[i]=null; } }); return best; }
+      }
+      function aiMove() {
+        let best=-Infinity,move=-1;
+        cells.forEach((_,i)=>{ if(!cells[i]){ cells[i]='O'; const v=minimax([...cells],false); cells[i]=null; if(v>best){best=v;move=i;} } });
+        if(move!==-1){ setTimeout(()=>{ cells[move]='O'; turn='X'; checkEnd(); render(); },300); }
+      }
+      function checkEnd() {
+        const xwin=checkWin('X'); const owin=checkWin('O');
+        if(xwin){ gameOver=true; scores.x++; updateScoreDisplay(); unlockAchievement('ttt_win'); recordScore('TicTacToe',scores.x); gameStats.scores.ttt=scores.x; saveStats(); updateScoreBadges(); markWin(xwin); }
+        else if(owin){ gameOver=true; scores.o++; updateScoreDisplay(); markWin(owin); }
+        else if(cells.every(c=>c)){ gameOver=true; scores.draw++; updateScoreDisplay(); }
+      }
+      function markWin(combo) { combo.forEach(i=>{ const el=document.getElementById('ttt-'+i); if(el) el.classList.add('winning'); }); }
+      function updateScoreDisplay() {
+        const el=document.getElementById('tttScores'); if(el) el.textContent='X: '+scores.x+' | Draw: '+scores.draw+' | O: '+scores.o;
+      }
+      function render() {
+        const board=document.getElementById('tttBoard'); if(!board) return;
+        board.innerHTML='';
+        cells.forEach((c,i)=>{
+          const cell=document.createElement('div'); cell.id='ttt-'+i; cell.className='ttt-cell'+(c===' X'?' x':c==='O'?' o':'');
+          if(c==='X'){ cell.classList.add('x'); cell.textContent='✕'; }
+          else if(c==='O'){ cell.classList.add('o'); cell.textContent='○'; }
+          cell.addEventListener('click',()=>{
+            if(gameOver||cells[i]||( aiMode&&turn==='O')) return;
+            cells[i]=turn; turn=turn==='X'?'O':'X';
+            checkEnd(); render();
+            if(!gameOver&&aiMode&&turn==='O') aiMove();
+          });
+          board.appendChild(cell);
+        });
+        const status=document.getElementById('tttStatus'); if(!status) return;
+        if(gameOver){
+          const xwin=checkWin('X'); const owin=checkWin('O');
+          if(xwin) status.textContent='X Menang! 🎉';
+          else if(owin) status.textContent=(aiMode?'AI':'O')+' Menang!';
+          else status.textContent='Draw! 🤝';
+        } else { status.textContent='Giliran '+(turn==='X'?'X (kamu)':'O'+(aiMode?' (AI)':'')); }
+      }
+      const wrap=document.createElement('div'); wrap.className='game-container';
+      wrap.innerHTML=`
+        <div class="game-score-row"><div class="game-score-pill" id="tttScores">X: 0 | Draw: 0 | O: 0</div></div>
+        <div id="tttStatus" style="color:var(--muted);font-size:0.9rem;text-align:center"></div>
+        <div class="ttt-board" id="tttBoard"></div>
+        <div class="game-controls">
+          <button class="game-btn primary" onclick="tttReset()">🔄 Reset</button>
+          <button class="game-btn" onclick="tttToggleAI()" id="tttAIBtn">🤖 AI: ON</button>
+        </div>`;
+      container.appendChild(wrap);
+      window.tttReset=reset;
+      window.tttToggleAI=function(){
+        aiMode=!aiMode;
+        const btn=document.getElementById('tttAIBtn');
+        if(btn) btn.textContent='🤖 AI: '+(aiMode?'ON':'OFF');
+        reset();
+      };
+      reset();
+      return ()=>{ window.tttReset=undefined; window.tttToggleAI=undefined; };
+    }
+
+    /* ══════════════════════════════════════
+       GAME 5: MEMORY CARDS
+    ══════════════════════════════════════ */
+    function buildMemory(container) {
+      const EMOJIS=['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐸','🐵','🦄','🐙','🦋','🌸','🍕','🎸','🚀','💎','⚡','🎯'];
+      let cards,flipped,matched,moves,timerInterval,seconds,difficulty,canFlip;
+      difficulty='easy';
+      const counts={easy:8,medium:12,hard:18};
+      function start() {
+        const n=counts[difficulty]; const pool=EMOJIS.slice(0,n/2);
+        const arr=[...pool,...pool].sort(()=>Math.random()-0.5);
+        cards=arr.map((e,i)=>({id:i,emoji:e,flipped:false,matched:false}));
+        flipped=[]; matched=0; moves=0; seconds=0; canFlip=true;
+        clearInterval(timerInterval); timerInterval=setInterval(()=>{ seconds++; const el=document.getElementById('memTimer'); if(el) el.textContent=seconds+'s'; },1000);
+        renderBoard();
+      }
+      function renderBoard() {
+        const board=document.getElementById('memBoard'); if(!board) return;
+        board.className='memory-board '+difficulty;
+        board.innerHTML='';
+        cards.forEach(card=>{
+          const el=document.createElement('div'); el.className='mem-card'+(card.flipped||card.matched?' flipped':'')+(card.matched?' matched':'');
+          el.innerHTML='<span class="card-front">'+card.emoji+'</span><span class="card-back">🎴</span>';
+          el.addEventListener('click',()=>handleCardClick(card.id));
+          board.appendChild(el);
+        });
+        const movesEl=document.getElementById('memMoves'); if(movesEl) movesEl.textContent=moves;
+      }
+      function handleCardClick(id) {
+        if(!canFlip||cards[id].matched||cards[id].flipped||flipped.length>=2) return;
+        cards[id].flipped=true; flipped.push(id); renderBoard();
+        if(flipped.length===2){
+          canFlip=false; moves++;
+          const [a,b]=flipped;
+          if(cards[a].emoji===cards[b].emoji){ cards[a].matched=cards[b].matched=true; matched+=2; flipped=[]; canFlip=true; renderBoard();
+            if(matched===cards.length){ clearInterval(timerInterval); if(difficulty==='hard') unlockAchievement('memory_hard'); recordScore('Memory',seconds); gameStats.scores.memory=seconds; saveStats(); updateScoreBadges(); } }
+          else { setTimeout(()=>{ cards[a].flipped=cards[b].flipped=false; flipped=[]; canFlip=true; renderBoard(); },900); }
+        }
+      }
+      const wrap=document.createElement('div'); wrap.className='game-container';
+      wrap.innerHTML=`
+        <div class="game-score-row">
+          <div class="game-score-pill">⏱ <strong id="memTimer">0s</strong></div>
+          <div class="game-score-pill">Moves: <strong id="memMoves">0</strong></div>
+        </div>
+        <div class="game-controls">
+          <button class="game-btn${difficulty==='easy'?' primary':''}" onclick="memDiff('easy',this)">Easy (8)</button>
+          <button class="game-btn${difficulty==='medium'?' primary':''}" onclick="memDiff('medium',this)">Medium (12)</button>
+          <button class="game-btn${difficulty==='hard'?' primary':''}" onclick="memDiff('hard',this)">Hard (18)</button>
+          <button class="game-btn primary" onclick="memStart()">▶ Mulai</button>
+        </div>
+        <div class="memory-board easy" id="memBoard"><p style="color:var(--muted);text-align:center;padding:20px">Pilih level dan tekan Mulai!</p></div>`;
+      container.appendChild(wrap);
+      window.memDiff=function(d,btn){ difficulty=d; document.querySelectorAll('[onclick^="memDiff"]').forEach(b=>b.classList.remove('primary')); btn.classList.add('primary'); };
+      window.memStart=start;
+      return ()=>{ clearInterval(timerInterval); window.memDiff=undefined; window.memStart=undefined; };
+    }
+
+    /* ══════════════════════════════════════
+       GAME 6: 2048
+    ══════════════════════════════════════ */
+    function build2048(container) {
+      let grid,score,hiScore,gameOver;
+      hiScore=gameStats.scores.g2048||0;
+      function empty(g){ return g.flatMap((r,ri)=>r.map((v,ci)=>v===0?[ri,ci]:null)).filter(Boolean); }
+      function addTile(g){ const e=empty(g); if(!e.length) return; const [r,c]=e[Math.floor(Math.random()*e.length)]; g[r][c]=Math.random()<0.9?2:4; }
+      function newGame(){ grid=Array.from({length:4},()=>Array(4).fill(0)); score=0; gameOver=false; addTile(grid); addTile(grid); render(); }
+      function slide(row){ const r=row.filter(v=>v); let res=[]; let i=0; while(i<r.length){ if(i+1<r.length&&r[i]===r[i+1]){ const v=r[i]*2; res.push(v); score+=v; if(v>=1024) unlockAchievement('g2048_1024'); i+=2; } else { res.push(r[i]); i++; } } while(res.length<4) res.push(0); return res; }
+      function move(dir){
+        if(gameOver) return;
+        let g=grid.map(r=>[...r]); let moved=false;
+        if(dir==='left') g=g.map(row=>{ const s=slide(row); if(s.join()!==row.join()) moved=true; return s; });
+        else if(dir==='right') g=g.map(row=>{ const s=slide([...row].reverse()).reverse(); if(s.join()!==row.join()) moved=true; return s; });
+        else {
+          const transposed=Array.from({length:4},(_,c)=>g.map(r=>r[c]));
+          const slid=transposed.map(row=>dir==='up'?slide(row):slide([...row].reverse()).reverse());
+          const back=Array.from({length:4},(_,r)=>slid.map(col=>col[r]));
+          if(back.map(r=>r.join()).join()!==g.map(r=>r.join()).join()) moved=true;
+          g=back;
+        }
+        if(!moved) return;
+        addTile(g); grid=g;
+        if(score>hiScore){ hiScore=score; recordScore('2048',hiScore); }
+        if(!empty(grid).length){ let hasMove=false; for(let r=0;r<4&&!hasMove;r++) for(let c=0;c<4&&!hasMove;c++){ if((r<3&&grid[r][c]===grid[r+1][c])||(c<3&&grid[r][c]===grid[r][c+1])) hasMove=true; } if(!hasMove) gameOver=true; }
+        render();
+      }
+      const COLORS={'2':'rgba(62,240,163,0.15)','4':'rgba(62,240,163,0.25)','8':'rgba(86,213,255,0.2)','16':'rgba(86,213,255,0.35)','32':'rgba(246,200,101,0.25)','64':'rgba(246,200,101,0.4)','128':'rgba(255,125,115,0.3)','256':'rgba(255,125,115,0.5)','512':'rgba(62,240,163,0.5)','1024':'rgba(86,213,255,0.6)','2048':'rgba(246,200,101,0.7)'};
+      function render(){
+        const board=document.getElementById('board2048'); if(!board) return;
+        board.innerHTML='';
+        grid.forEach(row=>row.forEach(v=>{
+          const cell=document.createElement('div'); cell.className='g2048-cell';
+          if(v){ cell.textContent=v; cell.style.background=COLORS[String(v)]||'rgba(232,241,238,0.15)'; cell.style.color=v>=128?'var(--text)':'var(--text)'; }
+          board.appendChild(cell);
+        }));
+        const sc=document.getElementById('score2048'); if(sc) sc.textContent=score;
+        const hi=document.getElementById('hi2048'); if(hi) hi.textContent=hiScore;
+        if(gameOver){ const ov=document.getElementById('over2048'); if(ov) ov.style.display='flex'; }
+      }
+      const wrap=document.createElement('div'); wrap.className='game-container';
+      wrap.innerHTML=`
+        <div class="game-score-row">
+          <div class="game-score-pill">Score: <strong id="score2048">0</strong></div>
+          <div class="game-score-pill">Best: <strong id="hi2048">${hiScore}</strong></div>
+        </div>
+        <div style="position:relative">
+          <div class="g2048-board" id="board2048"></div>
+          <div id="over2048" style="display:none;position:absolute;inset:0;background:rgba(7,11,13,0.85);border-radius:10px;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+            <strong style="font-size:1.3rem">Game Over!</strong>
+            <button class="game-btn primary" onclick="new2048()">🔄 Coba Lagi</button>
+          </div>
+        </div>
+        <div class="game-controls">
+          <button class="game-btn primary" onclick="new2048()">🔄 New Game</button>
+        </div>
+        <p style="color:var(--muted);font-size:0.78rem;text-align:center;margin:0">Arrow keys atau swipe untuk gerakkan tile</p>`;
+      container.appendChild(wrap);
+      window.new2048=newGame;
+      const keyH=function(e){
+        const m={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};
+        if(m[e.key]){ e.preventDefault(); move(m[e.key]); }
+      };
+      document.addEventListener('keydown',keyH);
+      // swipe
+      let tx=0,ty=0;
+      wrap.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+      wrap.addEventListener('touchend',e=>{
+        const dx=e.changedTouches[0].clientX-tx; const dy=e.changedTouches[0].clientY-ty;
+        if(Math.max(Math.abs(dx),Math.abs(dy))<20) return;
+        if(Math.abs(dx)>Math.abs(dy)) move(dx>0?'right':'left');
+        else move(dy>0?'down':'up');
+      },{passive:true});
+      newGame();
+      return ()=>{ document.removeEventListener('keydown',keyH); window.new2048=undefined; };
+    }
+
+    /* ══════════════════════════════════════
+       GAME 7: ROCK PAPER SCISSORS
+    ══════════════════════════════════════ */
+    function buildRPS(container) {
+      const choices=['✊','✌️','🖐️']; const names=['Batu','Gunting','Kertas'];
+      let playerWins=0,aiWins=0,draws=0;
+      function play(idx){
+        const ai=Math.floor(Math.random()*3);
+        const player=idx;
+        let result;
+        if(player===ai) { result='draw'; draws++; }
+        else if((player===0&&ai===2)||(player===1&&ai===0)||(player===2&&ai===1)){ result='win'; playerWins++; unlockAchievement('rps_win'); recordScore('RPS',playerWins); gameStats.scores.rps=playerWins; saveStats(); updateScoreBadges(); }
+        else { result='lose'; aiWins++; }
+        const resEl=document.getElementById('rpsResult'); if(!resEl) return;
+        const colors={win:'var(--green)',draw:'var(--amber)',lose:'var(--coral)'};
+        const labels={win:'Kamu Menang! 🎉',draw:'Draw! 🤝',lose:'AI Menang!'};
+        resEl.innerHTML=`
+          <div style="color:${colors[result]};font-weight:800;font-size:1rem;margin-bottom:10px">${labels[result]}</div>
+          <div class="rps-vs"><span>${choices[player]}</span><span class="vs-label">VS</span><span>${choices[ai]}</span></div>
+          <div style="font-size:0.8rem;color:var(--muted)">${names[player]} vs ${names[ai]}</div>`;
+        document.getElementById('rpsScores').textContent='Kamu: '+playerWins+' | Draw: '+draws+' | AI: '+aiWins;
+      }
+      const wrap=document.createElement('div'); wrap.className='game-container';
+      wrap.innerHTML=`
+        <div class="game-score-pill" id="rpsScores">Kamu: 0 | Draw: 0 | AI: 0</div>
+        <p style="color:var(--muted);font-size:0.9rem;margin:4px 0">Pilih gerakanmu:</p>
+        <div class="rps-choices">
+          <button class="rps-btn" onclick="rpsPlay(0)" title="Batu">✊</button>
+          <button class="rps-btn" onclick="rpsPlay(1)" title="Gunting">✌️</button>
+          <button class="rps-btn" onclick="rpsPlay(2)" title="Kertas">🖐️</button>
+        </div>
+        <div class="rps-result" id="rpsResult"><p style="color:var(--muted)">Pilih gerakan di atas...</p></div>`;
+      container.appendChild(wrap);
+      window.rpsPlay=play;
+      return ()=>{ window.rpsPlay=undefined; };
+    }
+
+    /* ══════════════════════════════════════
+       GAME 8: TYPING SPEED
+    ══════════════════════════════════════ */
+    function buildTyping(container) {
+      const TEXTS = {
+        easy: ["Belajar coding itu butuh waktu dan latihan setiap hari.", "Website yang baik harus responsif dan mudah digunakan.", "HTML CSS dan JavaScript adalah tiga pilar web development."],
+        medium: ["Node.js memungkinkan JavaScript berjalan di sisi server dengan event loop yang efisien.", "Memahami cara kerja request dan response sangat penting dalam membangun API yang handal.", "Responsive design memastikan tampilan website tetap rapi di berbagai ukuran layar."],
+        hard: ["Algoritma dan struktur data adalah fondasi utama ilmu komputer yang perlu dipahami setiap programmer.", "Asynchronous programming dengan async await memudahkan penanganan operasi yang membutuhkan waktu tunggu.", "Clean code bukan hanya tentang kode yang bekerja tetapi tentang kode yang mudah dibaca dan dirawat."]
+      };
+      let text,typed,startTime,timerInterval,wpm,accuracy,finished,level;
+      level='easy';
+      const hiScore=gameStats.scores.typing||0;
+
+      function start() {
+        const arr=TEXTS[level]; text=arr[Math.floor(Math.random()*arr.length)];
+        typed=''; startTime=null; wpm=0; accuracy=100; finished=false;
+        clearInterval(timerInterval);
+        document.getElementById('typingTimer').textContent='60s';
+        document.getElementById('typingWpm').textContent='0';
+        document.getElementById('typingAcc').textContent='100%';
+        const inp=document.getElementById('typingInput'); if(inp){ inp.value=''; inp.disabled=false; inp.focus(); }
+        renderText(); updateTimerDisplay();
+        let secs=60;
+        timerInterval=setInterval(()=>{ secs--; if(document.getElementById('typingTimer')) document.getElementById('typingTimer').textContent=secs+'s'; if(secs<=0||finished){ clearInterval(timerInterval); if(!finished) endGame(); } },1000);
+      }
+
+      function renderText() {
+        const el=document.getElementById('typingText'); if(!el) return;
+        let html='';
+        for(let i=0;i<text.length;i++){
+          if(i<typed.length){
+            html+=typed[i]===text[i]?'<span class="correct">'+escHtml(text[i])+'</span>':'<span class="incorrect">'+escHtml(text[i])+'</span>';
+          } else if(i===typed.length){
+            html+='<span class="cursor">'+escHtml(text[i])+'</span>';
+          } else {
+            html+=escHtml(text[i]);
+          }
+        }
+        el.innerHTML=html;
+      }
+      function escHtml(c){ return c==='&'?'&amp;':c==='<'?'&lt;':c==='>'?'&gt;':c; }
+      function updateTimerDisplay(){}
+
+      function handleInput(e) {
+        if(finished) return;
+        typed=e.target.value;
+        if(!startTime&&typed.length>0) startTime=Date.now();
+        if(startTime){
+          const mins=(Date.now()-startTime)/60000;
+          const words=typed.trim().split(/\s+/).filter(Boolean).length;
+          wpm=Math.round(words/Math.max(mins,0.001));
+          let correct=0; for(let i=0;i<typed.length;i++) if(typed[i]===text[i]) correct++;
+          accuracy=typed.length?Math.round(correct/typed.length*100):100;
+          const wEl=document.getElementById('typingWpm'); if(wEl) wEl.textContent=wpm;
+          const aEl=document.getElementById('typingAcc'); if(aEl) aEl.textContent=accuracy+'%';
+        }
+        if(typed===text){ finished=true; clearInterval(timerInterval); endGame(); }
+        renderText();
+      }
+
+      function endGame(){
+        finished=true;
+        const inp=document.getElementById('typingInput'); if(inp) inp.disabled=true;
+        if(wpm>60) unlockAchievement('typing_60wpm');
+        if(wpm>(gameStats.scores.typing||0)){ recordScore('Typing',wpm); gameStats.scores.typing=wpm; saveStats(); updateScoreBadges(); }
+        const result=document.getElementById('typingResult');
+        if(result){ result.style.display='block'; result.innerHTML='<div style="padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(17,26,29,0.8);text-align:center"><strong style="color:var(--green);font-size:1.2rem">'+wpm+' WPM</strong><br><span style="color:var(--muted);font-size:0.82rem">Akurasi: '+accuracy+'% | Best: '+Math.max(wpm,hiScore)+' WPM</span></div>'; }
+      }
+
+      const wrap=document.createElement('div'); wrap.className='game-container'; wrap.style.maxWidth='640px'; wrap.style.width='100%';
+      wrap.innerHTML=`
+        <div class="typing-stats">
+          <div class="typing-stat"><strong id="typingWpm">0</strong><span>WPM</span></div>
+          <div class="typing-stat"><strong id="typingAcc">100%</strong><span>Akurasi</span></div>
+          <div class="typing-stat"><strong id="typingTimer">60s</strong><span>Sisa Waktu</span></div>
+        </div>
+        <div class="game-controls">
+          <button class="game-btn${level==='easy'?' primary':''}" onclick="typingLevel('easy',this)">Easy</button>
+          <button class="game-btn${level==='medium'?' primary':''}" onclick="typingLevel('medium',this)">Medium</button>
+          <button class="game-btn${level==='hard'?' primary':''}" onclick="typingLevel('hard',this)">Hard</button>
+          <button class="game-btn primary" onclick="typingStart()">▶ Mulai</button>
+        </div>
+        <div class="typing-text-area" id="typingText" style="cursor:text;min-height:60px">Pilih level dan klik Mulai!</div>
+        <textarea class="typing-input" id="typingInput" placeholder="Ketik di sini..." rows="3" disabled style="resize:none;padding:12px;border-radius:var(--radius);border:1px solid var(--line);background:rgba(7,11,13,0.6);color:var(--text);font-size:1rem;font-family:monospace"></textarea>
+        <div id="typingResult" style="display:none;width:100%"></div>`;
+      container.appendChild(wrap);
+      window.typingLevel=function(l,btn){ level=l; document.querySelectorAll('[onclick^="typingLevel"]').forEach(b=>b.classList.remove('primary')); btn.classList.add('primary'); };
+      window.typingStart=start;
+      const inp=document.getElementById('typingInput');
+      if(inp) inp.addEventListener('input',handleInput);
+      return ()=>{ clearInterval(timerInterval); window.typingLevel=undefined; window.typingStart=undefined; };
+    }
+
+  })();
   </script>
 </body>
 </html>
